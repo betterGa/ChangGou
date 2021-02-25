@@ -35,4 +35,6 @@ public interface BrandService {
 
     /* 分页条件搜索 */
     PageInfo<Brand> findPage(Brand brand,Integer page,Integer size);
+
+    List<Brand> findByCategory(Integer id);
 }

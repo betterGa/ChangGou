@@ -1,7 +1,9 @@
 package com.changgou.goods.service.impl;
 
 import com.changgou.goods.dao.BrandMapper;
+import com.changgou.goods.dao.CategoryBrandMapper;
 import com.changgou.goods.pojo.Brand;
+import com.changgou.goods.pojo.CategoryBrand;
 import com.changgou.goods.service.BrandService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,6 +18,8 @@ import java.util.List;
 @Service
 public class BrandServiceImpl implements BrandService {
 
+    @Autowired
+    CategoryBrandMapper categoryBrandMapper;
 
     @Autowired
     private BrandMapper brandMapper;
@@ -120,5 +124,10 @@ public class BrandServiceImpl implements BrandService {
         Example example = createExample(brand);
         List<Brand> brands = brandMapper.selectByExample(example);
         return new PageInfo<Brand>(brands);
+    }
+
+    @Override
+    public List<Brand> findByCategory(Integer id) {
+        return brandMapper.findByCategory(id);
     }
 }

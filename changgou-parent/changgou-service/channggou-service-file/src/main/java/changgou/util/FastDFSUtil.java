@@ -12,16 +12,6 @@ import java.io.InputStream;
 
 public class FastDFSUtil {
 
-
-    public static TrackerServer getTrackerServer() throws IOException {
-        // 创建 TrackerClient 对象，访问 TrackerServer
-        TrackerClient trackerClient = new TrackerClient();
-
-        // 通过 TrackerClient 获取 TrackerServer 的连接对象，
-        return trackerClient.getConnection();
-    }
-
-
     /* 加载 Tracker 连接信息 */
     static {
         try {
@@ -38,6 +28,17 @@ public class FastDFSUtil {
             e.printStackTrace();
         }
     }
+
+    public static TrackerServer getTrackerServer() throws IOException {
+        // 创建 TrackerClient 对象，访问 TrackerServer
+        TrackerClient trackerClient = new TrackerClient();
+
+        // 通过 TrackerClient 获取 TrackerServer 的连接对象，
+        return trackerClient.getConnection();
+    }
+
+
+
 
     /* 文件上传 */
     public static String[] upload(FastDFSFile file) throws IOException, MyException {
@@ -171,7 +172,8 @@ public class FastDFSUtil {
         */
 
         // 删除文件
-        // System.out.println(deleteFile("group1", "M00/00/00/wKjThGAySpeAar03AAABPGy6xXQ033.txt"));
+         System.out.println(deleteFile("group1",
+                 "M00/00/00/wKjThGAyWeWAATfFAAEzV8UKNNg30.docx"));
 
 
         // 获取 Storage 信息
@@ -192,7 +194,7 @@ public class FastDFSUtil {
 
          */
 
-        System.out.println(getTrackerInfo());
+        // System.out.println(getTrackerInfo());
     }
 }
 
