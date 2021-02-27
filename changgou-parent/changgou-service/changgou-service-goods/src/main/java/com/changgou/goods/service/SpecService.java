@@ -2,40 +2,68 @@ package com.changgou.goods.service;
 
 import com.changgou.goods.pojo.Spec;
 import com.github.pagehelper.PageInfo;
-import io.swagger.models.auth.In;
 
 import java.util.List;
 
+/****
+ * @Author:shenkunlin
+ * @Description:Spec业务层接口
+ * @Date 2019/6/14 0:16
+ *****/
+public interface SpecService {
 
-public interface SpecService{
-    /* 增加规模信息 */
-    public void add(Spec spec);
+    /***
+     * Spec多条件分页查询
+     * @param spec
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Spec> findPage(Spec spec, int page, int size);
 
-    /* 删除规模信息 */
-    public void delete(Integer id);
+    /***
+     * Spec分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Spec> findPage(int page, int size);
 
-    /* 更新规模信息 */
-    public void update(Spec spec);
+    /***
+     * Spec多条件搜索方法
+     * @param spec
+     * @return
+     */
+    List<Spec> findList(Spec spec);
 
-    /* 查询所有信息 */
-    public List<Spec> findAll();
+    /***
+     * 删除Spec
+     * @param id
+     */
+    void delete(Integer id);
 
-    /* 按 ID 查询 */
-    public Spec findById(Integer id);
+    /***
+     * 修改Spec数据
+     * @param spec
+     */
+    void update(Spec spec);
 
-    /* 根据 template_ID 查询 */
-    public List<Spec> findByTempId(Integer id);
+    /***
+     * 新增Spec
+     * @param spec
+     */
+    void add(Spec spec);
 
-    /* 根据 category_ID 查询 */
-    public List<Spec> findByCateGory(Integer id);
+    /**
+     * 根据ID查询Spec
+     * @param id
+     * @return
+     */
+     Spec findById(Integer id);
 
-    /* 条件查询 */
-    public List<Spec> findList(Spec spec);
-
-    /* 分页查询 */
-    public PageInfo<Spec> findPage(Integer page,Integer size);
-
-    /* 分页条件查询 */
-    public PageInfo<Spec> findPage(Integer page,Integer size,Spec spec);
-
+    /***
+     * 查询所有Spec
+     * @return
+     */
+    List<Spec> findAll();
 }

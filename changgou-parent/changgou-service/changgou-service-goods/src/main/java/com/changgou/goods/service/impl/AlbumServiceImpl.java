@@ -12,84 +12,135 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+/****
+ * @Author:shenkunlin
+ * @Description:Album业务层接口实现类
+ * @Date 2019/6/14 0:16
+ *****/
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
-    AlbumMapper albumMapper;
+    private AlbumMapper albumMapper;
 
+
+    /**
+     * Album条件+分页查询
+     * @param album 查询条件
+     * @param page 页码
+     * @param size 页大小
+     * @return 分页结果
+     */
     @Override
-    public List<Album> findAll() {
-        return albumMapper.selectAll();
+    public PageInfo<Album> findPage(Album album, int page, int size){
+        //分页
+        PageHelper.startPage(page,size);
+        //搜索条件构建
+        Example example = createExample(album);
+        //执行搜索
+        return new PageInfo<Album>(albumMapper.selectByExample(example));
     }
 
+    /**
+     * Album分页查询
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
-    public Album findById(Long id) {
-        return albumMapper.selectByPrimaryKey(id);
+    public PageInfo<Album> findPage(int page, int size){
+        //静态分页
+        PageHelper.startPage(page,size);
+        //分页查询
+        return new PageInfo<Album>(albumMapper.selectAll());
+    }
+
+    /**
+     * Album条件查询
+     * @param album
+     * @return
+     */
+    @Override
+    public List<Album> findList(Album album){
+        //构建查询条件
+        Example example = createExample(album);
+        //根据构建的条件查询数据
+        return albumMapper.selectByExample(example);
     }
 
 
-    @Override
-    public void add(Album album) {
-        albumMapper.insert(album);
-    }
-
-    @Override
-    public void delete(Long id) {
-        albumMapper.deleteByPrimaryKey(id);
-    }
-
-    @Override
-    public void update(Album album) {
-        albumMapper.updateByPrimaryKey(album);
-    }
-
-    /* 分页查询 */
-    @Override
-    public PageInfo findPage(int page, int size) {
-        PageHelper.startPage(page, size);
-        List<Album> albums = albumMapper.selectAll();
-        return new PageInfo(albums);
-    }
-
-    /* 把构建条件的逻辑提取出来 */
-    public static Example createExample(Album album) {
-        // 构建条件
-        Example example = new Example(Album.class);
+    /**
+     * Album构建查询对象
+     * @param album
+     * @return
+     */
+    public Example createExample(Album album){
+        Example example=new Example(Album.class);
         Example.Criteria criteria = example.createCriteria();
-        if (album != null) {
-            // 对 id、title、image、imageItems 属性进行模糊查询
-            if (!StringUtils.isEmpty(album.getId())) {
-                criteria.andEqualTo("id", album.getId());
+        if(album!=null){
+            // 编号
+            if(!StringUtils.isEmpty(album.getId())){
+                    criteria.andEqualTo("id",album.getId());
             }
-            if (!StringUtils.isEmpty(album.getTitle()))
-                criteria.andLike("title", "%" + album.getTitle() + "%");
-            if (!StringUtils.isEmpty(album.getImage()))
-                criteria.andLike("image", "%" + album.getImage() + "%");
-            criteria.andLike("title", "%" + album.getTitle() + "%");
-            if (!StringUtils.isEmpty(album.getImageItems()))
-                criteria.andLike("image_items", "%" + album.getImageItems() + "%");
+            // 相册名称
+            if(!StringUtils.isEmpty(album.getTitle())){
+                    criteria.andLike("title","%"+album.getTitle()+"%");
+            }
+            // 相册封面
+            if(!StringUtils.isEmpty(album.getImage())){
+                    criteria.andEqualTo("image",album.getImage());
+            }
+            // 图片列表
+            if(!StringUtils.isEmpty(album.getImageItems())){
+                    criteria.andEqualTo("imageItems",album.getImageItems());
+            }
         }
         return example;
     }
 
-    /* 条件查询 */
+    /**
+     * 删除
+     * @param id
+     */
     @Override
-    public List<Album> findList(Album album) {
-
-        return albumMapper.selectByExample(createExample(album));
+    public void delete(Long id){
+        albumMapper.deleteByPrimaryKey(id);
     }
 
-
-    /* 分页条件查询 */
+    /**
+     * 修改Album
+     * @param album
+     */
     @Override
-    public PageInfo findPage(int page, int size, Album album) {
-
-        // 分页
-        PageHelper.startPage(page, size);
-
-        List albums = albumMapper.selectByExample(createExample(album));
-        return new PageInfo(albums);
+    public void update(Album album){
+        albumMapper.updateByPrimaryKey(album);
     }
 
+    /**
+     * 增加Album
+     * @param album
+     */
+    @Override
+    public void add(Album album){
+        albumMapper.insert(album);
+    }
+
+    /**
+     * 根据ID查询Album
+     * @param id
+     * @return
+     */
+    @Override
+    public Album findById(Long id){
+        return  albumMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 查询Album全部数据
+     * @return
+     */
+    @Override
+    public List<Album> findAll() {
+        return albumMapper.selectAll();
+    }
 }

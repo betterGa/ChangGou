@@ -2,35 +2,68 @@ package com.changgou.goods.service;
 
 import com.changgou.goods.pojo.Para;
 import com.github.pagehelper.PageInfo;
-import io.swagger.models.auth.In;
 
 import java.util.List;
 
+/****
+ * @Author:shenkunlin
+ * @Description:Para业务层接口
+ * @Date 2019/6/14 0:16
+ *****/
 public interface ParaService {
-    /* 增加参数信息 */
-    public void add(Para para);
 
-    /* 根据 ID 删除参数信息 */
-    public void delete(Integer id);
+    /***
+     * Para多条件分页查询
+     * @param para
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Para> findPage(Para para, int page, int size);
 
-    /* 根据 ID 更新参数信息 */
-    public void update(Para para);
+    /***
+     * Para分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Para> findPage(int page, int size);
 
-    /* 查找所有信息 */
-    public List<Para> findAll();
+    /***
+     * Para多条件搜索方法
+     * @param para
+     * @return
+     */
+    List<Para> findList(Para para);
 
-    /* 根据 ID 查找信息 */
-    public Para findById(Integer id);
+    /***
+     * 删除Para
+     * @param id
+     */
+    void delete(Integer id);
 
-    /* 条件查询 */
-    public List<Para> findList(Para para);
+    /***
+     * 修改Para数据
+     * @param para
+     */
+    void update(Para para);
 
-    /* 分页查询 */
-    public PageInfo<Para> findPage(Integer page,Integer size);
+    /***
+     * 新增Para
+     * @param para
+     */
+    void add(Para para);
 
-    /* 条件分页查询 */
-    public PageInfo<Para> findPage(Integer page,Integer size,Para para);
+    /**
+     * 根据ID查询Para
+     * @param id
+     * @return
+     */
+     Para findById(Integer id);
 
-    /* 根据 Category ID 查找 */
-    public List<Para> findByCateId(Integer id);
+    /***
+     * 查询所有Para
+     * @return
+     */
+    List<Para> findAll();
 }

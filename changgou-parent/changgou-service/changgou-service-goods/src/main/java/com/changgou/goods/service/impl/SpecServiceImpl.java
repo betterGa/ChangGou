@@ -1,8 +1,6 @@
 package com.changgou.goods.service.impl;
 
-import com.changgou.goods.dao.CategoryMapper;
 import com.changgou.goods.dao.SpecMapper;
-import com.changgou.goods.pojo.Category;
 import com.changgou.goods.pojo.Spec;
 import com.changgou.goods.service.SpecService;
 import com.github.pagehelper.PageHelper;
@@ -14,116 +12,139 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+/****
+ * @Author:shenkunlin
+ * @Description:Spec业务层接口实现类
+ * @Date 2019/6/14 0:16
+ *****/
 @Service
 public class SpecServiceImpl implements SpecService {
-    @Autowired
-    SpecMapper specMapper;
 
     @Autowired
-    CategoryMapper categoryMapper;
+    private SpecMapper specMapper;
 
-    // 构建条件
-    public static Example createExample(Spec spec) {
-        Example example = new Example(Spec.class);
+
+    /**
+     * Spec条件+分页查询
+     * @param spec 查询条件
+     * @param page 页码
+     * @param size 页大小
+     * @return 分页结果
+     */
+    @Override
+    public PageInfo<Spec> findPage(Spec spec, int page, int size){
+        //分页
+        PageHelper.startPage(page,size);
+        //搜索条件构建
+        Example example = createExample(spec);
+        //执行搜索
+        return new PageInfo<Spec>(specMapper.selectByExample(example));
+    }
+
+    /**
+     * Spec分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public PageInfo<Spec> findPage(int page, int size){
+        //静态分页
+        PageHelper.startPage(page,size);
+        //分页查询
+        return new PageInfo<Spec>(specMapper.selectAll());
+    }
+
+    /**
+     * Spec条件查询
+     * @param spec
+     * @return
+     */
+    @Override
+    public List<Spec> findList(Spec spec){
+        //构建查询条件
+        Example example = createExample(spec);
+        //根据构建的条件查询数据
+        return specMapper.selectByExample(example);
+    }
+
+
+    /**
+     * Spec构建查询对象
+     * @param spec
+     * @return
+     */
+    public Example createExample(Spec spec){
+        Example example=new Example(Spec.class);
         Example.Criteria criteria = example.createCriteria();
-        if (spec != null) {
-            if (!StringUtils.isEmpty(spec.getName()))
-                criteria.andLike("name", "%" + spec.getName() + "%");
-            if (!StringUtils.isEmpty(spec.getId()))
-                criteria.andEqualTo("id", spec.getId());
-            if (!StringUtils.isEmpty(spec.getOptions()))
-                criteria.andLike("options", "%" + spec.getOptions() + "%");
-            if (!StringUtils.isEmpty(spec.getSeq()))
-                criteria.andEqualTo("seq", spec.getSeq());
-            if (!StringUtils.isEmpty(spec.getTemplateId()))
-                criteria.andEqualTo("templateId", spec.getTemplateId());
+        if(spec!=null){
+            // ID
+            if(!StringUtils.isEmpty(spec.getId())){
+                    criteria.andEqualTo("id",spec.getId());
+            }
+            // 名称
+            if(!StringUtils.isEmpty(spec.getName())){
+                    criteria.andLike("name","%"+spec.getName()+"%");
+            }
+            // 规格选项
+            if(!StringUtils.isEmpty(spec.getOptions())){
+                    criteria.andEqualTo("options",spec.getOptions());
+            }
+            // 排序
+            if(!StringUtils.isEmpty(spec.getSeq())){
+                    criteria.andEqualTo("seq",spec.getSeq());
+            }
+            // 模板ID
+            if(!StringUtils.isEmpty(spec.getTemplateId())){
+                    criteria.andEqualTo("templateId",spec.getTemplateId());
+            }
         }
         return example;
     }
 
+    /**
+     * 删除
+     * @param id
+     */
     @Override
-    public void add(Spec spec) {
-        specMapper.insert(spec);
-    }
-
-    @Override
-    public void delete(Integer id) {
+    public void delete(Integer id){
         specMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 修改Spec
+     * @param spec
+     */
     @Override
-    public void update(Spec spec) {
-
+    public void update(Spec spec){
         specMapper.updateByPrimaryKey(spec);
     }
 
+    /**
+     * 增加Spec
+     * @param spec
+     */
+    @Override
+    public void add(Spec spec){
+        specMapper.insert(spec);
+    }
+
+    /**
+     * 根据ID查询Spec
+     * @param id
+     * @return
+     */
+    @Override
+    public Spec findById(Integer id){
+        return  specMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 查询Spec全部数据
+     * @return
+     */
     @Override
     public List<Spec> findAll() {
         return specMapper.selectAll();
-    }
-
-    @Override
-    public Spec findById(Integer id) {
-        return specMapper.selectByPrimaryKey(id);
-    }
-
-    /* 根据 Template Id 查询 */
-    @Override
-    public List<Spec> findByTempId(Integer id) {
-        Example example = new Example(Spec.class);
-        Example.Criteria criteria = example.createCriteria();
-        // select * from tb_spec,tb_template where template_id=tb_template.id;
-        // 只需要在 tb_spec 表中查即可......
-        criteria.andEqualTo("templateId", id);
-        return specMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<Spec> findByCateGory(Integer id) {
-
-        /*
-        Example example=new Example(Spec.class);
-        Example.Criteria criteria=example.createCriteria();
-        // select * from tb_spec,tb_category where template_id=
-        // (select template_id from tb_category where templated_id=id;)
-
-        // 先通过 id 查到 category 表里的记录，因为是 id 所有只会有一个对象
-        Category category= categoryMapper.selectByPrimaryKey(id);
-
-        // 通过对象的 templated_id 属性查询
-        criteria.andEqualTo("templateId",category.getTemplateId());
-
-        return specMapper.selectByExample(example);
-*/
-
-        // 考虑不用 example
-        Category category=categoryMapper.selectByPrimaryKey(id);
-        Spec spec=new Spec();
-        spec.setTemplateId(category.getTemplateId());
-        return specMapper.select(spec);
-
-    }
-
-    /* 条件查询 */
-    @Override
-    public List<Spec> findList(Spec spec) {
-        Example example = createExample(spec);
-        return specMapper.selectByExample(example);
-    }
-
-    /* 分页查询 */
-    @Override
-    public PageInfo<Spec> findPage(Integer page, Integer size) {
-        PageHelper.startPage(page, size);
-        List<Spec> specs = specMapper.selectAll();
-        return new PageInfo<>(specs);
-    }
-
-    /* 分页条件查询 */
-    @Override
-    public PageInfo<Spec> findPage(Integer page, Integer size, Spec spec) {
-        PageHelper.startPage(page, size);
-        List<Spec> specs = specMapper.selectByExample(createExample(spec));
-        return new PageInfo<>(specs);
     }
 }

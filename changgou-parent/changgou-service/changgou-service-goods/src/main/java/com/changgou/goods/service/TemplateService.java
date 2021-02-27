@@ -5,29 +5,65 @@ import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
+/****
+ * @Author:shenkunlin
+ * @Description:Template业务层接口
+ * @Date 2019/6/14 0:16
+ *****/
 public interface TemplateService {
-    /* 添加模板信息 */
-    public void add(Template template);
 
-    /* 删除模板信息 */
-    public void delete(Integer id);
+    /***
+     * Template多条件分页查询
+     * @param template
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Template> findPage(Template template, int page, int size);
 
-    /* 修改模板信息 */
-    public void update(Template template);
+    /***
+     * Template分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Template> findPage(int page, int size);
 
-    /* 查找所有模板信息 */
-    public List<Template> findAll();
+    /***
+     * Template多条件搜索方法
+     * @param template
+     * @return
+     */
+    List<Template> findList(Template template);
 
-    /* 根据 ID 查找模板信息 */
-    public Template findById(Integer id);
+    /***
+     * 删除Template
+     * @param id
+     */
+    void delete(Integer id);
 
-    /* 分页查询 */
-    public PageInfo<Template> findPage(Integer page,Integer size);
+    /***
+     * 修改Template数据
+     * @param template
+     */
+    void update(Template template);
 
-    /* 条件查询 */
-    public List<Template> findList(Template template);
+    /***
+     * 新增Template
+     * @param template
+     */
+    void add(Template template);
 
-    /* 分页条件查询 */
-    public PageInfo<Template> findPage(Integer page,Integer size,Template template);
+    /**
+     * 根据ID查询Template
+     * @param id
+     * @return
+     */
+     Template findById(Integer id);
 
+    /***
+     * 查询所有Template
+     * @return
+     */
+    List<Template> findAll();
 }

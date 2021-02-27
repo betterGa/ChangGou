@@ -2,33 +2,68 @@ package com.changgou.goods.service;
 
 import com.changgou.goods.pojo.Album;
 import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+/****
+ * @Author:shenkunlin
+ * @Description:Album业务层接口
+ * @Date 2019/6/14 0:16
+ *****/
 public interface AlbumService {
-    /* 查询所有相册信息 */
-    public List<Album> findAll();
 
-    /* 按照 ID 查询 */
-    public Album findById(Long id);
+    /***
+     * Album多条件分页查询
+     * @param album
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Album> findPage(Album album, int page, int size);
 
-    /* 添加相册信息 */
-    public void add(Album album);
+    /***
+     * Album分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    PageInfo<Album> findPage(int page, int size);
 
-    /* 删除相册信息 */
-    public void delete(Long id);
+    /***
+     * Album多条件搜索方法
+     * @param album
+     * @return
+     */
+    List<Album> findList(Album album);
 
-    /* 修改相册信息 */
-    public void update(Album album);
+    /***
+     * 删除Album
+     * @param id
+     */
+    void delete(Long id);
 
-    /* 分页查询 */
-    public PageInfo findPage(int page,int size);
+    /***
+     * 修改Album数据
+     * @param album
+     */
+    void update(Album album);
 
-    /* 条件查询 */
-    public List<Album> findList(Album album);
+    /***
+     * 新增Album
+     * @param album
+     */
+    void add(Album album);
 
-    /* 按条件分页查询 */
-    public PageInfo findPage(int page,int size,Album album);
+    /**
+     * 根据ID查询Album
+     * @param id
+     * @return
+     */
+     Album findById(Long id);
+
+    /***
+     * 查询所有Album
+     * @return
+     */
+    List<Album> findAll();
 }
