@@ -2,8 +2,8 @@ package changgou.controller;
 
 import changgou.file.FastDFSFile;
 import changgou.util.FastDFSUtil;
-import com.changgou.entity.Result;
-import com.changgou.entity.StatusCode;
+import entity.Result;
+import entity.StatusCode;
 import org.csource.common.MyException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;

@@ -192,25 +192,25 @@ public class Sku implements Serializable{
 		return updateTime;
 	}
 
-	//set方法
+	// set方法
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	//get方法
+	// get方法
 	public Long getSpuId() {
 		return spuId;
 	}
 
-	//set方法
+	// set方法
 	public void setSpuId(Long spuId) {
 		this.spuId = spuId;
 	}
-	//get方法
+	// get方法
 	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	//set方法
+	// set方法
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
@@ -219,20 +219,20 @@ public class Sku implements Serializable{
 		return categoryName;
 	}
 
-	//set方法
+	// set方法
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	//get方法
+	// get方法
 	public String getBrandName() {
 		return brandName;
 	}
 
-	//set方法
+	// set方法
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	//get方法
+	// get方法
 	public String getSpec() {
 		return spec;
 	}

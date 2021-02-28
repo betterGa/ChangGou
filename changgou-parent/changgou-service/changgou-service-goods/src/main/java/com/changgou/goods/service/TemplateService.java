@@ -11,6 +11,13 @@ import java.util.List;
  * @Date 2019/6/14 0:16
  *****/
 public interface TemplateService {
+    /**
+     *  根据 分类ID 查询 模板信息
+     * @param id
+     * @return
+     */
+    Template findByCategoryId(Integer id);
+
 
     /***
      * Template多条件分页查询

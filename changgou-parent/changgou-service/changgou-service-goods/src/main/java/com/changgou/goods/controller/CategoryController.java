@@ -1,12 +1,9 @@
 package com.changgou.goods.controller;
 
-import com.changgou.entity.Result;
-import com.changgou.entity.StatusCode;
+import entity.*;
 import com.changgou.goods.pojo.Category;
 import com.changgou.goods.service.CategoryService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +27,7 @@ public class CategoryController {
     @GetMapping(value = "/list/{pid}")
     public Result<List<Category>> findByParentId(@PathVariable Integer pid){
        List<Category> categories= categoryService.findByParentId(pid);
-        return new Result<>(true, StatusCode.OK,"查询子节点成功!",categories);
+        return new Result<List<Category>>(true, StatusCode.OK,"查询子节点成功!",categories);
     }
 
 

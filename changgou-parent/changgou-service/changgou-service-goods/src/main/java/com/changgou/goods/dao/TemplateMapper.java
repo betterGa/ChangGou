@@ -10,6 +10,6 @@ import tk.mybatis.mapper.common.Mapper;
  *****/
 public interface TemplateMapper extends Mapper<Template> {
 
-    @Select("select tem.name from tb_template tem,tb_category cat where tem.id=cat.template_id and cat.id=#{cateId}")
-    String findByCategory(Integer cateId);
+    @Select("select tem.* from tb_template tem,tb_category cat where tem.id=cat.template_id and cat.id=#{cateId}")
+    Template findByCategory(Integer cateId);
 }

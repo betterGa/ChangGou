@@ -1,10 +1,8 @@
 package com.changgou.goods.controller;
-
+import entity.*;
 import com.changgou.goods.pojo.Pref;
 import com.changgou.goods.service.PrefService;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
