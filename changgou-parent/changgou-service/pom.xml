@@ -13,6 +13,8 @@
     <modules>
         <module>changgou-service-goods</module>
         <module>channggou-service-file</module>
+        <module>changgou-service-canal</module>
+        <module>changgou-service-content</module>
     </modules>
 
     <artifactId>changgou-service</artifactId>

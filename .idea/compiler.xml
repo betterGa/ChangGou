@@ -9,6 +9,10 @@
         <module name="changgou-service-goods" />
         <module name="changgou-service-goods-api" />
         <module name="changgou-eureka" />
+        <module name="changgou-service-canal" />
+        <module name="changgou-servcie-canal" />
+        <module name="changgou-service-content-api" />
+        <module name="changgou-service-content" />
         <module name="changgou-common-db" />
         <module name="code-template" />
         <module name="changgou-common" />
@@ -21,8 +25,12 @@
       <module name="changgou-eureka" target="8" />
       <module name="changgou-gateway" target="8" />
       <module name="changgou-parent" target="1.8" />
+      <module name="changgou-servcie-canal" target="8" />
       <module name="changgou-service" target="8" />
       <module name="changgou-service-api" target="8" />
+      <module name="changgou-service-canal" target="8" />
+      <module name="changgou-service-content" target="8" />
+      <module name="changgou-service-content-api" target="8" />
       <module name="changgou-service-goods" target="8" />
       <module name="changgou-service-goods-api" target="8" />
       <module name="changgou-web" target="1.8" />
@@ -35,6 +43,10 @@
       <module name="changgou-common" options="-parameters" />
       <module name="changgou-common-db" options="-parameters" />
       <module name="changgou-eureka" options="-parameters" />
+      <module name="changgou-servcie-canal" options="-parameters" />
+      <module name="changgou-service-canal" options="-parameters" />
+      <module name="changgou-service-content" options="-parameters" />
+      <module name="changgou-service-content-api" options="-parameters" />
       <module name="changgou-service-goods" options="-parameters" />
       <module name="changgou-service-goods-api" options="-parameters" />
       <module name="channggou-service-file" options="-parameters" />

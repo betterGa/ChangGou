@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import entity.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -38,6 +39,42 @@ public class SpuServiceImpl implements SpuService {
 
     @Autowired
     private BrandMapper brandMapper;
+
+    @Transactional
+    @Override
+    public void logicDelete(Long spuId) {
+        Spu spu=spuMapper.selectByPrimaryKey(spuId);
+
+        // 检查是否是已下架商品
+        if(!spu.getIsMarketable().equalsIgnoreCase("0")){
+            throw new RuntimeException("必须先下架再删除！");
+
+        }
+        spu.setIsDelete("1");
+
+        // 需要把这个商品置为未审核
+        spu.setStatus("0");
+        spuMapper.updateByPrimaryKeySelective(spu);
+    }
+
+    @Override
+    public void restore(Long spuId) {
+        Spu spu=spuMapper.selectByPrimaryKey(spuId);
+
+        // 检查是否是未删除的商品
+        if(!spu.getIsDelete().equalsIgnoreCase("1")){
+            throw new RuntimeException("此商品未删除！");
+        }
+
+        // 逻辑恢复
+        spu.setIsDelete("0");
+
+        // 设置为未审核
+        spu.setStatus("0");
+
+        spuMapper.updateByPrimaryKeySelective(spu);
+    }
+
 
     @Override
     public int pullMany(Long[] ids) {
@@ -370,6 +407,11 @@ public class SpuServiceImpl implements SpuService {
      */
     @Override
     public void delete(Long id) {
+        // 检查是否被逻辑删除，必须先逻辑删除，才能被物理删除
+        Spu spu=spuMapper.selectByPrimaryKey(id);
+        if(!spu.getIsDelete().equalsIgnoreCase("1")){
+            throw new RuntimeException("此商品不能删除！");
+        }
         spuMapper.deleteByPrimaryKey(id);
     }
 
@@ -385,7 +427,6 @@ public class SpuServiceImpl implements SpuService {
 
     /**
      * 增加Spu
-     *
      * @param spu
      */
     @Override
