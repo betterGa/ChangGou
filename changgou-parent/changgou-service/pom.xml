@@ -15,6 +15,7 @@
         <module>channggou-service-file</module>
         <module>changgou-service-canal</module>
         <module>changgou-service-content</module>
+        <module>changgou-service-search</module>
     </modules>
 
     <artifactId>changgou-service</artifactId>

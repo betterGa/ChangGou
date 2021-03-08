@@ -196,7 +196,7 @@ public class SkuServiceImpl implements SkuService {
     }
 
     /**
-     * 查询Sku全部数据
+     * 查询 Sku全部数据
      * @return
      */
     @Override

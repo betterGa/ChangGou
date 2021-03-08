@@ -134,13 +134,13 @@ public class SkuController {
     }
 
     /***
-     * 查询Sku全部数据
+     * 查询 Sku全部数据
      * @return
      */
     @ApiOperation(value = "查询所有Sku",notes = "查询所Sku有方法详情",tags = {"SkuController"})
-    @GetMapping
+    @GetMapping("/findAll")
     public Result<List<Sku>> findAll(){
-        //调用SkuService实现查询所有Sku
+        // 调用 SkuService 实现查询所有 Sku
         List<Sku> list = skuService.findAll();
         return new Result<List<Sku>>(true, StatusCode.OK,"查询成功",list) ;
     }
