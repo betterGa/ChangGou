@@ -7,14 +7,24 @@ import com.changgou.goods.pojo.Sku;
 import com.changgou.search.pojo.SkuInfo;
 import com.changgou.search.service.SkuService;
 import entity.Result;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.SearchResultMapper;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
+import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -248,7 +258,28 @@ public class SkuServiceImpl implements SkuService {
                 }
             }
         }
-        // 实现分页，如果用户没有传入分页参数，默认 第 1 页
+
+
+        /**
+         * 实现排序
+         */
+        // 指定排序的域
+        String sortField = searchMap.get("sortField");
+
+        // 指定排序规则
+        String sortRule = searchMap.get("sortRule");
+
+        if (!StringUtils.isEmpty(sortField) && !StringUtils.isEmpty(sortRule)) {
+            builder.withSort(
+                    new FieldSortBuilder(sortField)
+                            .order(SortOrder.valueOf(sortRule)));
+        }
+
+
+        /**
+         * 实现分页
+         */
+        // 如果用户没有传入分页参数，默认 第 1 页
         Integer pageNum = coverterPage(searchMap);
         // 默认每页显示 3 条数据
         Integer size = 3;
@@ -257,7 +288,7 @@ public class SkuServiceImpl implements SkuService {
         // 将 BoolQueryBuilder 对象填充给 NativeSearchQueryBuilder
         builder.withQuery(boolQueryBuilder);
         return builder;
-}
+    }
 
     /**
      * 接受前端分页参数 页码、每页数据条数
@@ -273,7 +304,7 @@ public class SkuServiceImpl implements SkuService {
                 if (pageNum1 >= 1) {
                     return pageNum1;
                 }
-            }catch (NumberFormatException numberFormatException){
+            } catch (NumberFormatException numberFormatException) {
 
             }
         }
@@ -288,10 +319,76 @@ public class SkuServiceImpl implements SkuService {
      */
     public Map<String, Object> searchlist(NativeSearchQueryBuilder builder) {
 
+
+        /**
+         * 高亮搜索
+         */
+
+        // 指定高亮域
+        HighlightBuilder.Field field = new HighlightBuilder.Field("name");
+
+        // 前缀 <em style="color:red">
+        field.preTags("<em style=\"color:red\">");
+
+        // 后缀 </em>
+        field.postTags("</em>");
+
+        // 碎片长度 即 当关键词所在的记录过长时
+        // 截取关键词数据之前与之后，展示数据的最大长度
+        field.fragmentOffset(100);
+
+        // 添加高亮
+        builder.withHighlightFields(field);
+
         // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
         // AggregatedPage<SkuInfo> 是对结果集的封装
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(
-                builder.build(), SkuInfo.class);
+        AggregatedPage<SkuInfo> page = elasticsearchTemplate
+                .queryForPage(
+                        // 搜索条件封装
+                        builder.build(),
+                        // 执行搜索后数据集合需要转化的字节码类型
+                        SkuInfo.class,
+                        // 执行搜索后将数据结果集封装到该对象中
+                        new SearchResultMapper() {
+                            @Override
+                            public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
+                                // 存储转换后的高亮对象
+                                List list = new ArrayList();
+
+                                // 遍历结果集
+                                for (SearchHit hit : searchResponse.getHits()) {
+
+                                    // 转化成 JavaBean
+                                    SkuInfo skuInfo = JSON.parseObject(hit.getSourceAsString(), SkuInfo.class);
+
+                                    // 分析结果集，获取高亮数据
+                                    HighlightField highlightField = hit.getHighlightFields().get("name");
+
+                                    // 取出高亮数据
+                                    if (highlightField != null && highlightField.getFragments() != null) {
+                                        Text[] fragments = highlightField.getFragments();
+                                        StringBuffer buffer = new StringBuffer();
+                                        for (Text fragment : fragments) {
+                                            buffer.append(fragment.toString());
+                                        }
+
+                                        // 把非高亮数据中指定域替换成高亮数据
+                                        skuInfo.setName(buffer.toString());
+
+                                        // 将高亮数据添加到集合中
+                                        list.add(skuInfo);
+                                    }
+
+                                }
+                                // 将数据返回
+                                // 构造方法需要的参数：搜索得到的数据集合 List,携带高亮的
+                                // 分页对象
+                                // 总条数
+                                return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
+                            }
+                        });
+
+
 
         // 获取数据结果集
         List<SkuInfo> contents = page.getContent();
