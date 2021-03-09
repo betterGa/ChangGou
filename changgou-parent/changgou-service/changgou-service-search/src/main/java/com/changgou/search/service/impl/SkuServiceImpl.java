@@ -12,6 +12,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -174,6 +175,7 @@ public class SkuServiceImpl implements SkuService {
      * @return
      */
     public NativeSearchQueryBuilder builderBasicQuery(Map<String, String> searchMap) {
+
         // 构建搜索条件对象
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
 
@@ -240,164 +242,187 @@ public class SkuServiceImpl implements SkuService {
                 if (prices.length == 1) {
                     boolQueryBuilder.must(QueryBuilders.rangeQuery("price").gt(Integer.parseInt(prices[0])));
                 } else {
+
+                    // price[1]!=null price<=price[1]
                     boolQueryBuilder.must(QueryBuilders.rangeQuery("price").lte(Integer.parseInt(prices[1])));
                 }
+            }
+        }
+        // 实现分页，如果用户没有传入分页参数，默认 第 1 页
+        Integer pageNum = coverterPage(searchMap);
+        // 默认每页显示 3 条数据
+        Integer size = 3;
+        builder.withPageable(PageRequest.of(pageNum - 1, size));
 
-                // price[1]!=null price<=price[1]
+        // 将 BoolQueryBuilder 对象填充给 NativeSearchQueryBuilder
+        builder.withQuery(boolQueryBuilder);
+        return builder;
+}
+
+    /**
+     * 接受前端分页参数 页码、每页数据条数
+     *
+     * @param searchMap
+     * @return
+     */
+    public Integer coverterPage(Map<String, String> searchMap) {
+        if (searchMap != null) {
+            String pageNum = searchMap.get("pageNum");
+            try {
+                Integer pageNum1 = Integer.parseInt(pageNum);
+                if (pageNum1 >= 1) {
+                    return pageNum1;
+                }
+            }catch (NumberFormatException numberFormatException){
 
             }
-
-            // 将 BoolQueryBuilder 对象填充给 NativeSearchQueryBuilder
-            builder.withQuery(boolQueryBuilder);}
-            return builder;
+        }
+        return 1;
     }
 
-        /**
-         * 集合搜索封装
-         *
-         * @param builder
-         * @return
-         */
-        public Map<String, Object> searchlist (NativeSearchQueryBuilder builder){
+    /**
+     * 集合搜索封装
+     *
+     * @param builder
+     * @return
+     */
+    public Map<String, Object> searchlist(NativeSearchQueryBuilder builder) {
 
-            // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
-            // AggregatedPage<SkuInfo> 是对结果集的封装
-            AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(
-                    builder.build(), SkuInfo.class);
+        // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
+        // AggregatedPage<SkuInfo> 是对结果集的封装
+        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(
+                builder.build(), SkuInfo.class);
 
-            // 获取数据结果集
-            List<SkuInfo> contents = page.getContent();
+        // 获取数据结果集
+        List<SkuInfo> contents = page.getContent();
 
-            // 获取总记录数
-            long totalNums = page.getTotalElements();
+        // 获取总记录数
+        long totalNums = page.getTotalElements();
 
-            // 获取总页数
-            int totalPages = page.getTotalPages();
+        // 获取总页数
+        int totalPages = page.getTotalPages();
 
-            // 封装 Map 存储数据作为结果
-            Map<String, Object> resultMap = new HashMap<String, Object>();
-            resultMap.put("rows", contents);
-            resultMap.put("totalNums", totalNums);
-            resultMap.put("totalPages", totalPages);
-            return resultMap;
+        // 封装 Map 存储数据作为结果
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("rows", contents);
+        resultMap.put("totalNums", totalNums);
+        resultMap.put("totalPages", totalPages);
+        return resultMap;
+    }
+
+    /**
+     * 抽取根据分类进行分组查询
+     *
+     * @param nativeSearchQueryBuilder
+     * @return
+     */
+    public List<String> searchCategoryList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
+        // 分组查询分类集合
+        // addAggregation 添加聚合操作
+        // 第一个参数需要传入分组的依据，即 根据哪个域进行分组
+        nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName"));
+
+        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(),
+                SkuInfo.class);
+
+        // 可以根据多个域进行分组。
+        // 获取指定域的集合数据 {手机，电脑，电视}
+        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuCategory");
+
+        List<String> categoryList = new ArrayList<String>();
+        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
+            // 获取其中一个分类名称，比如 手机 或者 电脑 或者 电视
+            String categoryName = bucket.getKeyAsString();
+            categoryList.add(categoryName);
         }
+        return categoryList;
+    }
 
-        /**
-         * 抽取根据分类进行分组查询
-         *
-         * @param nativeSearchQueryBuilder
-         * @return
-         */
-        public List<String> searchCategoryList (NativeSearchQueryBuilder nativeSearchQueryBuilder){
-            // 分组查询分类集合
-            // addAggregation 添加聚合操作
-            // 第一个参数需要传入分组的依据，即 根据哪个域进行分组
-            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName"));
+    /**
+     * 根据品牌名称分组查询
+     *
+     * @param nativeSearchQueryBuilder
+     * @return
+     */
+    public List<String> searchBrandList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
+        // 分组查询品牌集合
+        // addAggregation 添加聚合操作
+        // 第一个参数需要传入分组的依据，即 根据哪个域进行分组
+        nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuBrand").field("brandName"));
 
-            AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(),
-                    SkuInfo.class);
+        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
 
-            // 可以根据多个域进行分组。
-            // 获取指定域的集合数据 {手机，电脑，电视}
-            StringTerms stringTerms = aggregatedPage.getAggregations().get("skuCategory");
+        // 可以根据多个域进行分组。
+        // 获取指定域的集合数据 {TCL，海尔，华为}
+        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuBrand");
 
-            List<String> categoryList = new ArrayList<String>();
-            for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
-                // 获取其中一个分类名称，比如 手机 或者 电脑 或者 电视
-                String categoryName = bucket.getKeyAsString();
-                categoryList.add(categoryName);
-            }
-            return categoryList;
+        List<String> brandList = new ArrayList<String>();
+        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
+            // 获取其中一个分类名称，比如 TCL 或者 海尔 或者 华为
+            String categoryName = bucket.getKeyAsString();
+            brandList.add(categoryName);
         }
+        return brandList;
+    }
 
-        /**
-         * 根据品牌名称分组查询
-         *
-         * @param nativeSearchQueryBuilder
-         * @return
-         */
-        public List<String> searchBrandList (NativeSearchQueryBuilder nativeSearchQueryBuilder){
-            // 分组查询品牌集合
-            // addAggregation 添加聚合操作
-            // 第一个参数需要传入分组的依据，即 根据哪个域进行分组
-            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuBrand").field("brandName"));
+    /**
+     * 根据规格进行分组查询
+     *
+     * @param nativeSearchQueryBuilder
+     * @return
+     */
+    public Map<String, Set<String>> searchSpecList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
 
-            AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
+        // 使用 spec.keyword 表示不分词
+        nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
+                size(10000));
 
-            // 可以根据多个域进行分组。
-            // 获取指定域的集合数据 {TCL，海尔，华为}
-            StringTerms stringTerms = aggregatedPage.getAggregations().get("skuBrand");
+        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(),
+                SkuInfo.class);
 
-            List<String> brandList = new ArrayList<String>();
-            for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
-                // 获取其中一个分类名称，比如 TCL 或者 海尔 或者 华为
-                String categoryName = bucket.getKeyAsString();
-                brandList.add(categoryName);
-            }
-            return brandList;
+        // 按照规格进行分类查询
+        // 其实相当于对 spec 进行去重，可以提高后续对它的 value 去重的效率
+        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuSpec");
+
+        List<String> specList = new ArrayList<String>();
+
+        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
+            String specName = bucket.getKeyAsString();
+            specList.add(specName);
         }
-
-        /**
-         * 根据规格进行分组查询
-         *
-         * @param nativeSearchQueryBuilder
-         * @return
-         */
-        public Map<String, Set<String>> searchSpecList (NativeSearchQueryBuilder nativeSearchQueryBuilder){
-
-            // 使用 spec.keyword 表示不分词
-            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
-                    size(10000));
-
-            AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(),
-                    SkuInfo.class);
-
-            // 按照规格进行分类查询
-            // 其实相当于对 spec 进行去重，可以提高后续对它的 value 去重的效率
-            StringTerms stringTerms = aggregatedPage.getAggregations().get("skuSpec");
-
-            List<String> specList = new ArrayList<String>();
-
-            for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
-                String specName = bucket.getKeyAsString();
-                specList.add(specName);
-            }
+        Map<String, Set<String>> allSpec = putAllSpec(specList);
+        return allSpec;
+    }
 
 
-            Map<String, Set<String>> allSpec = putAllSpec(specList);
-            return allSpec;
-        }
+    /**
+     * 规格数据操作
+     *
+     * @param specList
+     * @return
+     */
+    private Map<String, Set<String>> putAllSpec(List<String> specList) {
+        Map<String, Set<String>> allSpec = new HashMap<String, Set<String>>();
 
+        // 遍历 specList
+        for (String spec : specList) {
+            // 将 List 先转化成 Map
+            Map<String, String> specMap = JSON.parseObject(spec, Map.class);
 
-        /**
-         * 规格数据操作
-         *
-         * @param specList
-         * @return
-         */
-        private Map<String, Set<String>> putAllSpec(List < String > specList) {
-            Map<String, Set<String>> allSpec = new HashMap<String, Set<String>>();
-
-            // 遍历 specList
-            for (String spec : specList) {
-                // 将 List 先转化成 Map
-                Map<String, String> specMap = JSON.parseObject(spec, Map.class);
-
-                // 再将 Map 转化成 Map<String,Set<String>>,key 不变，需要把 value 添加到 Set 中
-                for (Map.Entry<String, String> entry : specMap.entrySet()) {
-                    String entryKey = entry.getKey();
-                    if (allSpec.get(entryKey) == null) {
-                        Set set = new HashSet<>();
-                        set.add(entry.getValue());
-                        allSpec.put(entryKey, set);
-                    } else {
-                        allSpec.get(entryKey).add(entry.getValue());
-                    }
+            // 再将 Map 转化成 Map<String,Set<String>>,key 不变，需要把 value 添加到 Set 中
+            for (Map.Entry<String, String> entry : specMap.entrySet()) {
+                String entryKey = entry.getKey();
+                if (allSpec.get(entryKey) == null) {
+                    Set set = new HashSet<>();
+                    set.add(entry.getValue());
+                    allSpec.put(entryKey, set);
+                } else {
+                    allSpec.get(entryKey).add(entry.getValue());
                 }
             }
-            return allSpec;
         }
-
+        return allSpec;
     }
+}
 
 
