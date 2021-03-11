@@ -14,6 +14,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.FieldSortBuilder;
@@ -74,109 +75,91 @@ public class SkuServiceImpl implements SkuService {
         skuEsMapper.saveAll(skuInfos);
     }
 
-
     /**
-     * 多条件搜索
+     * 一、根据关键词搜索
      *
      * @param searchMap
      * @return
      */
     /*
-    @Override
     public Map<String, Object> search(Map<String, String> searchMap) {
 
-        // 构建搜索条件对象
-        NativeSearchQueryBuilder builder =builderBasicQuery(searchMap);
+            // 搜索条件构建对象
+            NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
 
+            // 如果关键词不为空
+            if(searchMap!=null && searchMap.size()>0){
 
-        //
-        if (searchMap != null && searchMap.size() > 0) {
+                // 根据关键词搜索
+                String keyWords = searchMap.get("keywords");
 
-            // 根据关键词搜索
-            String keyWords = searchMap.get("keywords");
-
-            if (!StringUtils.isEmpty(keyWords)) {
-                builder.withQuery(
-                        QueryBuilders.queryStringQuery(keyWords).field("name"));
+                if(!StringUtils.isEmpty(keyWords)){
+                    builder.withQuery(
+                            QueryBuilders.queryStringQuery(keyWords).field("name"));
+                }
             }
 
+            // 第二个参数需要搜索的结果类型（页面展示的是集合数据）
+            // AggregatedPage<SkuInfo> 是对结果集的封装
+            AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(
+                    builder.build(), SkuInfo.class);
+
+            // 获取数据结果集
+            List<SkuInfo> contents = page.getContent();
+
+            // 获取总记录数
+            long totalNums = page.getTotalElements();
+
+            // 获取总页数
+            int totalPages = page.getTotalPages();
+
+            // 封装 Map 存储数据作为结果
+            Map<String,Object> resultMap=new HashMap<String,Object>();
+            resultMap.put("rows",contents);
+            resultMap.put("totalNums",totalNums);
+            resultMap.put("totalPages", totalPages);
+            return resultMap;
         }
-
-        // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
-        // AggregatedPage<SkuInfo> 是对结果集的封装
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(
-                builder.build(), SkuInfo.class);
-
-        // 根据分类进行分组查询
-        List<String> categoryList = searchCategoryList(builder);
-
-        // 根据品牌名称进行分组查询
-        List<String> brandList = searchBrandList(builder);
-
-
-        // 获取数据结果集
-        List<SkuInfo> contents = page.getContent();
-
-        // 获取总记录数
-        long totalNums = page.getTotalElements();
-
-        // 获取总页数
-        int totalPages = page.getTotalPages();
-
-        // 封装 Map 存储数据作为结果
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("rows", contents);
-        resultMap.put("totalNums", totalNums);
-        resultMap.put("totalPages", totalPages);
-        resultMap.put("category", categoryList);
-        return resultMap;
-    }
 */
 
     /**
-     * 多条件搜索
+     * 二、整合 根据分类进行分组查询
      *
      * @param searchMap
      * @return
      */
-    @Override
     public Map<String, Object> search(Map<String, String> searchMap) {
 
-        // 构建搜索条件对象
+        // 搜索条件构建对象
         NativeSearchQueryBuilder builder = builderBasicQuery(searchMap);
 
-
-        // 集合搜索
         Map<String, Object> resultMap = searchlist(builder);
 
 
-        // 如果用户在前端页面中已经输入了 比如说 分类、品牌 的条件
-        // 那么就没必要再根据 分类、品牌进行分组查询了，只需要根据条件进行搜索。
-
-        // 如果用户没有输入条件 或者 没有输入分类条件
+        // 如果用户没有输入条件或者没有输入分类，才会展示分类列表
         if (searchMap == null || searchMap.get("category") == null) {
-            // 根据分类进行分组查询
+
+            /* 根据分类进行分组查询 */
             List<String> categoryList = searchCategoryList(builder);
-            resultMap.put("category", categoryList);
+
+            resultMap.put("categoryList", categoryList);
         }
 
-        // 如果用户没有输入品牌 或者 没有输入品牌条件
+        // 如果用户没有输入条件或者没有输入品牌，才会展示品牌列表
         if (searchMap == null || searchMap.get("brand") == null) {
-            // 根据品牌名称进行分组查询
+            /* 根据品牌名进行分组查询 */
             List<String> brandList = searchBrandList(builder);
-            resultMap.put("brand", brandList);
+            resultMap.put("brandList", brandList);
         }
 
+        /* 根据规格进行分组查询 */
+        Map<String, Set<String>> specMap = searchSpecList(builder);
 
-        // 根据规格进行分组查询
-        Map<String, Set<String>> specList = searchSpecList(builder);
+        resultMap.put("specMap", specMap);
 
-
-        resultMap.put("spec", specList);
-
+//
         return resultMap;
     }
-
 
     /**
      * 搜索条件封装
@@ -196,6 +179,7 @@ public class SkuServiceImpl implements SkuService {
             String keyWords = searchMap.get("keywords");
 
             String category = searchMap.get("category");
+
             String brand = searchMap.get("brand");
 
             if (!StringUtils.isEmpty(keyWords)) {
@@ -232,61 +216,61 @@ public class SkuServiceImpl implements SkuService {
                     boolQueryBuilder.must(QueryBuilders.termQuery("specMap." + key.substring(5) + ".keyword", value));
                 }
             }
-        }
 
-        // 价格区间查询
-        // 前端写s的是 price 0-500元 500-1000元 1000-1500元 1500-2000元 2000-3000元 3000元以上
 
-        String price = searchMap.get("price");
-        if (!StringUtils.isEmpty(price)) {
+            /** 价格区间查询 */
+            // 前端写s的是 price 0-500元 500-1000元 1000-1500元 1500-2000元 2000-3000元 3000元以上
 
-            // 需要去掉 "元" 和 “以上” 变成 0-500 500-1000 1000-1500 1500-2000 2000-3000 3000
-            price = price.replace("元", "").replace("以上", "");
+            String price = searchMap.get("price");
+            if (!StringUtils.isEmpty(price)) {
 
-            // 需要根据 “-” 进行分割 [0,500] [500,1000] ... ... [3000]
-            String[] prices = price.split("-");
+                // 需要去掉 "元" 和 “以上” 变成 0-500 500-1000 1000-1500 1500-2000 2000-3000 3000
+                price = price.replace("元", "").replace("以上", "");
 
-            if (prices != null && prices.length > 0) {
+                // 需要根据 “-” 进行分割 [0,500] [500,1000] ... ... [3000]
+                String[] prices = price.split("-");
 
-                // price[0]!=null price>price[0]
-                if (prices.length == 1) {
-                    boolQueryBuilder.must(QueryBuilders.rangeQuery("price").gt(Integer.parseInt(prices[0])));
-                } else {
+                if (prices != null && prices.length > 0) {
 
-                    // price[1]!=null price<=price[1]
-                    boolQueryBuilder.must(QueryBuilders.rangeQuery("price").lte(Integer.parseInt(prices[1])));
+                    // price[0]!=null price>price[0]
+                    if (prices.length == 1) {
+                        boolQueryBuilder.must(QueryBuilders.rangeQuery("price").gt(Integer.parseInt(prices[0])));
+                    } else {
+
+                        // price[1]!=null price<=price[1]
+                        boolQueryBuilder.must(QueryBuilders.rangeQuery("price").lte(Integer.parseInt(prices[1])));
+                    }
                 }
             }
+            // 将 BoolQueryBuilder 对象填充给 NativeSearchQueryBuilder
+            builder.withQuery(boolQueryBuilder);
+
+
+            /**
+             * 实现排序
+             */
+            // 指定排序的域
+            String sortField = searchMap.get("sortField");
+
+            // 指定排序规则
+            String sortRule = searchMap.get("sortRule");
+
+            if (!StringUtils.isEmpty(sortField) && !StringUtils.isEmpty(sortRule)) {
+                builder.withSort(
+                        new FieldSortBuilder(sortField)
+                                .order(SortOrder.valueOf(sortRule)));
+            }
+
+
+            /**
+             * 实现分页
+             */
+            // 如果用户没有传入分页参数，默认 第 1 页
+            Integer pageNum = coverterPage(searchMap);
+            // 默认每页显示 3 条数据
+            Integer size = 3;
+            builder.withPageable(PageRequest.of(pageNum - 1, size));
         }
-
-
-        /**
-         * 实现排序
-         */
-        // 指定排序的域
-        String sortField = searchMap.get("sortField");
-
-        // 指定排序规则
-        String sortRule = searchMap.get("sortRule");
-
-        if (!StringUtils.isEmpty(sortField) && !StringUtils.isEmpty(sortRule)) {
-            builder.withSort(
-                    new FieldSortBuilder(sortField)
-                            .order(SortOrder.valueOf(sortRule)));
-        }
-
-
-        /**
-         * 实现分页
-         */
-        // 如果用户没有传入分页参数，默认 第 1 页
-        Integer pageNum = coverterPage(searchMap);
-        // 默认每页显示 3 条数据
-        Integer size = 3;
-        builder.withPageable(PageRequest.of(pageNum - 1, size));
-
-        // 将 BoolQueryBuilder 对象填充给 NativeSearchQueryBuilder
-        builder.withQuery(boolQueryBuilder);
         return builder;
     }
 
@@ -311,6 +295,7 @@ public class SkuServiceImpl implements SkuService {
         return 1;
     }
 
+
     /**
      * 集合搜索封装
      *
@@ -318,12 +303,11 @@ public class SkuServiceImpl implements SkuService {
      * @return
      */
     public Map<String, Object> searchlist(NativeSearchQueryBuilder builder) {
-
-
         /**
          * 高亮搜索
          */
 
+/*
         // 指定高亮域
         HighlightBuilder.Field field = new HighlightBuilder.Field("name");
 
@@ -340,15 +324,23 @@ public class SkuServiceImpl implements SkuService {
         // 添加高亮
         builder.withHighlightFields(field);
 
+
+
+
         // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
         // AggregatedPage<SkuInfo> 是对结果集的封装
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate
+         AggregatedPage<SkuInfo> page = elasticsearchTemplate
                 .queryForPage(
                         // 搜索条件封装
                         builder.build(),
+
                         // 执行搜索后数据集合需要转化的字节码类型
                         SkuInfo.class,
-                        // 执行搜索后将数据结果集封装到该对象中
+
+                        *//***
+                         * 高亮搜索
+                         *//*
+                        // 执行搜索后,将数据结果集封装到该 SearchResultMapper  对象中
                         new SearchResultMapper() {
                             @Override
                             public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
@@ -378,7 +370,6 @@ public class SkuServiceImpl implements SkuService {
                                         // 将高亮数据添加到集合中
                                         list.add(skuInfo);
                                     }
-
                                 }
                                 // 将数据返回
                                 // 构造方法需要的参数：搜索得到的数据集合 List,携带高亮的
@@ -386,10 +377,9 @@ public class SkuServiceImpl implements SkuService {
                                 // 总条数
                                 return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
                             }
-                        });
+                        });*/
 
-
-
+        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(builder.build(), SkuInfo.class);
         // 获取数据结果集
         List<SkuInfo> contents = page.getContent();
 
@@ -414,24 +404,21 @@ public class SkuServiceImpl implements SkuService {
      * @return
      */
     public List<String> searchCategoryList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
-        // 分组查询分类集合
-        // addAggregation 添加聚合操作
-        // 第一个参数需要传入分组的依据，即 根据哪个域进行分组
         nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName"));
 
-        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(),
-                SkuInfo.class);
+        AggregatedPage<SkuInfo> page1 = elasticsearchTemplate.queryForPage(
+                nativeSearchQueryBuilder.build(), SkuInfo.class);
 
-        // 可以根据多个域进行分组。
-        // 获取指定域的集合数据 {手机，电脑，电视}
-        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuCategory");
+        // 因为可以根据多个域分组，所以先获取集合，再获取指定域的数据
+        // 这时获取到的是 {电脑，手机配件，电视}
+        StringTerms stringTerms = page1.getAggregations().get("skuCategory");
 
-        List<String> categoryList = new ArrayList<String>();
+        List<String> categoryList = new ArrayList<>();
         for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
-            // 获取其中一个分类名称，比如 手机 或者 电脑 或者 电视
             String categoryName = bucket.getKeyAsString();
             categoryList.add(categoryName);
         }
+
         return categoryList;
     }
 
@@ -451,10 +438,10 @@ public class SkuServiceImpl implements SkuService {
 
         // 可以根据多个域进行分组。
         // 获取指定域的集合数据 {TCL，海尔，华为}
-        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuBrand");
+        StringTerms terms = aggregatedPage.getAggregations().get("skuBrand");
 
         List<String> brandList = new ArrayList<String>();
-        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
+        for (Terms.Bucket bucket : terms.getBuckets()) {
             // 获取其中一个分类名称，比如 TCL 或者 海尔 或者 华为
             String categoryName = bucket.getKeyAsString();
             brandList.add(categoryName);
@@ -479,11 +466,11 @@ public class SkuServiceImpl implements SkuService {
 
         // 按照规格进行分类查询
         // 其实相当于对 spec 进行去重，可以提高后续对它的 value 去重的效率
-        StringTerms stringTerms = aggregatedPage.getAggregations().get("skuSpec");
+        Terms terms = aggregatedPage.getAggregations().get("skuSpec");
 
         List<String> specList = new ArrayList<String>();
 
-        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
+        for (Terms.Bucket bucket : terms.getBuckets()) {
             String specName = bucket.getKeyAsString();
             specList.add(specName);
         }
@@ -521,5 +508,4 @@ public class SkuServiceImpl implements SkuService {
         return allSpec;
     }
 }
-
 
