@@ -51,7 +51,6 @@ public class SkuServiceImpl implements SkuService {
     /**
      * 导入索引库
      */
-
     @Override
     public void importData() {
 
@@ -131,33 +130,14 @@ public class SkuServiceImpl implements SkuService {
     public Map<String, Object> search(Map<String, String> searchMap) {
 
         // 搜索条件构建对象
+        // 实现：根据关键词进行搜索，根据分类、品牌、规格过滤，根据价格区间进行查询，排序，分页 的功能
         NativeSearchQueryBuilder builder = builderBasicQuery(searchMap);
 
+        // 实现高亮搜索，执行搜索语句，获取数据结果
         Map<String, Object> resultMap = searchlist(builder);
 
-
-        // 如果用户没有输入条件或者没有输入分类，才会展示分类列表
-        if (searchMap == null || searchMap.get("category") == null) {
-
-            /* 根据分类进行分组查询 */
-            List<String> categoryList = searchCategoryList(builder);
-
-            resultMap.put("categoryList", categoryList);
-        }
-
-        // 如果用户没有输入条件或者没有输入品牌，才会展示品牌列表
-        if (searchMap == null || searchMap.get("brand") == null) {
-            /* 根据品牌名进行分组查询 */
-            List<String> brandList = searchBrandList(builder);
-            resultMap.put("brandList", brandList);
-        }
-
-        /* 根据规格进行分组查询 */
-        Map<String, Set<String>> specMap = searchSpecList(builder);
-
-        resultMap.put("specMap", specMap);
-
-//
+        // 如果没有输入品牌、分类参数，就获取参数列表
+        resultMap.putAll(searchGroupList(builder,searchMap));
         return resultMap;
     }
 
@@ -194,14 +174,14 @@ public class SkuServiceImpl implements SkuService {
             // 如果分类不为空
             if (!StringUtils.isEmpty(category)) {
                 // 不需要分词
-                boolQueryBuilder.must(QueryBuilders.termQuery("categoryName", "category"));
+                boolQueryBuilder.must(QueryBuilders.termQuery("categoryName", category));
             }
 
             // 品牌过滤
             // 如果品牌不为空
             if (!StringUtils.isEmpty(brand)) {
                 // 不需要分词
-                boolQueryBuilder.must(QueryBuilders.termQuery("brandName", "brand"));
+                boolQueryBuilder.must(QueryBuilders.termQuery("brandName", brand));
             }
 
             // 规格过滤
@@ -306,8 +286,6 @@ public class SkuServiceImpl implements SkuService {
         /**
          * 高亮搜索
          */
-
-/*
         // 指定高亮域
         HighlightBuilder.Field field = new HighlightBuilder.Field("name");
 
@@ -337,9 +315,9 @@ public class SkuServiceImpl implements SkuService {
                         // 执行搜索后数据集合需要转化的字节码类型
                         SkuInfo.class,
 
-                        *//***
-                         * 高亮搜索
-                         *//*
+                        /***
+                        * 高亮搜索
+                        */
                         // 执行搜索后,将数据结果集封装到该 SearchResultMapper  对象中
                         new SearchResultMapper() {
                             @Override
@@ -377,9 +355,7 @@ public class SkuServiceImpl implements SkuService {
                                 // 总条数
                                 return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
                             }
-                        });*/
-
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate.queryForPage(builder.build(), SkuInfo.class);
+                        });
         // 获取数据结果集
         List<SkuInfo> contents = page.getContent();
 
@@ -397,6 +373,57 @@ public class SkuServiceImpl implements SkuService {
         return resultMap;
     }
 
+
+    public Map<String, Object> searchGroupList(NativeSearchQueryBuilder nativeSearchQueryBuilder, Map<String, String> searchMap) {
+        // 结果集
+        Map<String, Object> groupResult = new HashMap<>();
+
+        // 构建条件
+        /** 如果没有输入分类、品牌参数，就展示分类列表 */
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("category"))) {
+            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName"));
+        }
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("brand"))) {
+            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuBrand").field("brandName"));
+        }
+
+
+        if(searchMap==null || StringUtils.isEmpty(searchMap.get("spec"))){
+            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
+                    size(10000));
+        }
+
+
+        // 执行语句,这样就执行一次
+        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
+
+        // 获取结果
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("category"))) {
+            StringTerms categoryTerm = aggregatedPage.getAggregations().get("skuCategory");
+            List<String> categoryList = getGroupList(categoryTerm);
+            groupResult.put("category", categoryList);
+        }
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("brand"))) {
+            StringTerms brandTerm = aggregatedPage.getAggregations().get("skuBrand");
+            List<String> brandList = getGroupList(brandTerm);
+            groupResult.put("brand", brandList);
+        }
+        if(searchMap==null||StringUtils.isEmpty(searchMap.get("spec"))){
+            List<String> specList = new ArrayList<String>();
+            StringTerms specTerm=aggregatedPage.getAggregations().get("skuSpec");
+            for (Terms.Bucket bucket : specTerm.getBuckets()) {
+                String specName = bucket.getKeyAsString();
+                specList.add(specName);
+            }
+            Map<String, Set<String>> allSpec = putAllSpec(specList);
+            groupResult.put("spec",allSpec);
+        }
+        return groupResult;
+    }
+    /** 如果没有输入分类、品牌参数，就展示列表 */
+
+
+
     /**
      * 抽取根据分类进行分组查询
      *
@@ -413,11 +440,7 @@ public class SkuServiceImpl implements SkuService {
         // 这时获取到的是 {电脑，手机配件，电视}
         StringTerms stringTerms = page1.getAggregations().get("skuCategory");
 
-        List<String> categoryList = new ArrayList<>();
-        for (StringTerms.Bucket bucket : stringTerms.getBuckets()) {
-            String categoryName = bucket.getKeyAsString();
-            categoryList.add(categoryName);
-        }
+        List<String> categoryList = getGroupList(stringTerms);
 
         return categoryList;
     }
@@ -440,21 +463,21 @@ public class SkuServiceImpl implements SkuService {
         // 获取指定域的集合数据 {TCL，海尔，华为}
         StringTerms terms = aggregatedPage.getAggregations().get("skuBrand");
 
-        List<String> brandList = new ArrayList<String>();
-        for (Terms.Bucket bucket : terms.getBuckets()) {
-            // 获取其中一个分类名称，比如 TCL 或者 海尔 或者 华为
-            String categoryName = bucket.getKeyAsString();
-            brandList.add(categoryName);
-        }
+        List<String> brandList = getGroupList(terms);
         return brandList;
     }
 
-    /**
-     * 根据规格进行分组查询
-     *
-     * @param nativeSearchQueryBuilder
-     * @return
-     */
+    private List<String> getGroupList(StringTerms terms) {
+        List<String> groupList = new ArrayList<String>();
+        for (Terms.Bucket bucket : terms.getBuckets()) {
+            // 获取其中一个分类名称，比如 TCL 或者 海尔 或者 华为
+            String categoryName = bucket.getKeyAsString();
+            groupList.add(categoryName);
+        }
+        return groupList;
+    }
+
+    /** 根据规格进行分组查询 */
     public Map<String, Set<String>> searchSpecList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
 
         // 使用 spec.keyword 表示不分词
@@ -481,7 +504,6 @@ public class SkuServiceImpl implements SkuService {
 
     /**
      * 规格数据操作
-     *
      * @param specList
      * @return
      */
