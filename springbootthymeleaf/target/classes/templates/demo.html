@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--引入 thymeleaf 标签-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Thymeleaf的入门</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--
+hello
+&lt;!&ndash;输出hello数据&ndash;&gt;
+<p th:text="${hello}"></p>
+
+<div>
+    &lt;!&ndash;th:action 指定表单提交的路径&ndash;&gt;
+    <form id="login-form" th:action="@{/test/hello}">
+        <button>提交</button>
+    </form>
+</div>
+-->
+
+<!-- 对象遍历 -->
+<!--<div>
+    <table>
+        <tr>
+            <td>下标</td>
+            <td>ID</td>
+            <td>name</td>
+            <td>address</td>
+        </tr>
+        &lt;!&ndash;user 表示接受当前循环的对象 ,userState 表示当前循环对象的状态记录&ndash;&gt;
+        <tr th:each="user,userState:${users}">
+            <td th:text="${userState.index}">下标</td>
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.name}">name</td>
+            <td th:text="${user.address}">address</td>
+        </tr>
+    </table>
+</div>-->
+
+<!--集合遍历-->
+<!--<div>
+    <div>
+    知道 key 时，根据 key 得到 value： <br/>
+    <span th:text="${dataMap.No}"></span>
+    <span th:text="${dataMap.address}"></span>
+    </div>
+
+    <div>
+    不知道 key 时，需要遍历 map：<br/>
+        <div th:each="datamap:${dataMap}">
+            <span th:text="${datamap.key}"></span>:<span th:text="${datamap.value}"></span>
+        </div>
+    </div>
+</div>-->
+
+<!--输出数组-->
+<!--<div th:each="nm,nmStat:${names}">
+    <span th:text="${nmStat.count}"></span><span th:text="${nm}"></span>
+</div>-->
+
+<!--输出日期-->
+<!--<div>
+    Date 数据获取
+    <div>
+        <span th:text="${#dates.format(now,'YYYY-MM-dd HH:mm:ss')}"></span>
+    </div>
+</div>-->
+
+<!--if 条件判断-->
+<!--<div>
+    if 条件判断
+    <div>
+        <span th:if="${age>=18}">成年</span>
+        <span th:unless="${age<18}">未成年</span>
+    </div>
+</div>-->
+
+<!-- 使用 fragment 模块-->
+    <div>
+    引入模块
+    <div id="A" th:include="footer::copy"></div>
+</div>
+
+</body>
+</html>

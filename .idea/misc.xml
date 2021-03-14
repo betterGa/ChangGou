@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/pom.xml" />
         <option value="$PROJECT_DIR$/code-template/pom.xml" />
         <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-content-api/pom.xml" />
+        <option value="$PROJECT_DIR$/com.jia/pom.xml" />
+        <option value="$PROJECT_DIR$/springbootthymeleaf/pom.xml" />
       </list>
     </option>
   </component>

@@ -137,7 +137,7 @@ public class SkuServiceImpl implements SkuService {
         Map<String, Object> resultMap = searchlist(builder);
 
         // 如果没有输入品牌、分类参数，就获取参数列表
-        resultMap.putAll(searchGroupList(builder,searchMap));
+        resultMap.putAll(searchGroupList(builder, searchMap));
         return resultMap;
     }
 
@@ -154,6 +154,13 @@ public class SkuServiceImpl implements SkuService {
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 
+
+        // 如果没有输入关键字，把关键字初始值赋值为 “华为”
+        if (searchMap == null || searchMap.size() == 0) {
+            searchMap = new LinkedHashMap<>();
+            searchMap.put("keywords", "华为");
+        }
+
         if (searchMap != null && searchMap.size() > 0) {
             // 根据关键词搜索
             String keyWords = searchMap.get("keywords");
@@ -161,14 +168,12 @@ public class SkuServiceImpl implements SkuService {
             String category = searchMap.get("category");
 
             String brand = searchMap.get("brand");
-
+            //builder.withQuery(
+            //QueryBuilders.queryStringQuery(keyWords).field("name"));
             if (!StringUtils.isEmpty(keyWords)) {
-                //builder.withQuery(
-                //QueryBuilders.queryStringQuery(keyWords).field("name"));
-
                 // 如果关键词不为空，根据关键词在 name 域进行搜索
                 boolQueryBuilder.must(QueryBuilders.queryStringQuery(keyWords).field("name"));
-            }
+            } else keyWords = "华为";
 
             // 分类过滤
             // 如果分类不为空
@@ -196,7 +201,6 @@ public class SkuServiceImpl implements SkuService {
                     boolQueryBuilder.must(QueryBuilders.termQuery("specMap." + key.substring(5) + ".keyword", value));
                 }
             }
-
 
             /** 价格区间查询 */
             // 前端写s的是 price 0-500元 500-1000元 1000-1500元 1500-2000元 2000-3000元 3000元以上
@@ -248,7 +252,7 @@ public class SkuServiceImpl implements SkuService {
             // 如果用户没有传入分页参数，默认 第 1 页
             Integer pageNum = coverterPage(searchMap);
             // 默认每页显示 3 条数据
-            Integer size = 3;
+            Integer size = 30;
             builder.withPageable(PageRequest.of(pageNum - 1, size));
         }
         return builder;
@@ -303,11 +307,9 @@ public class SkuServiceImpl implements SkuService {
         builder.withHighlightFields(field);
 
 
-
-
         // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
         // AggregatedPage<SkuInfo> 是对结果集的封装
-         AggregatedPage<SkuInfo> page = elasticsearchTemplate
+        AggregatedPage<SkuInfo> page = elasticsearchTemplate
                 .queryForPage(
                         // 搜索条件封装
                         builder.build(),
@@ -316,8 +318,8 @@ public class SkuServiceImpl implements SkuService {
                         SkuInfo.class,
 
                         /***
-                        * 高亮搜索
-                        */
+                         * 高亮搜索
+                         */
                         // 执行搜索后,将数据结果集封装到该 SearchResultMapper  对象中
                         new SearchResultMapper() {
                             @Override
@@ -388,41 +390,92 @@ public class SkuServiceImpl implements SkuService {
         }
 
 
-        if(searchMap==null || StringUtils.isEmpty(searchMap.get("spec"))){
+        // 如果这样写，传入 spec_网络=3G 时，就会展示所有列表
+        // if (searchMap == null || StringUtils.isEmpty(searchMap.get("spec"))) {
+        // 应该是 不论输入的参数是什么，有没有 都应该展示所有列表
+
             nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
                     size(10000));
-        }
+    //}
 
 
-        // 执行语句,这样就执行一次
-        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
+    // 执行语句,这样就执行一次
+    AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
 
-        // 获取结果
-        if (searchMap == null || StringUtils.isEmpty(searchMap.get("category"))) {
-            StringTerms categoryTerm = aggregatedPage.getAggregations().get("skuCategory");
-            List<String> categoryList = getGroupList(categoryTerm);
-            groupResult.put("category", categoryList);
-        }
-        if (searchMap == null || StringUtils.isEmpty(searchMap.get("brand"))) {
-            StringTerms brandTerm = aggregatedPage.getAggregations().get("skuBrand");
-            List<String> brandList = getGroupList(brandTerm);
-            groupResult.put("brand", brandList);
-        }
-        if(searchMap==null||StringUtils.isEmpty(searchMap.get("spec"))){
-            List<String> specList = new ArrayList<String>();
-            StringTerms specTerm=aggregatedPage.getAggregations().get("skuSpec");
-            for (Terms.Bucket bucket : specTerm.getBuckets()) {
-                String specName = bucket.getKeyAsString();
-                specList.add(specName);
-            }
-            Map<String, Set<String>> allSpec = putAllSpec(specList);
-            groupResult.put("spec",allSpec);
-        }
-        return groupResult;
+    // 获取结果
+        if(searchMap ==null||StringUtils.isEmpty(searchMap.get("category")))
+
+    {
+        StringTerms categoryTerm = aggregatedPage.getAggregations().get("skuCategory");
+        List<String> categoryList = getGroupList(categoryTerm);
+        groupResult.put("categoryList", categoryList);
     }
+        if(searchMap ==null||StringUtils.isEmpty(searchMap.get("brand")))
+
+    {
+        StringTerms brandTerm = aggregatedPage.getAggregations().get("skuBrand");
+        List<String> brandList = getGroupList(brandTerm);
+        groupResult.put("brandList", brandList);
+    }
+
+
+        /***
+         * 当搜索条件为 null 或者 搜索条件不是以 spec_ 开头时，需要展示所有的 spec 列表
+         */
+
+        if(searchMap ==null||!hasBeginWithSpec(searchMap))
+    {
+        List<String> specList = new ArrayList<String>();
+        StringTerms specTerm = aggregatedPage.getAggregations().get("skuSpec");
+        for (Terms.Bucket bucket : specTerm.getBuckets()) {
+            String specName = bucket.getKeyAsString();
+            specList.add(specName);
+        }
+        Map<String, Set<String>> allSpec = putAllSpec(specList);
+        groupResult.put("specMap", allSpec);
+    }
+
+        /***
+         * 当有 spec_ 开头的条件时，除了条件，其他的 spec 列表都要展示
+         */
+      else
+    {
+        // 遍历 条件参数
+        for (String key : searchMap.keySet()) {
+
+            String keyString = "";
+            if (key.startsWith("spec_")) {
+                // keyString 为 网络
+                keyString = key.substring(5, key.length());
+                List<String> specList = new ArrayList<String>();
+                StringTerms specTerm = aggregatedPage.getAggregations().get("skuSpec");
+                for (Terms.Bucket bucket : specTerm.getBuckets()) {
+                    String specName = bucket.getKeyAsString();
+                    specList.add(specName);
+                }
+                Map<String, Set<String>> allSpec = putAllSpec(specList, keyString);
+                groupResult.put("specMap", allSpec);
+            }
+        }
+    }
+        return groupResult;
+}
+
     /** 如果没有输入分类、品牌参数，就展示列表 */
 
 
+    /**
+     * 判断参数是否以 spec_ 开头
+     *
+     * @param searchMap
+     * @return
+     */
+    public boolean hasBeginWithSpec(Map<String, String> searchMap) {
+        for (String key : searchMap.keySet()) {
+            if (key.startsWith("spec_")) return true;
+        }
+        return false;
+    }
 
     /**
      * 抽取根据分类进行分组查询
@@ -477,7 +530,9 @@ public class SkuServiceImpl implements SkuService {
         return groupList;
     }
 
-    /** 根据规格进行分组查询 */
+    /**
+     * 根据规格进行分组查询
+     */
     public Map<String, Set<String>> searchSpecList(NativeSearchQueryBuilder nativeSearchQueryBuilder) {
 
         // 使用 spec.keyword 表示不分词
@@ -504,9 +559,37 @@ public class SkuServiceImpl implements SkuService {
 
     /**
      * 规格数据操作
+     *
      * @param specList
      * @return
      */
+    private Map<String, Set<String>> putAllSpec(List<String> specList, String keyString) {
+        Map<String, Set<String>> allSpec = new HashMap<String, Set<String>>();
+
+        // 遍历 specList
+        for (String spec : specList) {
+            // 将 List 先转化成 Map
+            Map<String, String> specMap = JSON.parseObject(spec, Map.class);
+
+            // 再将 Map 转化成 Map<String,Set<String>>,key 不变，需要把 value 添加到 Set 中
+            for (Map.Entry<String, String> entry : specMap.entrySet()) {
+                String entryKey = entry.getKey();
+
+                if (!entryKey.equals(keyString)) {
+                    if (allSpec.get(entryKey) == null) {
+                        Set set = new HashSet<>();
+                        set.add(entry.getValue());
+                        allSpec.put(entryKey, set);
+                    } else {
+                        allSpec.get(entryKey).add(entry.getValue());
+                    }
+                }
+            }
+        }
+
+        return allSpec;
+    }
+
     private Map<String, Set<String>> putAllSpec(List<String> specList) {
         Map<String, Set<String>> allSpec = new HashMap<String, Set<String>>();
 
@@ -525,9 +608,11 @@ public class SkuServiceImpl implements SkuService {
                 } else {
                     allSpec.get(entryKey).add(entry.getValue());
                 }
+
             }
         }
         return allSpec;
     }
+
 }
 
