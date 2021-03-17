@@ -134,7 +134,7 @@ public class SkuServiceImpl implements SkuService {
         NativeSearchQueryBuilder builder = builderBasicQuery(searchMap);
 
         // 实现高亮搜索，执行搜索语句，获取数据结果
-        Map<String, Object> resultMap = searchlist(builder);
+        Map<String, Object> resultMap = searchlist(builder, searchMap);
 
         // 如果没有输入品牌、分类参数，就获取参数列表
         resultMap.putAll(searchGroupList(builder, searchMap));
@@ -156,10 +156,10 @@ public class SkuServiceImpl implements SkuService {
 
 
         // 如果没有输入关键字，把关键字初始值赋值为 “华为”
-        if (searchMap == null || searchMap.size() == 0) {
+        /*if (searchMap == null || searchMap.size() == 0) {
             searchMap = new LinkedHashMap<>();
             searchMap.put("keywords", "华为");
-        }
+        }*/
 
         if (searchMap != null && searchMap.size() > 0) {
             // 根据关键词搜索
@@ -172,12 +172,12 @@ public class SkuServiceImpl implements SkuService {
             //QueryBuilders.queryStringQuery(keyWords).field("name"));
 
             // 如果没有输入关键字，把关键字初始值赋值为 “华为”
-            if(StringUtils.isEmpty(keyWords)){
+            /*if(StringUtils.isEmpty(keyWords)){
                 keyWords="华为";
-            }
+            }*/
 
-                // 根据关键词在 name 域进行搜索
-                boolQueryBuilder.must(QueryBuilders.queryStringQuery(keyWords).field("name"));
+            // 根据关键词在 name 域进行搜索
+            boolQueryBuilder.must(QueryBuilders.queryStringQuery(keyWords).field("name"));
 
 
             // 分类过滤
@@ -291,78 +291,89 @@ public class SkuServiceImpl implements SkuService {
      * @param builder
      * @return
      */
-    public Map<String, Object> searchlist(NativeSearchQueryBuilder builder) {
+    public Map<String, Object> searchlist(NativeSearchQueryBuilder builder,Map<String, String> searchMap) {
         /**
          * 高亮搜索
          */
-        // 指定高亮域
-        HighlightBuilder.Field field = new HighlightBuilder.Field("name");
+        AggregatedPage<SkuInfo> page=null;
 
-        // 前缀 <em style="color:red">
-        field.preTags("<em style=\"color:red\">");
+        if (searchMap==null || searchMap.size()==0 || StringUtils.isEmpty(searchMap.get("keywords"))) {
+            page = elasticsearchTemplate
+                    .queryForPage(
+                            // 搜索条件封装
+                            builder.build(),
 
-        // 后缀 </em>
-        field.postTags("</em>");
+                            // 执行搜索后数据集合需要转化的字节码类型
+                            SkuInfo.class);
+        } else {
+            // 指定高亮域
+            HighlightBuilder.Field field = new HighlightBuilder.Field("name");
 
-        // 碎片长度 即 当关键词所在的记录过长时
-        // 截取关键词数据之前与之后，展示数据的最大长度
-        field.fragmentOffset(100);
+            // 前缀 <em style="color:red">
+            field.preTags("<em style=\"color:red\">");
 
-        // 添加高亮
-        builder.withHighlightFields(field);
+            // 后缀 </em>
+            field.postTags("</em>");
+
+            // 碎片长度 即 当关键词所在的记录过长时
+            // 截取关键词数据之前与之后，展示数据的最大长度
+            field.fragmentOffset(100);
+
+            // 添加高亮
+            builder.withHighlightFields(field);
 
 
-        // 第二个参数需要传入 搜索的结果类型（页面展示的是集合数据）
-        // AggregatedPage<SkuInfo> 是对结果集的封装
-        AggregatedPage<SkuInfo> page = elasticsearchTemplate
-                .queryForPage(
-                        // 搜索条件封装
-                        builder.build(),
+            page = elasticsearchTemplate
+                    .queryForPage(
+                            // 搜索条件封装
+                            builder.build(),
 
-                        // 执行搜索后数据集合需要转化的字节码类型
-                        SkuInfo.class,
+                            // 执行搜索后数据集合需要转化的字节码类型
+                            SkuInfo.class,
 
-                        /***
-                         * 高亮搜索
-                         */
-                        // 执行搜索后,将数据结果集封装到该 SearchResultMapper  对象中
-                        new SearchResultMapper() {
-                            @Override
-                            public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
-                                // 存储转换后的高亮对象
-                                List list = new ArrayList();
+                            /***
+                             * 高亮搜索
+                             */
+                            // 执行搜索后,将数据结果集封装到该 SearchResultMapper  对象中
+                            new SearchResultMapper() {
+                                @Override
+                                public <T> AggregatedPage<T> mapResults(SearchResponse searchResponse, Class<T> aClass, Pageable pageable) {
+                                    // 存储转换后的高亮对象
+                                    List list = new ArrayList();
 
-                                // 遍历结果集
-                                for (SearchHit hit : searchResponse.getHits()) {
+                                    // 遍历结果集
+                                    for (SearchHit hit : searchResponse.getHits()) {
 
-                                    // 转化成 JavaBean
-                                    SkuInfo skuInfo = JSON.parseObject(hit.getSourceAsString(), SkuInfo.class);
+                                        // 转化成 JavaBean
+                                        SkuInfo skuInfo = JSON.parseObject(hit.getSourceAsString(), SkuInfo.class);
 
-                                    // 分析结果集，获取高亮数据
-                                    HighlightField highlightField = hit.getHighlightFields().get("name");
+                                        // 分析结果集，获取高亮数据
+                                        HighlightField highlightField = hit.getHighlightFields().get("name");
 
-                                    // 取出高亮数据
-                                    if (highlightField != null && highlightField.getFragments() != null) {
-                                        Text[] fragments = highlightField.getFragments();
-                                        StringBuffer buffer = new StringBuffer();
-                                        for (Text fragment : fragments) {
-                                            buffer.append(fragment.toString());
+                                        // 取出高亮数据
+                                        if (highlightField != null && highlightField.getFragments() != null) {
+                                            Text[] fragments = highlightField.getFragments();
+                                            StringBuffer buffer = new StringBuffer();
+                                            for (Text fragment : fragments) {
+                                                buffer.append(fragment.toString());
+                                            }
+
+                                            // 把非高亮数据中指定域替换成高亮数据
+                                            skuInfo.setName(buffer.toString());
+
+                                            // 将高亮数据添加到集合中
+                                            list.add(skuInfo);
                                         }
-
-                                        // 把非高亮数据中指定域替换成高亮数据
-                                        skuInfo.setName(buffer.toString());
-
-                                        // 将高亮数据添加到集合中
-                                        list.add(skuInfo);
                                     }
+                                    // 将数据返回
+                                    // 构造方法需要的参数：搜索得到的数据集合 List,携带高亮的
+                                    // 分页对象
+                                    // 总条数
+                                    return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
                                 }
-                                // 将数据返回
-                                // 构造方法需要的参数：搜索得到的数据集合 List,携带高亮的
-                                // 分页对象
-                                // 总条数
-                                return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
-                            }
-                        });
+                            });
+
+        }
         // 获取数据结果集
         List<SkuInfo> contents = page.getContent();
 
@@ -399,29 +410,25 @@ public class SkuServiceImpl implements SkuService {
         // if (searchMap == null || StringUtils.isEmpty(searchMap.get("spec"))) {
         // 应该是 不论输入的参数是什么，有没有 都应该展示所有列表
 
-            nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
-                    size(10000));
-    //}
+        nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuSpec").field("spec.keyword").
+                size(10000));
+        //}
 
 
-    // 执行语句,这样就执行一次
-    AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
+        // 执行语句,这样就执行一次
+        AggregatedPage<SkuInfo> aggregatedPage = elasticsearchTemplate.queryForPage(nativeSearchQueryBuilder.build(), SkuInfo.class);
 
-    // 获取结果
-        if(searchMap ==null||StringUtils.isEmpty(searchMap.get("category")))
-
-    {
-        StringTerms categoryTerm = aggregatedPage.getAggregations().get("skuCategory");
-        List<String> categoryList = getGroupList(categoryTerm);
-        groupResult.put("categoryList", categoryList);
-    }
-        if(searchMap ==null||StringUtils.isEmpty(searchMap.get("brand")))
-
-    {
-        StringTerms brandTerm = aggregatedPage.getAggregations().get("skuBrand");
-        List<String> brandList = getGroupList(brandTerm);
-        groupResult.put("brandList", brandList);
-    }
+        // 获取结果
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("category"))) {
+            StringTerms categoryTerm = aggregatedPage.getAggregations().get("skuCategory");
+            List<String> categoryList = getGroupList(categoryTerm);
+            groupResult.put("categoryList", categoryList);
+        }
+        if (searchMap == null || StringUtils.isEmpty(searchMap.get("brand"))) {
+            StringTerms brandTerm = aggregatedPage.getAggregations().get("skuBrand");
+            List<String> brandList = getGroupList(brandTerm);
+            groupResult.put("brandList", brandList);
+        }
 
 
         /***
@@ -438,7 +445,7 @@ public class SkuServiceImpl implements SkuService {
         }
         Map<String, Set<String>> allSpec = putAllSpec(specList);
         groupResult.put("specMap", allSpec);
-    /*}*/
+        /*}*/
 
         /***
          * 当有 spec_ 开头的条件时，除了条件，其他的 spec 列表都要展示
@@ -464,7 +471,7 @@ public class SkuServiceImpl implements SkuService {
         }
     }*/
         return groupResult;
-}
+    }
 
     /** 如果没有输入分类、品牌参数，就展示列表 */
 
