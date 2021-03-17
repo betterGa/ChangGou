@@ -170,10 +170,15 @@ public class SkuServiceImpl implements SkuService {
             String brand = searchMap.get("brand");
             //builder.withQuery(
             //QueryBuilders.queryStringQuery(keyWords).field("name"));
-            if (!StringUtils.isEmpty(keyWords)) {
-                // 如果关键词不为空，根据关键词在 name 域进行搜索
+
+            // 如果没有输入关键字，把关键字初始值赋值为 “华为”
+            if(StringUtils.isEmpty(keyWords)){
+                keyWords="华为";
+            }
+
+                // 根据关键词在 name 域进行搜索
                 boolQueryBuilder.must(QueryBuilders.queryStringQuery(keyWords).field("name"));
-            } else keyWords = "华为";
+
 
             // 分类过滤
             // 如果分类不为空
@@ -423,8 +428,8 @@ public class SkuServiceImpl implements SkuService {
          * 当搜索条件为 null 或者 搜索条件不是以 spec_ 开头时，需要展示所有的 spec 列表
          */
 
-        if(searchMap ==null||!hasBeginWithSpec(searchMap))
-    {
+       /* if(searchMap ==null||!hasBeginWithSpec(searchMap))
+    {*/
         List<String> specList = new ArrayList<String>();
         StringTerms specTerm = aggregatedPage.getAggregations().get("skuSpec");
         for (Terms.Bucket bucket : specTerm.getBuckets()) {
@@ -433,12 +438,12 @@ public class SkuServiceImpl implements SkuService {
         }
         Map<String, Set<String>> allSpec = putAllSpec(specList);
         groupResult.put("specMap", allSpec);
-    }
+    /*}*/
 
         /***
          * 当有 spec_ 开头的条件时，除了条件，其他的 spec 列表都要展示
          */
-      else
+      /*else
     {
         // 遍历 条件参数
         for (String key : searchMap.keySet()) {
@@ -457,7 +462,7 @@ public class SkuServiceImpl implements SkuService {
                 groupResult.put("specMap", allSpec);
             }
         }
-    }
+    }*/
         return groupResult;
 }
 
@@ -470,12 +475,12 @@ public class SkuServiceImpl implements SkuService {
      * @param searchMap
      * @return
      */
-    public boolean hasBeginWithSpec(Map<String, String> searchMap) {
+   /* public boolean hasBeginWithSpec(Map<String, String> searchMap) {
         for (String key : searchMap.keySet()) {
             if (key.startsWith("spec_")) return true;
         }
         return false;
-    }
+    }*/
 
     /**
      * 抽取根据分类进行分组查询
@@ -558,7 +563,7 @@ public class SkuServiceImpl implements SkuService {
 
 
     /**
-     * 规格数据操作
+     * 规格数据操作,传入 keyString ，可以过滤掉，不作为结果 Map 的 key
      *
      * @param specList
      * @return
