@@ -176,8 +176,10 @@ public class SkuServiceImpl implements SkuService {
                 keyWords="华为";
             }*/
 
+            if(!StringUtils.isEmpty(keyWords)){
             // 根据关键词在 name 域进行搜索
             boolQueryBuilder.must(QueryBuilders.queryStringQuery(keyWords).field("name"));
+            }
 
 
             // 分类过滤
