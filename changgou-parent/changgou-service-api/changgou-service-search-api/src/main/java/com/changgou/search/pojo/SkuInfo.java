@@ -46,6 +46,13 @@ public class SkuInfo implements Serializable {
     // 更新时间
     private Date updateTime;
 
+
+    // 评论数
+    private Long commentNum;
+
+    // 销量
+    private Long saleNum;
+
     // 是否默认
     private String isDefault;
 
@@ -191,4 +198,21 @@ public class SkuInfo implements Serializable {
     public void setSpecMap(Map<String, Object> specMap) {
         this.specMap = specMap;
     }
+
+    public Long getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Long commentNum) {
+        this.commentNum = commentNum;
+    }
+
+    public Long getSaleNum() {
+        return saleNum;
+    }
+
+    public void setSaleNum(Long saleNum) {
+        this.saleNum = saleNum;
+    }
+
 }

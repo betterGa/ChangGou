@@ -1,6 +1,8 @@
 package com.changgou.search.controller;
 
 import com.changgou.search.feign.SkuFeign;
+import com.changgou.search.pojo.SkuInfo;
+import entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,14 @@ public class SkuController {
     public String search(@RequestParam(required = false) Map<String,String> searchMap, Model model){
         Map resultMap=skuFeign.search(searchMap);
         model.addAttribute("result",resultMap);
+
+        // 分页
+        Page<SkuInfo> pageInfo=new Page<SkuInfo>(Long.parseLong(resultMap.get("totalNums").toString()),
+                Integer.parseInt(resultMap.get("pageNumber").toString())+1,
+                Integer.parseInt(resultMap.get("pageSize").toString())
+                );
+
+        model.addAttribute("pageInfo",pageInfo);
 
         // 将搜索条件进行存储
         model.addAttribute("searchMap",searchMap);
@@ -55,6 +65,11 @@ public class SkuController {
             sorturl+="?";
             for(Map.Entry<String,String> entry:searchMap.entrySet()){
                 String key=entry.getKey();
+
+                // 跳过当前页参数
+                if(key.equalsIgnoreCase("pageNum")){
+                    continue;
+                }
                 String value=entry.getValue();
 
                 // 遇到排序参数时，url 需要对它进行拼接，而 sorturl 不需要

@@ -7,6 +7,7 @@ import com.changgou.goods.pojo.Sku;
 import com.changgou.search.pojo.SkuInfo;
 import com.changgou.search.service.SkuService;
 import entity.Result;
+import org.elasticsearch.action.admin.cluster.storedscripts.PutStoredScriptAction;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -26,6 +27,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.SearchResultMapper;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -168,13 +170,6 @@ public class SkuServiceImpl implements SkuService {
             String category = searchMap.get("category");
 
             String brand = searchMap.get("brand");
-            //builder.withQuery(
-            //QueryBuilders.queryStringQuery(keyWords).field("name"));
-
-            // 如果没有输入关键字，把关键字初始值赋值为 “华为”
-            /*if(StringUtils.isEmpty(keyWords)){
-                keyWords="华为";
-            }*/
 
             if(!StringUtils.isEmpty(keyWords)){
             // 根据关键词在 name 域进行搜索
@@ -251,17 +246,16 @@ public class SkuServiceImpl implements SkuService {
                         new FieldSortBuilder(sortField)
                                 .order(SortOrder.valueOf(sortRule)));
             }
-
-
-            /**
-             * 实现分页
-             */
-            // 如果用户没有传入分页参数，默认 第 1 页
-            Integer pageNum = coverterPage(searchMap);
-            // 默认每页显示 3 条数据
-            Integer size = 30;
-            builder.withPageable(PageRequest.of(pageNum - 1, size));
         }
+
+        /**
+         * 实现分页
+         */
+        // 如果用户没有传入分页参数，默认 第 1 页
+        Integer pageNum = coverterPage(searchMap);
+        // 默认每页显示 30 条数据
+        Integer size = 30;
+        builder.withPageable(PageRequest.of(pageNum - 1, size));
         return builder;
     }
 
@@ -294,11 +288,12 @@ public class SkuServiceImpl implements SkuService {
      * @return
      */
     public Map<String, Object> searchlist(NativeSearchQueryBuilder builder,Map<String, String> searchMap) {
+
+        AggregatedPage<SkuInfo> page=null;
+
         /**
          * 高亮搜索
          */
-        AggregatedPage<SkuInfo> page=null;
-
         if (searchMap==null || searchMap.size()==0 || StringUtils.isEmpty(searchMap.get("keywords"))) {
             page = elasticsearchTemplate
                     .queryForPage(
@@ -374,8 +369,17 @@ public class SkuServiceImpl implements SkuService {
                                     return new AggregatedPageImpl<T>(list, pageable, searchResponse.getHits().getTotalHits());
                                 }
                             });
-
         }
+
+        // 获取搜索封装信息中的分页信息
+        NativeSearchQuery query=builder.build();
+        Pageable pageable=query.getPageable();
+
+        // 当前页
+        int pageNumber = pageable.getPageNumber();
+        int pageSize = pageable.getPageSize();
+
+
         // 获取数据结果集
         List<SkuInfo> contents = page.getContent();
 
@@ -390,6 +394,11 @@ public class SkuServiceImpl implements SkuService {
         resultMap.put("rows", contents);
         resultMap.put("totalNums", totalNums);
         resultMap.put("totalPages", totalPages);
+
+
+        resultMap.put("pageNumber",pageNumber);
+        resultMap.put("pageSize",pageSize);
+
         return resultMap;
     }
 
@@ -400,7 +409,7 @@ public class SkuServiceImpl implements SkuService {
 
         // 构建条件
         /** 如果没有输入分类、品牌参数，就展示分类列表 */
-        if (searchMap == null || StringUtils.isEmpty(searchMap.get("category"))) {
+        if (searchMap == null ||searchMap.size()==0|| StringUtils.isEmpty(searchMap.get("category"))) {
             nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategory").field("categoryName"));
         }
         if (searchMap == null || StringUtils.isEmpty(searchMap.get("brand"))) {

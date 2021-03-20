@@ -24,7 +24,7 @@ public class Page <T> implements Serializable{
 	
 	private int lpage;//左边的开始的页码
 	
-	private int rpage;//右边额开始的页码
+	private int rpage;//右边开始的页码
 	
 	//从哪条开始查
 	private long start;
@@ -231,8 +231,8 @@ public class Page <T> implements Serializable{
 			//总记录数
 			//当前页
 			//每页显示多少条
-			int cpage =17;
-			Page page = new Page(1001,cpage,50,7);
+			int cpage =21;
+			Page page = new Page(31190,2,30);
 			System.out.println("开始页:"+page.getLpage()+"__当前页："+page.getCurrentpage()+"__结束页"+page.getRpage()+"____总页数："+page.getLast());
 	}
 }

@@ -720,7 +720,7 @@
                             <a th:href="@{${sorturl}(sortField=saleNum,sortRule=DESC)}">销量</a>
                         </li>
                         <li>
-                            <a th:href="@{${sorturl}(sortField=updateTime,sortRule=DESC)}">新品</a>>
+                            <a th:href="@{${sorturl}(sortField=updateTime,sortRule=DESC)}">新品</a>
                         </li>
                         <li>
                             <a th:href="@{${sorturl}(sortField=commentNum,sortRule=DESC)}">评价</a>
@@ -753,7 +753,8 @@
                                 <a th:utext="${#strings.abbreviate(item.name,45)}" target="_blank"></a>
                             </div>
                             <div class="commit">
-                                <i class="command">已有<span>2000</span>人评价</i>
+                                <i class="command">已有<span th:text="${item.commentNum}"></span>人评价</i>
+                                <i class="command">销量为<span th:text="${item.saleNum}"></span></i>
                             </div>
                             <div class="operate">
                                 <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
@@ -767,29 +768,17 @@
                 <div class="sui-pagination pagination-large">
                     <ul>
                         <li class="prev disabled">
-                            <a href="#">«上一页</a>
+                            <a th:href="@{${url}(pageNum=${pageInfo.getUpper()})}">«上一页</a>
                         </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
+                        <li th:each="i:${#numbers.sequence(pageInfo.getLpage(),pageInfo.getRpage())}" th:class="${pageInfo.getCurrentpage()}==${i}?'active':''">
+                            <a th:href="@{${url}(pageNum=${i})}" th:text="${i}"></a>
                         </li>
                         <li class="dotted"><span>...</span></li>
                         <li class="next">
-                            <a href="#">下一页»</a>
+                            <a th:href="@{${url}(pageNum=${pageInfo.next})}">下一页»</a>
                         </li>
                     </ul>
-                    <div><span>共10页&nbsp;</span><span>
+                    <div><span>共<em th:text="${pageInfo.last}">页</span><span>
       到第
       <input type="text" class="page-num">
       页 <button class="page-confirm" onclick="alert(1)">确定</button></span></div>
