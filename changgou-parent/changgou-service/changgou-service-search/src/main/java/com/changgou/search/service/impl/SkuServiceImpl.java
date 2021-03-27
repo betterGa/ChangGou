@@ -292,7 +292,7 @@ public class SkuServiceImpl implements SkuService {
         AggregatedPage<SkuInfo> page=null;
 
         /**
-         * 高亮搜索
+         * 如果没有输入搜索参数，不进行高亮搜索
          */
         if (searchMap==null || searchMap.size()==0 || StringUtils.isEmpty(searchMap.get("keywords"))) {
             page = elasticsearchTemplate

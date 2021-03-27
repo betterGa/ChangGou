@@ -9,22 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>changgou-gateway</artifactId>
-    <packaging>pom</packaging>
-    <description>微服务网关父工程</description>
-    <modules>
-        <module>changgou-gateway-web</module>
-    </modules>
+    <artifactId>changgou-service-user-api</artifactId>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    <dependencies>
-    <!--redis-->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-        <version>2.1.3.RELEASE</version>
-    </dependency>
-    </dependencies>
+
 </project>
