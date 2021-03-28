@@ -16,6 +16,7 @@
         <module>changgou-service-canal</module>
         <module>changgou-service-content</module>
         <module>changgou-service-search</module>
+        <module>changgou-service-user</module>
     </modules>
 
     <artifactId>changgou-service</artifactId>
@@ -33,6 +34,11 @@
         <artifactId>changgou-common-db</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+        <dependency>
+            <groupId>com.changgou</groupId>
+            <artifactId>changgou-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
             <dependency>
                 <groupId>com.changgou</groupId>
                 <artifactId>changgou-service-goods-api</artifactId>

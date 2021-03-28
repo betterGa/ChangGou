@@ -17,9 +17,11 @@
         <module name="channggou-service-file" />
         <module name="changgou-service-goods" />
         <module name="changgou-service-goods-api" />
+        <module name="changgou-service-user" />
         <module name="changgou-service-canal" />
         <module name="springbootthymeleaf" />
         <module name="changgou-service-content-api" />
+        <module name="changgou-service-user-api" />
         <module name="changgou-common-db" />
         <module name="code-template" />
         <module name="changgou-web-item" />
@@ -44,6 +46,8 @@
       <module name="changgou-service-item-api" target="8" />
       <module name="changgou-service-search" target="8" />
       <module name="changgou-service-search-api" target="8" />
+      <module name="changgou-service-user" target="8" />
+      <module name="changgou-service-user-api" target="8" />
       <module name="changgou-web" target="1.8" />
       <module name="changgou-web-item" target="8" />
       <module name="changgou-web-item-api" target="8" />
@@ -69,6 +73,8 @@
       <module name="changgou-service-item-api" options="-parameters" />
       <module name="changgou-service-search" options="-parameters" />
       <module name="changgou-service-search-api" options="-parameters" />
+      <module name="changgou-service-user" options="-parameters" />
+      <module name="changgou-service-user-api" options="-parameters" />
       <module name="changgou-web-item" options="-parameters" />
       <module name="changgou-web-item-api" options="-parameters" />
       <module name="changgou-web-search" options="-parameters" />

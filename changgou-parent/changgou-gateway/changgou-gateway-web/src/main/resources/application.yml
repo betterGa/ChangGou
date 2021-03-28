@@ -16,23 +16,32 @@ spring:
               - PUT
               - DELETE
       routes:
-           - id: changgou_goods_route
-             # uri: http://localhost:18081
-             uri: lb://goods
-             predicates:
-             #- Host=cloud.jia.com**
-             # - Path=/brand/**
-             - Path=/**
+            - id: changgou_goods_route
+              uri: lb://goods
+              predicates:
+              - Path=/api/goods/**
              # filters:
              # - PrefixPath=/brand
-             filters:
-             - StripPrefix=1
+              filters:
+              - StripPrefix=1
              # 局部限流过滤器
-             - name: RequestRateLimiter
-               args:
-                 key-resolver: "#{@ipKeyResolver}"
-                 redis-rate-limiter.replenishRate: 1
-                 redis-rate-limiter.burstCapacity: 4
+              - name: RequestRateLimiter
+                args:
+                  key-resolver: "#{@ipKeyResolver}"
+                  redis-rate-limiter.replenishRate: 1
+                  redis-rate-limiter.burstCapacity: 4
+            - id: changgou_user_route
+              uri: lb://user
+              predicates:
+              - Path=/api/user/**,/api/address/**,/api/cities/**,/api/provinces/**
+              filters:
+              - StripPrefix=1
+                 # 局部限流过滤器
+              - name: RequestRateLimiter
+                args:
+                   key-resolver: "#{@ipKeyResolver}"
+                   redis-rate-limiter.replenishRate: 1
+                   redis-rate-limiter.burstCapacity: 4
 server:
   port: 8001
 eureka:
