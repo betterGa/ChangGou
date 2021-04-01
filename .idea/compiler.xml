@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="changgou-service-search-api" />
         <module name="changgou-eureka" />
+        <module name="changgou-user-oauth" />
         <module name="changgou-servcie-canal" />
         <module name="changgou-web-search" />
         <module name="changgou-service-content" />
@@ -48,6 +49,7 @@
       <module name="changgou-service-search-api" target="8" />
       <module name="changgou-service-user" target="8" />
       <module name="changgou-service-user-api" target="8" />
+      <module name="changgou-user-oauth" target="1.8" />
       <module name="changgou-web" target="1.8" />
       <module name="changgou-web-item" target="8" />
       <module name="changgou-web-item-api" target="8" />
@@ -75,6 +77,7 @@
       <module name="changgou-service-search-api" options="-parameters" />
       <module name="changgou-service-user" options="-parameters" />
       <module name="changgou-service-user-api" options="-parameters" />
+      <module name="changgou-user-oauth" options="-parameters" />
       <module name="changgou-web-item" options="-parameters" />
       <module name="changgou-web-item-api" options="-parameters" />
       <module name="changgou-web-search" options="-parameters" />
