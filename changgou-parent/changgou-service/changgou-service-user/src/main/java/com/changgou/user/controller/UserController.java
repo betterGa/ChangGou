@@ -8,9 +8,11 @@ import entity.BCrypt;
 import entity.JwtUtil;
 import entity.Result;
 import entity.StatusCode;
+import io.swagger.annotations.Authorization;
 import org.apache.commons.codec.digest.Crypt;
 import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.ldap.HasControls;
@@ -118,18 +120,23 @@ public class UserController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}","/load/{id}"})
     public Result<User> findById(@PathVariable String id){
         //调用UserService实现根据主键查询User
         User user = userService.findById(id);
+      /*  if(user==null){
+            return new Result<>(false,StatusCode.ERROR,"查询无果");
+        }*/
         return new Result<User>(true,StatusCode.OK,"查询成功",user);
     }
 
     /***
      * 查询 User全部数据
+     * 只允许管理员 admin 角色访问
      * @return
      */
     @GetMapping
+    @PreAuthorize("hasRole('user')")
     public Result<List<User>> findAll(){
         //调用UserService实现查询所有User
         List<User> list = userService.findAll();

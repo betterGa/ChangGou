@@ -15,14 +15,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-/**
- * 描述
- *
- * @author www.itheima.com
- * @version 1.0
- * @package com.changgou.oauth.controller *
- * @since 1.0
- */
 @RestController
 @RequestMapping("/user")
 public class UserLoginController {
@@ -56,7 +48,7 @@ public class UserLoginController {
      */
     @RequestMapping("/login")
     public Result<Map> login(String username, String password) {
-        //登录 之后生成令牌的数据返回
+        // 登录 之后生成令牌的数据返回
         AuthToken authToken = loginService.login(username, password, clientId, clientSecret, GRAND_TYPE);
 
 

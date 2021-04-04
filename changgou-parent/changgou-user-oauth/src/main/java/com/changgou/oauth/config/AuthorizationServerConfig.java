@@ -51,7 +51,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
      * @param clients
      * @throws Exception
      */
-    @Override
+  /*  @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("changgou")          //客户端id
@@ -65,6 +65,16 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
                         "refresh_token",                //刷新令牌
                         "password")                     //密码方式认证
                 .scopes("app");                         //客户端范围，名称自定义，必填
+    }*/
+
+    /**
+     * 从数据库中查询用户登录数据
+     * @param clients
+     * @throws Exception
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    clients.jdbc(dataSource).clients(clientDetails());
     }
 
     /***

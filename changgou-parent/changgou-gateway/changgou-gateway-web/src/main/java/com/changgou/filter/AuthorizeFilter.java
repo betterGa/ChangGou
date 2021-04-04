@@ -42,53 +42,49 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         // 设置一个布尔值，如果为 true，说明令牌在头文件中；
         boolean hasToken = true;
 
-        // 否则说明需要将令牌封装到头文件，才能传给其他微服务
-
-        // (2) 参数中
         if (StringUtils.isEmpty(token)) {
+            // (2) 参数中
             token = request.getQueryParams().getFirst(AUTHOR_TOKEN);
-            hasToken=false;
-        }
+            if (token != null) {
+                hasToken = false;
+            } else {
+                // (3) Cookie 中
+                HttpCookie cookie = request.getCookies().getFirst(AUTHOR_TOKEN);
+                if (cookie != null) {
+                    token = cookie.getValue();
+                    hasToken = false;
+                } else {
 
-        // (3) Cookie 中
-        if (StringUtils.isEmpty(token)) {
-            HttpCookie cookie = request.getCookies().getFirst(AUTHOR_TOKEN);
-            if (cookie != null) {
-                token = cookie.getValue();
-                hasToken=false;
+                    // 若没有令牌
+                    // 设置状态码为 401 没有权限
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
+
+                    // 响应空数据
+                    return response.setComplete();
+
+                }
+
+                // 如果有令牌，则校验令牌是否有效
+                try {
+                    // 如果解析成功
+                    // JwtUtil.parseJWT(token);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    // 无效，则拦截
+                    // 设置状态码为 401 没有权限
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
+
+                    // 响应空数据
+                    return response.setComplete();
+                }
             }
         }
 
-        // 如果没有令牌，则拦截
-        if (StringUtils.isEmpty(token)) {
-
-            // 设置状态码为 401 没有权限
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
-
-            // 响应空数据
-            return response.setComplete();
-
-        }
-
-        // 如果有令牌，则校验令牌是否有效
-        try {
-            // 如果解析成功
-            JwtUtil.parseJWT(token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            // 无效，则拦截
-            // 设置状态码为 401 没有权限
-            response.setStatusCode(HttpStatus.UNAUTHORIZED);
-
-            // 响应空数据
-            return response.setComplete();
-        }
-
-        // 将令牌封装到头文件中
-        if(hasToken){
-        request.mutate().header(AUTHOR_TOKEN,token);
+        //  需要将令牌封装到头文件，才能传给其他微服务
+        if (!hasToken) {
+            //request.mutate().header(AUTHOR_TOKEN,token);
+            request.mutate().header(AUTHOR_TOKEN, "bearer " + token);
         }
 
         // 则放行
