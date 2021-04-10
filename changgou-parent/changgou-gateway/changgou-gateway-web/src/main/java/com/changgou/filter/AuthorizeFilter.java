@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 public class AuthorizeFilter implements GlobalFilter, Ordered {
 
     // 令牌的名字
-    private static final String AUTHOR_TOKEN = "Authorization";
+    private static final String AUTHOR_TOKEN =  "Authorization";
 
     /**
      * 全局拦截

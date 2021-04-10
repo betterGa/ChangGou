@@ -161,6 +161,9 @@ public class UserController {
                 cookie.setPath("/");
                 response.addCookie(cookie);
 
+                response.setHeader("Authorization", token);
+
+
                 // 把令牌作为参数给用户
                 return new Result(true,StatusCode.OK,"登录成功！",token);
             }

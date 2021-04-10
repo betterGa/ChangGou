@@ -37,9 +37,11 @@ public class CreateJWTTestDemo {
 
         // 创建令牌，使用私钥加盐，非对称加密
         Map<String,Object> payload=new HashMap<>();
-        payload.put("key1","value1");
+       /* payload.put("key1","value1");
         payload.put("key2","value2");
-        payload.put("key3","value3");
+        payload.put("key3","value3");*/
+
+        payload.put("authorities",new String[]{"accountant","user","salesman"});
         Jwt jwt = JwtHelper.encode(JSON.toJSONString(payload), new RsaSigner(aPrivate));
 
         // 获取令牌

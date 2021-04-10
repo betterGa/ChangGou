@@ -194,6 +194,7 @@
     <orderEntry type="library" name="Maven: org.latencyutils:LatencyUtils:2.0.3" level="project" />
     <orderEntry type="module" module-name="changgou-service-user-api" />
     <orderEntry type="module" module-name="changgou-service-goods-api" />
+    <orderEntry type="module" module-name="changgou-service-order-api" />
     <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: io.jsonwebtoken:jjwt:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />

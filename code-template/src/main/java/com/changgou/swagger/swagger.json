@@ -17,100 +17,148 @@
   "basePath": "/v2",
   "tags": [
         {
-      "name": "OauthClientDetailsController",
-      "description": "OauthClientDetailsController"
+      "name": "CategoryReportController",
+      "description": "CategoryReportController"
     },
     {
-      "name": "OauthClientDetailsController",
-      "description": "OauthClientDetailsController"
+      "name": "CategoryReportController",
+      "description": "CategoryReportController"
     },
     {
-      "name": "OauthClientDetailsController",
-      "description": "OauthClientDetailsController"
+      "name": "CategoryReportController",
+      "description": "CategoryReportController"
     },
     {
-      "name": "OauthClientDetailsController",
-      "description": "OauthClientDetailsController"
+      "name": "CategoryReportController",
+      "description": "CategoryReportController"
     },
     {
-      "name": "AddressController",
-      "description": "AddressController"
+      "name": "OrderController",
+      "description": "OrderController"
     },
     {
-      "name": "AddressController",
-      "description": "AddressController"
+      "name": "OrderController",
+      "description": "OrderController"
     },
     {
-      "name": "AddressController",
-      "description": "AddressController"
+      "name": "OrderController",
+      "description": "OrderController"
     },
     {
-      "name": "AddressController",
-      "description": "AddressController"
+      "name": "OrderController",
+      "description": "OrderController"
     },
     {
-      "name": "AreasController",
-      "description": "AreasController"
+      "name": "OrderConfigController",
+      "description": "OrderConfigController"
     },
     {
-      "name": "AreasController",
-      "description": "AreasController"
+      "name": "OrderConfigController",
+      "description": "OrderConfigController"
     },
     {
-      "name": "AreasController",
-      "description": "AreasController"
+      "name": "OrderConfigController",
+      "description": "OrderConfigController"
     },
     {
-      "name": "AreasController",
-      "description": "AreasController"
+      "name": "OrderConfigController",
+      "description": "OrderConfigController"
     },
     {
-      "name": "CitiesController",
-      "description": "CitiesController"
+      "name": "OrderItemController",
+      "description": "OrderItemController"
     },
     {
-      "name": "CitiesController",
-      "description": "CitiesController"
+      "name": "OrderItemController",
+      "description": "OrderItemController"
     },
     {
-      "name": "CitiesController",
-      "description": "CitiesController"
+      "name": "OrderItemController",
+      "description": "OrderItemController"
     },
     {
-      "name": "CitiesController",
-      "description": "CitiesController"
+      "name": "OrderItemController",
+      "description": "OrderItemController"
     },
     {
-      "name": "ProvincesController",
-      "description": "ProvincesController"
+      "name": "OrderLogController",
+      "description": "OrderLogController"
     },
     {
-      "name": "ProvincesController",
-      "description": "ProvincesController"
+      "name": "OrderLogController",
+      "description": "OrderLogController"
     },
     {
-      "name": "ProvincesController",
-      "description": "ProvincesController"
+      "name": "OrderLogController",
+      "description": "OrderLogController"
     },
     {
-      "name": "ProvincesController",
-      "description": "ProvincesController"
+      "name": "OrderLogController",
+      "description": "OrderLogController"
     },
     {
-      "name": "UserController",
-      "description": "UserController"
+      "name": "PreferentialController",
+      "description": "PreferentialController"
     },
     {
-      "name": "UserController",
-      "description": "UserController"
+      "name": "PreferentialController",
+      "description": "PreferentialController"
     },
     {
-      "name": "UserController",
-      "description": "UserController"
+      "name": "PreferentialController",
+      "description": "PreferentialController"
     },
     {
-      "name": "UserController",
-      "description": "UserController"
+      "name": "PreferentialController",
+      "description": "PreferentialController"
+    },
+    {
+      "name": "ReturnCauseController",
+      "description": "ReturnCauseController"
+    },
+    {
+      "name": "ReturnCauseController",
+      "description": "ReturnCauseController"
+    },
+    {
+      "name": "ReturnCauseController",
+      "description": "ReturnCauseController"
+    },
+    {
+      "name": "ReturnCauseController",
+      "description": "ReturnCauseController"
+    },
+    {
+      "name": "ReturnOrderController",
+      "description": "ReturnOrderController"
+    },
+    {
+      "name": "ReturnOrderController",
+      "description": "ReturnOrderController"
+    },
+    {
+      "name": "ReturnOrderController",
+      "description": "ReturnOrderController"
+    },
+    {
+      "name": "ReturnOrderController",
+      "description": "ReturnOrderController"
+    },
+    {
+      "name": "ReturnOrderItemController",
+      "description": "ReturnOrderItemController"
+    },
+    {
+      "name": "ReturnOrderItemController",
+      "description": "ReturnOrderItemController"
+    },
+    {
+      "name": "ReturnOrderItemController",
+      "description": "ReturnOrderItemController"
+    },
+    {
+      "name": "ReturnOrderItemController",
+      "description": "ReturnOrderItemController"
     },
     {
       "name": "UndoLogController",
@@ -133,13 +181,13 @@
     "http"
   ],
   "paths": {
-    "/oauthClientDetails": {
+    "/categoryReport": {
       "get": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "查询所有OauthClientDetails",
-        "description": "查询所有OauthClientDetails方法详情",
+        "summary": "查询所有CategoryReport",
+        "description": "查询所有CategoryReport方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -166,20 +214,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有OauthClientDetails"
+            "description": "查询所有CategoryReport"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«OauthClientDetails»»"
+              "$ref": "#/definitions/Result«List«CategoryReport»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "添加OauthClientDetails",
-        "description": "添加OauthClientDetails方法详情",
+        "summary": "添加CategoryReport",
+        "description": "添加CategoryReport方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -191,11 +239,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加OauthClientDetails方法详情",
+            "description": "添加CategoryReport方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/OauthClientDetails"
+                "$ref": "#/definitions/CategoryReport"
               }
           }
         ],
@@ -216,7 +264,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加OauthClientDetails"
+            "description": "添加CategoryReport"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -225,13 +273,13 @@
         }
       }
     },
-    "/oauthClientDetails/{id}": {
+    "/categoryReport/{id}": {
       "delete": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "根据ID删除OauthClientDetails",
-        "description": "根据ID删除OauthClientDetails方法详情",
+        "summary": "根据ID删除CategoryReport",
+        "description": "根据ID删除CategoryReport方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -243,7 +291,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除OauthClientDetails方法详情",
+            "description": "根据ID删除CategoryReport方法详情",
             "required": true
           }
         ],
@@ -264,7 +312,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除OauthClientDetails"
+            "description": "根据ID删除CategoryReport"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -274,10 +322,10 @@
       },
       "put": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "根据ID修改OauthClientDetails",
-        "description": "根据ID修改OauthClientDetails方法详情",
+        "summary": "根据ID修改CategoryReport",
+        "description": "根据ID修改CategoryReport方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -289,17 +337,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改OauthClientDetails方法详情",
+            "description": "根据ID修改CategoryReport方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "OauthClientDetails",
-            "description": "传入OauthClientDetails的JSON对象",
+            "name": "CategoryReport",
+            "description": "传入CategoryReport的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/OauthClientDetails"
+                "$ref": "#/definitions/CategoryReport"
               }
           }
         ],
@@ -320,7 +368,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改OauthClientDetails"
+            "description": "根据ID修改CategoryReport"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -330,10 +378,10 @@
       },
       "get": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "根据ID查询OauthClientDetails",
-        "description": "根据ID查询OauthClientDetails方法详情",
+        "summary": "根据ID查询CategoryReport",
+        "description": "根据ID查询CategoryReport方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -345,7 +393,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改OauthClientDetails方法详情",
+            "description": "根据ID修改CategoryReport方法详情",
             "required": true
           }
         ],
@@ -366,22 +414,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改OauthClientDetails"
+            "description": "根据ID修改CategoryReport"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«OauthClientDetails»"
+              "$ref": "#/definitions/Result«CategoryReport»"
             }
           }
         }
       }
     },
-    "/oauthClientDetails/search": {
+    "/categoryReport/search": {
       "post": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "不带分页条件搜索OauthClientDetails",
-        "description": "不带分页条件搜索OauthClientDetails方法详情",
+        "summary": "不带分页条件搜索CategoryReport",
+        "description": "不带分页条件搜索CategoryReport方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -392,12 +440,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "OauthClientDetails",
-            "description": "传入OauthClientDetails的JSON对象",
+            "name": "CategoryReport",
+            "description": "传入CategoryReport的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/OauthClientDetails"
+                "$ref": "#/definitions/CategoryReport"
               }
           }
         ],
@@ -418,22 +466,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索OauthClientDetails"
+            "description": "不带分页搜索CategoryReport"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«OauthClientDetails»»"
+              "$ref": "#/definitions/Result«List«CategoryReport»»"
             }
           }
         }
       }
     },
-    "/oauthClientDetails/search/{page}/{size}": {
+    "/categoryReport/search/{page}/{size}": {
       "get": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "分页列表查询OauthClientDetails",
-        "description": "分页列表查询OauthClientDetails方法详情",
+        "summary": "分页列表查询CategoryReport",
+        "description": "分页列表查询CategoryReport方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -472,20 +520,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索OauthClientDetails"
+            "description": "不带分页搜索CategoryReport"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«OauthClientDetails»»"
+              "$ref": "#/definitions/Result«List«CategoryReport»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "OauthClientDetailsController"
+          "CategoryReportController"
         ],
-        "summary": "分页条件搜索OauthClientDetails",
-        "description": "分页条件搜索OauthClientDetails方法详情",
+        "summary": "分页条件搜索CategoryReport",
+        "description": "分页条件搜索CategoryReport方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -508,12 +556,12 @@
           },
           {
             "in": "body",
-            "name": "OauthClientDetails",
-            "description": "传入OauthClientDetails的JSON对象",
+            "name": "CategoryReport",
+            "description": "传入CategoryReport的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/OauthClientDetails"
+                "$ref": "#/definitions/CategoryReport"
               }
           }
         ],
@@ -534,22 +582,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索OauthClientDetails"
+            "description": "分页条件搜索CategoryReport"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«OauthClientDetails»»"
+              "$ref": "#/definitions/Result«List«CategoryReport»»"
             }
           }
         }
       }
     },
-    "/address": {
+    "/order": {
       "get": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "查询所有Address",
-        "description": "查询所有Address方法详情",
+        "summary": "查询所有Order",
+        "description": "查询所有Order方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -576,20 +624,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有Address"
+            "description": "查询所有Order"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Address»»"
+              "$ref": "#/definitions/Result«List«Order»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "添加Address",
-        "description": "添加Address方法详情",
+        "summary": "添加Order",
+        "description": "添加Order方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -601,11 +649,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加Address方法详情",
+            "description": "添加Order方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/definitions/Order"
               }
           }
         ],
@@ -626,7 +674,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加Address"
+            "description": "添加Order"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -635,13 +683,13 @@
         }
       }
     },
-    "/address/{id}": {
+    "/order/{id}": {
       "delete": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "根据ID删除Address",
-        "description": "根据ID删除Address方法详情",
+        "summary": "根据ID删除Order",
+        "description": "根据ID删除Order方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -653,7 +701,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除Address方法详情",
+            "description": "根据ID删除Order方法详情",
             "required": true
           }
         ],
@@ -674,7 +722,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除Address"
+            "description": "根据ID删除Order"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -684,10 +732,10 @@
       },
       "put": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "根据ID修改Address",
-        "description": "根据ID修改Address方法详情",
+        "summary": "根据ID修改Order",
+        "description": "根据ID修改Order方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -699,17 +747,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Address方法详情",
+            "description": "根据ID修改Order方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "Address",
-            "description": "传入Address的JSON对象",
+            "name": "Order",
+            "description": "传入Order的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/definitions/Order"
               }
           }
         ],
@@ -730,7 +778,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Address"
+            "description": "根据ID修改Order"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -740,10 +788,10 @@
       },
       "get": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "根据ID查询Address",
-        "description": "根据ID查询Address方法详情",
+        "summary": "根据ID查询Order",
+        "description": "根据ID查询Order方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -755,7 +803,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Address方法详情",
+            "description": "根据ID修改Order方法详情",
             "required": true
           }
         ],
@@ -776,22 +824,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Address"
+            "description": "根据ID修改Order"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«Address»"
+              "$ref": "#/definitions/Result«Order»"
             }
           }
         }
       }
     },
-    "/address/search": {
+    "/order/search": {
       "post": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "不带分页条件搜索Address",
-        "description": "不带分页条件搜索Address方法详情",
+        "summary": "不带分页条件搜索Order",
+        "description": "不带分页条件搜索Order方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -802,12 +850,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "Address",
-            "description": "传入Address的JSON对象",
+            "name": "Order",
+            "description": "传入Order的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/definitions/Order"
               }
           }
         ],
@@ -828,22 +876,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Address"
+            "description": "不带分页搜索Order"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Address»»"
+              "$ref": "#/definitions/Result«List«Order»»"
             }
           }
         }
       }
     },
-    "/address/search/{page}/{size}": {
+    "/order/search/{page}/{size}": {
       "get": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "分页列表查询Address",
-        "description": "分页列表查询Address方法详情",
+        "summary": "分页列表查询Order",
+        "description": "分页列表查询Order方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -882,20 +930,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Address"
+            "description": "不带分页搜索Order"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Address»»"
+              "$ref": "#/definitions/Result«List«Order»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "AddressController"
+          "OrderController"
         ],
-        "summary": "分页条件搜索Address",
-        "description": "分页条件搜索Address方法详情",
+        "summary": "分页条件搜索Order",
+        "description": "分页条件搜索Order方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -918,12 +966,12 @@
           },
           {
             "in": "body",
-            "name": "Address",
-            "description": "传入Address的JSON对象",
+            "name": "Order",
+            "description": "传入Order的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Address"
+                "$ref": "#/definitions/Order"
               }
           }
         ],
@@ -944,22 +992,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索Address"
+            "description": "分页条件搜索Order"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Address»»"
+              "$ref": "#/definitions/Result«List«Order»»"
             }
           }
         }
       }
     },
-    "/areas": {
+    "/orderConfig": {
       "get": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "查询所有Areas",
-        "description": "查询所有Areas方法详情",
+        "summary": "查询所有OrderConfig",
+        "description": "查询所有OrderConfig方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -986,20 +1034,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有Areas"
+            "description": "查询所有OrderConfig"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Areas»»"
+              "$ref": "#/definitions/Result«List«OrderConfig»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "添加Areas",
-        "description": "添加Areas方法详情",
+        "summary": "添加OrderConfig",
+        "description": "添加OrderConfig方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -1011,11 +1059,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加Areas方法详情",
+            "description": "添加OrderConfig方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/Areas"
+                "$ref": "#/definitions/OrderConfig"
               }
           }
         ],
@@ -1036,7 +1084,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加Areas"
+            "description": "添加OrderConfig"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1045,13 +1093,13 @@
         }
       }
     },
-    "/areas/{id}": {
+    "/orderConfig/{id}": {
       "delete": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "根据ID删除Areas",
-        "description": "根据ID删除Areas方法详情",
+        "summary": "根据ID删除OrderConfig",
+        "description": "根据ID删除OrderConfig方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -1063,7 +1111,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除Areas方法详情",
+            "description": "根据ID删除OrderConfig方法详情",
             "required": true
           }
         ],
@@ -1084,7 +1132,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除Areas"
+            "description": "根据ID删除OrderConfig"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1094,10 +1142,10 @@
       },
       "put": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "根据ID修改Areas",
-        "description": "根据ID修改Areas方法详情",
+        "summary": "根据ID修改OrderConfig",
+        "description": "根据ID修改OrderConfig方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -1109,17 +1157,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Areas方法详情",
+            "description": "根据ID修改OrderConfig方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "Areas",
-            "description": "传入Areas的JSON对象",
+            "name": "OrderConfig",
+            "description": "传入OrderConfig的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Areas"
+                "$ref": "#/definitions/OrderConfig"
               }
           }
         ],
@@ -1140,7 +1188,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Areas"
+            "description": "根据ID修改OrderConfig"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1150,10 +1198,10 @@
       },
       "get": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "根据ID查询Areas",
-        "description": "根据ID查询Areas方法详情",
+        "summary": "根据ID查询OrderConfig",
+        "description": "根据ID查询OrderConfig方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -1165,7 +1213,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Areas方法详情",
+            "description": "根据ID修改OrderConfig方法详情",
             "required": true
           }
         ],
@@ -1186,22 +1234,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Areas"
+            "description": "根据ID修改OrderConfig"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«Areas»"
+              "$ref": "#/definitions/Result«OrderConfig»"
             }
           }
         }
       }
     },
-    "/areas/search": {
+    "/orderConfig/search": {
       "post": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "不带分页条件搜索Areas",
-        "description": "不带分页条件搜索Areas方法详情",
+        "summary": "不带分页条件搜索OrderConfig",
+        "description": "不带分页条件搜索OrderConfig方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -1212,12 +1260,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "Areas",
-            "description": "传入Areas的JSON对象",
+            "name": "OrderConfig",
+            "description": "传入OrderConfig的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Areas"
+                "$ref": "#/definitions/OrderConfig"
               }
           }
         ],
@@ -1238,22 +1286,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Areas"
+            "description": "不带分页搜索OrderConfig"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Areas»»"
+              "$ref": "#/definitions/Result«List«OrderConfig»»"
             }
           }
         }
       }
     },
-    "/areas/search/{page}/{size}": {
+    "/orderConfig/search/{page}/{size}": {
       "get": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "分页列表查询Areas",
-        "description": "分页列表查询Areas方法详情",
+        "summary": "分页列表查询OrderConfig",
+        "description": "分页列表查询OrderConfig方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -1292,20 +1340,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Areas"
+            "description": "不带分页搜索OrderConfig"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Areas»»"
+              "$ref": "#/definitions/Result«List«OrderConfig»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "AreasController"
+          "OrderConfigController"
         ],
-        "summary": "分页条件搜索Areas",
-        "description": "分页条件搜索Areas方法详情",
+        "summary": "分页条件搜索OrderConfig",
+        "description": "分页条件搜索OrderConfig方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -1328,12 +1376,12 @@
           },
           {
             "in": "body",
-            "name": "Areas",
-            "description": "传入Areas的JSON对象",
+            "name": "OrderConfig",
+            "description": "传入OrderConfig的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Areas"
+                "$ref": "#/definitions/OrderConfig"
               }
           }
         ],
@@ -1354,22 +1402,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索Areas"
+            "description": "分页条件搜索OrderConfig"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Areas»»"
+              "$ref": "#/definitions/Result«List«OrderConfig»»"
             }
           }
         }
       }
     },
-    "/cities": {
+    "/orderItem": {
       "get": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "查询所有Cities",
-        "description": "查询所有Cities方法详情",
+        "summary": "查询所有OrderItem",
+        "description": "查询所有OrderItem方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -1396,20 +1444,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有Cities"
+            "description": "查询所有OrderItem"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Cities»»"
+              "$ref": "#/definitions/Result«List«OrderItem»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "添加Cities",
-        "description": "添加Cities方法详情",
+        "summary": "添加OrderItem",
+        "description": "添加OrderItem方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -1421,11 +1469,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加Cities方法详情",
+            "description": "添加OrderItem方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/Cities"
+                "$ref": "#/definitions/OrderItem"
               }
           }
         ],
@@ -1446,7 +1494,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加Cities"
+            "description": "添加OrderItem"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1455,13 +1503,13 @@
         }
       }
     },
-    "/cities/{id}": {
+    "/orderItem/{id}": {
       "delete": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "根据ID删除Cities",
-        "description": "根据ID删除Cities方法详情",
+        "summary": "根据ID删除OrderItem",
+        "description": "根据ID删除OrderItem方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -1473,7 +1521,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除Cities方法详情",
+            "description": "根据ID删除OrderItem方法详情",
             "required": true
           }
         ],
@@ -1494,7 +1542,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除Cities"
+            "description": "根据ID删除OrderItem"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1504,10 +1552,10 @@
       },
       "put": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "根据ID修改Cities",
-        "description": "根据ID修改Cities方法详情",
+        "summary": "根据ID修改OrderItem",
+        "description": "根据ID修改OrderItem方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -1519,17 +1567,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Cities方法详情",
+            "description": "根据ID修改OrderItem方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "Cities",
-            "description": "传入Cities的JSON对象",
+            "name": "OrderItem",
+            "description": "传入OrderItem的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Cities"
+                "$ref": "#/definitions/OrderItem"
               }
           }
         ],
@@ -1550,7 +1598,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Cities"
+            "description": "根据ID修改OrderItem"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1560,10 +1608,10 @@
       },
       "get": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "根据ID查询Cities",
-        "description": "根据ID查询Cities方法详情",
+        "summary": "根据ID查询OrderItem",
+        "description": "根据ID查询OrderItem方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -1575,7 +1623,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Cities方法详情",
+            "description": "根据ID修改OrderItem方法详情",
             "required": true
           }
         ],
@@ -1596,22 +1644,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Cities"
+            "description": "根据ID修改OrderItem"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«Cities»"
+              "$ref": "#/definitions/Result«OrderItem»"
             }
           }
         }
       }
     },
-    "/cities/search": {
+    "/orderItem/search": {
       "post": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "不带分页条件搜索Cities",
-        "description": "不带分页条件搜索Cities方法详情",
+        "summary": "不带分页条件搜索OrderItem",
+        "description": "不带分页条件搜索OrderItem方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -1622,12 +1670,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "Cities",
-            "description": "传入Cities的JSON对象",
+            "name": "OrderItem",
+            "description": "传入OrderItem的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Cities"
+                "$ref": "#/definitions/OrderItem"
               }
           }
         ],
@@ -1648,22 +1696,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Cities"
+            "description": "不带分页搜索OrderItem"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Cities»»"
+              "$ref": "#/definitions/Result«List«OrderItem»»"
             }
           }
         }
       }
     },
-    "/cities/search/{page}/{size}": {
+    "/orderItem/search/{page}/{size}": {
       "get": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "分页列表查询Cities",
-        "description": "分页列表查询Cities方法详情",
+        "summary": "分页列表查询OrderItem",
+        "description": "分页列表查询OrderItem方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -1702,20 +1750,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Cities"
+            "description": "不带分页搜索OrderItem"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Cities»»"
+              "$ref": "#/definitions/Result«List«OrderItem»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "CitiesController"
+          "OrderItemController"
         ],
-        "summary": "分页条件搜索Cities",
-        "description": "分页条件搜索Cities方法详情",
+        "summary": "分页条件搜索OrderItem",
+        "description": "分页条件搜索OrderItem方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -1738,12 +1786,12 @@
           },
           {
             "in": "body",
-            "name": "Cities",
-            "description": "传入Cities的JSON对象",
+            "name": "OrderItem",
+            "description": "传入OrderItem的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Cities"
+                "$ref": "#/definitions/OrderItem"
               }
           }
         ],
@@ -1764,22 +1812,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索Cities"
+            "description": "分页条件搜索OrderItem"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Cities»»"
+              "$ref": "#/definitions/Result«List«OrderItem»»"
             }
           }
         }
       }
     },
-    "/provinces": {
+    "/orderLog": {
       "get": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "查询所有Provinces",
-        "description": "查询所有Provinces方法详情",
+        "summary": "查询所有OrderLog",
+        "description": "查询所有OrderLog方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -1806,20 +1854,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有Provinces"
+            "description": "查询所有OrderLog"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Provinces»»"
+              "$ref": "#/definitions/Result«List«OrderLog»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "添加Provinces",
-        "description": "添加Provinces方法详情",
+        "summary": "添加OrderLog",
+        "description": "添加OrderLog方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -1831,11 +1879,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加Provinces方法详情",
+            "description": "添加OrderLog方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/Provinces"
+                "$ref": "#/definitions/OrderLog"
               }
           }
         ],
@@ -1856,7 +1904,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加Provinces"
+            "description": "添加OrderLog"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1865,13 +1913,13 @@
         }
       }
     },
-    "/provinces/{id}": {
+    "/orderLog/{id}": {
       "delete": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "根据ID删除Provinces",
-        "description": "根据ID删除Provinces方法详情",
+        "summary": "根据ID删除OrderLog",
+        "description": "根据ID删除OrderLog方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -1883,7 +1931,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除Provinces方法详情",
+            "description": "根据ID删除OrderLog方法详情",
             "required": true
           }
         ],
@@ -1904,7 +1952,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除Provinces"
+            "description": "根据ID删除OrderLog"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1914,10 +1962,10 @@
       },
       "put": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "根据ID修改Provinces",
-        "description": "根据ID修改Provinces方法详情",
+        "summary": "根据ID修改OrderLog",
+        "description": "根据ID修改OrderLog方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -1929,17 +1977,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Provinces方法详情",
+            "description": "根据ID修改OrderLog方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "Provinces",
-            "description": "传入Provinces的JSON对象",
+            "name": "OrderLog",
+            "description": "传入OrderLog的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Provinces"
+                "$ref": "#/definitions/OrderLog"
               }
           }
         ],
@@ -1960,7 +2008,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Provinces"
+            "description": "根据ID修改OrderLog"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -1970,10 +2018,10 @@
       },
       "get": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "根据ID查询Provinces",
-        "description": "根据ID查询Provinces方法详情",
+        "summary": "根据ID查询OrderLog",
+        "description": "根据ID查询OrderLog方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -1985,7 +2033,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改Provinces方法详情",
+            "description": "根据ID修改OrderLog方法详情",
             "required": true
           }
         ],
@@ -2006,22 +2054,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改Provinces"
+            "description": "根据ID修改OrderLog"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«Provinces»"
+              "$ref": "#/definitions/Result«OrderLog»"
             }
           }
         }
       }
     },
-    "/provinces/search": {
+    "/orderLog/search": {
       "post": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "不带分页条件搜索Provinces",
-        "description": "不带分页条件搜索Provinces方法详情",
+        "summary": "不带分页条件搜索OrderLog",
+        "description": "不带分页条件搜索OrderLog方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -2032,12 +2080,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "Provinces",
-            "description": "传入Provinces的JSON对象",
+            "name": "OrderLog",
+            "description": "传入OrderLog的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Provinces"
+                "$ref": "#/definitions/OrderLog"
               }
           }
         ],
@@ -2058,22 +2106,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Provinces"
+            "description": "不带分页搜索OrderLog"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Provinces»»"
+              "$ref": "#/definitions/Result«List«OrderLog»»"
             }
           }
         }
       }
     },
-    "/provinces/search/{page}/{size}": {
+    "/orderLog/search/{page}/{size}": {
       "get": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "分页列表查询Provinces",
-        "description": "分页列表查询Provinces方法详情",
+        "summary": "分页列表查询OrderLog",
+        "description": "分页列表查询OrderLog方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -2112,20 +2160,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索Provinces"
+            "description": "不带分页搜索OrderLog"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Provinces»»"
+              "$ref": "#/definitions/Result«List«OrderLog»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "ProvincesController"
+          "OrderLogController"
         ],
-        "summary": "分页条件搜索Provinces",
-        "description": "分页条件搜索Provinces方法详情",
+        "summary": "分页条件搜索OrderLog",
+        "description": "分页条件搜索OrderLog方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -2148,12 +2196,12 @@
           },
           {
             "in": "body",
-            "name": "Provinces",
-            "description": "传入Provinces的JSON对象",
+            "name": "OrderLog",
+            "description": "传入OrderLog的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/Provinces"
+                "$ref": "#/definitions/OrderLog"
               }
           }
         ],
@@ -2174,22 +2222,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索Provinces"
+            "description": "分页条件搜索OrderLog"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«Provinces»»"
+              "$ref": "#/definitions/Result«List«OrderLog»»"
             }
           }
         }
       }
     },
-    "/user": {
+    "/preferential": {
       "get": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "查询所有User",
-        "description": "查询所有User方法详情",
+        "summary": "查询所有Preferential",
+        "description": "查询所有Preferential方法详情",
         "operationId": "findAllUsingGET",
         "consumes": [
           "application/json"
@@ -2216,20 +2264,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "查询所有User"
+            "description": "查询所有Preferential"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«User»»"
+              "$ref": "#/definitions/Result«List«Preferential»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "添加User",
-        "description": "添加User方法详情",
+        "summary": "添加Preferential",
+        "description": "添加Preferential方法详情",
         "operationId": "addUsingPOST",
         "consumes": [
           "application/json"
@@ -2241,11 +2289,11 @@
           {
             "in": "body",
             "name": "body",
-            "description": "添加User方法详情",
+            "description": "添加Preferential方法详情",
             "required": true
               ,
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Preferential"
               }
           }
         ],
@@ -2266,7 +2314,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "添加User"
+            "description": "添加Preferential"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -2275,13 +2323,13 @@
         }
       }
     },
-    "/user/{id}": {
+    "/preferential/{id}": {
       "delete": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "根据ID删除User",
-        "description": "根据ID删除User方法详情",
+        "summary": "根据ID删除Preferential",
+        "description": "根据ID删除Preferential方法详情",
         "operationId": "deleteUsingDELETE",
         "consumes": [
           "application/json"
@@ -2293,7 +2341,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID删除User方法详情",
+            "description": "根据ID删除Preferential方法详情",
             "required": true
           }
         ],
@@ -2314,7 +2362,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID删除User"
+            "description": "根据ID删除Preferential"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -2324,10 +2372,10 @@
       },
       "put": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "根据ID修改User",
-        "description": "根据ID修改User方法详情",
+        "summary": "根据ID修改Preferential",
+        "description": "根据ID修改Preferential方法详情",
         "operationId": "updateUsingPUT",
         "consumes": [
           "application/json"
@@ -2339,17 +2387,17 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改User方法详情",
+            "description": "根据ID修改Preferential方法详情",
             "required": true
           },
           {
             "in": "body",
-            "name": "User",
-            "description": "传入User的JSON对象",
+            "name": "Preferential",
+            "description": "传入Preferential的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Preferential"
               }
           }
         ],
@@ -2370,7 +2418,7 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改User"
+            "description": "根据ID修改Preferential"
             ,
             "schema": {
               "$ref": "#/definitions/Result"
@@ -2380,10 +2428,10 @@
       },
       "get": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "根据ID查询User",
-        "description": "根据ID查询User方法详情",
+        "summary": "根据ID查询Preferential",
+        "description": "根据ID查询Preferential方法详情",
         "operationId": "findByIdUsingGET",
         "consumes": [
           "application/json"
@@ -2395,7 +2443,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "根据ID修改User方法详情",
+            "description": "根据ID修改Preferential方法详情",
             "required": true
           }
         ],
@@ -2416,22 +2464,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "根据ID修改User"
+            "description": "根据ID修改Preferential"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«User»"
+              "$ref": "#/definitions/Result«Preferential»"
             }
           }
         }
       }
     },
-    "/user/search": {
+    "/preferential/search": {
       "post": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "不带分页条件搜索User",
-        "description": "不带分页条件搜索User方法详情",
+        "summary": "不带分页条件搜索Preferential",
+        "description": "不带分页条件搜索Preferential方法详情",
         "operationId": "findListUsingPOST",
         "consumes": [
           "application/json"
@@ -2442,12 +2490,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "User",
-            "description": "传入User的JSON对象",
+            "name": "Preferential",
+            "description": "传入Preferential的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Preferential"
               }
           }
         ],
@@ -2468,22 +2516,22 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索User"
+            "description": "不带分页搜索Preferential"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«User»»"
+              "$ref": "#/definitions/Result«List«Preferential»»"
             }
           }
         }
       }
     },
-    "/user/search/{page}/{size}": {
+    "/preferential/search/{page}/{size}": {
       "get": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "分页列表查询User",
-        "description": "分页列表查询User方法详情",
+        "summary": "分页列表查询Preferential",
+        "description": "分页列表查询Preferential方法详情",
         "operationId": "findPageUsingGET",
         "consumes": [
           "application/json"
@@ -2522,20 +2570,20 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "不带分页搜索User"
+            "description": "不带分页搜索Preferential"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«User»»"
+              "$ref": "#/definitions/Result«List«Preferential»»"
             }
           }
         }
       },
       "post": {
         "tags": [
-          "UserController"
+          "PreferentialController"
         ],
-        "summary": "分页条件搜索User",
-        "description": "分页条件搜索User方法详情",
+        "summary": "分页条件搜索Preferential",
+        "description": "分页条件搜索Preferential方法详情",
         "operationId": "findPageUsingPOST",
         "consumes": [
           "application/json"
@@ -2558,12 +2606,12 @@
           },
           {
             "in": "body",
-            "name": "User",
-            "description": "传入User的JSON对象",
+            "name": "Preferential",
+            "description": "传入Preferential的JSON对象",
             "required": false
               ,
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/Preferential"
               }
           }
         ],
@@ -2584,10 +2632,1240 @@
             "description": "服务器内部错误"
                       },
           "200": {
-            "description": "分页条件搜索User"
+            "description": "分页条件搜索Preferential"
             ,
             "schema": {
-              "$ref": "#/definitions/Result«List«User»»"
+              "$ref": "#/definitions/Result«List«Preferential»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnCause": {
+      "get": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "查询所有ReturnCause",
+        "description": "查询所有ReturnCause方法详情",
+        "operationId": "findAllUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "查询所有ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnCause»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "添加ReturnCause",
+        "description": "添加ReturnCause方法详情",
+        "operationId": "addUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "添加ReturnCause方法详情",
+            "required": true
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnCause"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "添加ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/returnCause/{id}": {
+      "delete": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "根据ID删除ReturnCause",
+        "description": "根据ID删除ReturnCause方法详情",
+        "operationId": "deleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID删除ReturnCause方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID删除ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "根据ID修改ReturnCause",
+        "description": "根据ID修改ReturnCause方法详情",
+        "operationId": "updateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnCause方法详情",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnCause",
+            "description": "传入ReturnCause的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnCause"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "根据ID查询ReturnCause",
+        "description": "根据ID查询ReturnCause方法详情",
+        "operationId": "findByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnCause方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«ReturnCause»"
+            }
+          }
+        }
+      }
+    },
+    "/returnCause/search": {
+      "post": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "不带分页条件搜索ReturnCause",
+        "description": "不带分页条件搜索ReturnCause方法详情",
+        "operationId": "findListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ReturnCause",
+            "description": "传入ReturnCause的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnCause"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnCause»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnCause/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "分页列表查询ReturnCause",
+        "description": "分页列表查询ReturnCause方法详情",
+        "operationId": "findPageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnCause»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnCauseController"
+        ],
+        "summary": "分页条件搜索ReturnCause",
+        "description": "分页条件搜索ReturnCause方法详情",
+        "operationId": "findPageUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnCause",
+            "description": "传入ReturnCause的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnCause"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "分页条件搜索ReturnCause"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnCause»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrder": {
+      "get": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "查询所有ReturnOrder",
+        "description": "查询所有ReturnOrder方法详情",
+        "operationId": "findAllUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "查询所有ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrder»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "添加ReturnOrder",
+        "description": "添加ReturnOrder方法详情",
+        "operationId": "addUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "添加ReturnOrder方法详情",
+            "required": true
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrder"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "添加ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrder/{id}": {
+      "delete": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "根据ID删除ReturnOrder",
+        "description": "根据ID删除ReturnOrder方法详情",
+        "operationId": "deleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID删除ReturnOrder方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID删除ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "根据ID修改ReturnOrder",
+        "description": "根据ID修改ReturnOrder方法详情",
+        "operationId": "updateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnOrder方法详情",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnOrder",
+            "description": "传入ReturnOrder的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrder"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "根据ID查询ReturnOrder",
+        "description": "根据ID查询ReturnOrder方法详情",
+        "operationId": "findByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnOrder方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«ReturnOrder»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrder/search": {
+      "post": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "不带分页条件搜索ReturnOrder",
+        "description": "不带分页条件搜索ReturnOrder方法详情",
+        "operationId": "findListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ReturnOrder",
+            "description": "传入ReturnOrder的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrder"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrder»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrder/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "分页列表查询ReturnOrder",
+        "description": "分页列表查询ReturnOrder方法详情",
+        "operationId": "findPageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrder»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnOrderController"
+        ],
+        "summary": "分页条件搜索ReturnOrder",
+        "description": "分页条件搜索ReturnOrder方法详情",
+        "operationId": "findPageUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnOrder",
+            "description": "传入ReturnOrder的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrder"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "分页条件搜索ReturnOrder"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrder»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrderItem": {
+      "get": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "查询所有ReturnOrderItem",
+        "description": "查询所有ReturnOrderItem方法详情",
+        "operationId": "findAllUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "查询所有ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrderItem»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "添加ReturnOrderItem",
+        "description": "添加ReturnOrderItem方法详情",
+        "operationId": "addUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "添加ReturnOrderItem方法详情",
+            "required": true
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrderItem"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "添加ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrderItem/{id}": {
+      "delete": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "根据ID删除ReturnOrderItem",
+        "description": "根据ID删除ReturnOrderItem方法详情",
+        "operationId": "deleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID删除ReturnOrderItem方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID删除ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "根据ID修改ReturnOrderItem",
+        "description": "根据ID修改ReturnOrderItem方法详情",
+        "operationId": "updateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnOrderItem方法详情",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnOrderItem",
+            "description": "传入ReturnOrderItem的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrderItem"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "根据ID查询ReturnOrderItem",
+        "description": "根据ID查询ReturnOrderItem方法详情",
+        "operationId": "findByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "根据ID修改ReturnOrderItem方法详情",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "根据ID修改ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«ReturnOrderItem»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrderItem/search": {
+      "post": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "不带分页条件搜索ReturnOrderItem",
+        "description": "不带分页条件搜索ReturnOrderItem方法详情",
+        "operationId": "findListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ReturnOrderItem",
+            "description": "传入ReturnOrderItem的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrderItem"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrderItem»»"
+            }
+          }
+        }
+      }
+    },
+    "/returnOrderItem/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "分页列表查询ReturnOrderItem",
+        "description": "分页列表查询ReturnOrderItem方法详情",
+        "operationId": "findPageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "不带分页搜索ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrderItem»»"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ReturnOrderItemController"
+        ],
+        "summary": "分页条件搜索ReturnOrderItem",
+        "description": "分页条件搜索ReturnOrderItem方法详情",
+        "operationId": "findPageUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "page",
+            "description": "当前页",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "description": "每页显示条数",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "ReturnOrderItem",
+            "description": "传入ReturnOrderItem的JSON对象",
+            "required": false
+              ,
+              "schema": {
+                "$ref": "#/definitions/ReturnOrderItem"
+              }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid status value(无效的状态值)"
+                      },
+          "403": {
+            "description": "403 Forbidden(请求被拒绝)"
+                      },
+          "404": {
+            "description": "not found(没有找到相关资源)"
+                      },
+          "405": {
+            "description": "Invalid input(无效的输入)"
+                      },
+          "500": {
+            "description": "服务器内部错误"
+                      },
+          "200": {
+            "description": "分页条件搜索ReturnOrderItem"
+            ,
+            "schema": {
+              "$ref": "#/definitions/Result«List«ReturnOrderItem»»"
             }
           }
         }
@@ -3035,7 +4313,7 @@
       },
       "description": "Result"
     },
-    "Result«List«OauthClientDetails»»": {
+    "Result«List«CategoryReport»»": {
       "type": "object",
       "required": [
         "code",
@@ -3053,7 +4331,7 @@
           "type": "array",
           "description": "逻辑数据",
           "items": {
-            "$ref": "#/definitions/OauthClientDetails"
+            "$ref": "#/definitions/CategoryReport"
           }
         },
         "flag": {
@@ -3068,7 +4346,7 @@
       },
       "description": "Result"
     },
-    "Result«OauthClientDetails»": {
+    "Result«CategoryReport»": {
       "type": "object",
       "required": [
         "code",
@@ -3084,7 +4362,7 @@
         },
         "data": {
           "description": "逻辑数据",
-          "$ref": "#/definitions/OauthClientDetails"
+          "$ref": "#/definitions/CategoryReport"
         },
         "flag": {
           "type": "boolean",
@@ -3098,59 +4376,42 @@
       },
       "description": "Result"
     },
-    "OauthClientDetails": {
+    "CategoryReport": {
       "type": "object",
       "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "客户端ID，主要用于标识对应的应用"
-        },
-        "resourceIds": {
-          "type": "string",
-          "description": ""
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "客户端秘钥，BCryptPasswordEncoder加密算法加密"
-        },
-        "scope": {
-          "type": "string",
-          "description": "对应的范围"
-        },
-        "authorizedGrantTypes": {
-          "type": "string",
-          "description": "认证模式"
-        },
-        "webServerRedirectUri": {
-          "type": "string",
-          "description": "认证后重定向地址"
-        },
-        "authorities": {
-          "type": "string",
-          "description": ""
-        },
-        "accessTokenValidity": {
+        "categoryId1": {
           "type": "integer",
           "format": "int32",
-          "description": "令牌有效期"
+          "description": "1级分类"
         },
-        "refreshTokenValidity": {
+        "categoryId2": {
           "type": "integer",
           "format": "int32",
-          "description": "令牌刷新周期"
+          "description": "2级分类"
         },
-        "additionalInformation": {
-          "type": "string",
-          "description": ""
+        "categoryId3": {
+          "type": "integer",
+          "format": "int32",
+          "description": "3级分类"
         },
-        "autoapprove": {
-          "type": "string",
-          "description": ""
+        "countDate": {
+          "type": "date",
+          "description": "统计日期"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "销售数量"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32",
+          "description": "销售额"
         }
       },
-      "description": "OauthClientDetails"
+      "description": "CategoryReport"
     },
-    "Result«List«Address»»": {
+    "Result«List«Order»»": {
       "type": "object",
       "required": [
         "code",
@@ -3168,7 +4429,7 @@
           "type": "array",
           "description": "逻辑数据",
           "items": {
-            "$ref": "#/definitions/Address"
+            "$ref": "#/definitions/Order"
           }
         },
         "flag": {
@@ -3183,7 +4444,7 @@
       },
       "description": "Result"
     },
-    "Result«Address»": {
+    "Result«Order»": {
       "type": "object",
       "required": [
         "code",
@@ -3199,7 +4460,7 @@
         },
         "data": {
           "description": "逻辑数据",
-          "$ref": "#/definitions/Address"
+          "$ref": "#/definitions/Order"
         },
         "flag": {
           "type": "boolean",
@@ -3213,54 +4474,225 @@
       },
       "description": "Result"
     },
-    "Address": {
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "订单id"
+        },
+        "totalNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "数量合计"
+        },
+        "totalMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "金额合计"
+        },
+        "preMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "优惠金额"
+        },
+        "postFee": {
+          "type": "integer",
+          "format": "int32",
+          "description": "邮费"
+        },
+        "payMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "实付金额"
+        },
+        "payType": {
+          "type": "string",
+          "description": "支付类型，1、在线支付、0 货到付款"
+        },
+        "createTime": {
+          "type": "date",
+          "description": "订单创建时间"
+        },
+        "updateTime": {
+          "type": "date",
+          "description": "订单更新时间"
+        },
+        "payTime": {
+          "type": "date",
+          "description": "付款时间"
+        },
+        "consignTime": {
+          "type": "date",
+          "description": "发货时间"
+        },
+        "endTime": {
+          "type": "date",
+          "description": "交易完成时间"
+        },
+        "closeTime": {
+          "type": "date",
+          "description": "交易关闭时间"
+        },
+        "shippingName": {
+          "type": "string",
+          "description": "物流名称"
+        },
+        "shippingCode": {
+          "type": "string",
+          "description": "物流单号"
+        },
+        "username": {
+          "type": "string",
+          "description": "用户名称"
+        },
+        "buyerMessage": {
+          "type": "string",
+          "description": "买家留言"
+        },
+        "buyerRate": {
+          "type": "string",
+          "description": "是否评价"
+        },
+        "receiverContact": {
+          "type": "string",
+          "description": "收货人"
+        },
+        "receiverMobile": {
+          "type": "string",
+          "description": "收货人手机"
+        },
+        "receiverAddress": {
+          "type": "string",
+          "description": "收货人地址"
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "订单来源：1:web，2：app，3：微信公众号，4：微信小程序  5 H5手机页面"
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "交易流水号"
+        },
+        "orderStatus": {
+          "type": "string",
+          "description": "订单状态,0:未完成,1:已完成，2：已退货"
+        },
+        "payStatus": {
+          "type": "string",
+          "description": "支付状态,0:未支付，1：已支付，2：支付失败"
+        },
+        "consignStatus": {
+          "type": "string",
+          "description": "发货状态,0:未发货，1：已发货，2：已收货"
+        },
+        "isDelete": {
+          "type": "string",
+          "description": "是否删除"
+        }
+      },
+      "description": "Order"
+    },
+    "Result«List«OrderConfig»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/OrderConfig"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«OrderConfig»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/OrderConfig"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "OrderConfig": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": ""
+          "description": "ID"
         },
-        "username": {
-          "type": "string",
-          "description": "用户名"
+        "orderTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "正常订单超时时间（分）"
         },
-        "provinceid": {
-          "type": "string",
-          "description": "省"
+        "seckillTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "秒杀订单超时时间（分）"
         },
-        "cityid": {
-          "type": "string",
-          "description": "市"
+        "takeTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "自动收货（天）"
         },
-        "areaid": {
-          "type": "string",
-          "description": "县/区"
+        "serviceTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "售后期限"
         },
-        "phone": {
-          "type": "string",
-          "description": "电话"
-        },
-        "address": {
-          "type": "string",
-          "description": "详细地址"
-        },
-        "contact": {
-          "type": "string",
-          "description": "联系人"
-        },
-        "isDefault": {
-          "type": "string",
-          "description": "是否是默认 1默认 0否"
-        },
-        "alias": {
-          "type": "string",
-          "description": "别名"
+        "commentTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "自动五星好评"
         }
       },
-      "description": "Address"
+      "description": "OrderConfig"
     },
-    "Result«List«Areas»»": {
+    "Result«List«OrderItem»»": {
       "type": "object",
       "required": [
         "code",
@@ -3278,7 +4710,7 @@
           "type": "array",
           "description": "逻辑数据",
           "items": {
-            "$ref": "#/definitions/Areas"
+            "$ref": "#/definitions/OrderItem"
           }
         },
         "flag": {
@@ -3293,7 +4725,7 @@
       },
       "description": "Result"
     },
-    "Result«Areas»": {
+    "Result«OrderItem»": {
       "type": "object",
       "required": [
         "code",
@@ -3309,7 +4741,7 @@
         },
         "data": {
           "description": "逻辑数据",
-          "$ref": "#/definitions/Areas"
+          "$ref": "#/definitions/OrderItem"
         },
         "flag": {
           "type": "boolean",
@@ -3323,333 +4755,655 @@
       },
       "description": "Result"
     },
-    "Areas": {
+    "OrderItem": {
       "type": "object",
       "properties": {
-        "areaid": {
+        "id": {
           "type": "string",
-          "description": "区域ID"
+          "description": "ID"
         },
-        "area": {
-          "type": "string",
-          "description": "区域名称"
-        },
-        "cityid": {
-          "type": "string",
-          "description": "城市ID"
-        }
-      },
-      "description": "Areas"
-    },
-    "Result«List«Cities»»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
+        "categoryId1": {
           "type": "integer",
           "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+          "description": "1级分类"
         },
-        "data": {
-          "type": "array",
-          "description": "逻辑数据",
-          "items": {
-            "$ref": "#/definitions/Cities"
-          }
-        },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
-        },
-        "message": {
-          "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "Result«Cities»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
+        "categoryId2": {
           "type": "integer",
           "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+          "description": "2级分类"
         },
-        "data": {
-          "description": "逻辑数据",
-          "$ref": "#/definitions/Cities"
-        },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
-        },
-        "message": {
-          "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "Cities": {
-      "type": "object",
-      "properties": {
-        "cityid": {
-          "type": "string",
-          "description": "城市ID"
-        },
-        "city": {
-          "type": "string",
-          "description": "城市名称"
-        },
-        "provinceid": {
-          "type": "string",
-          "description": "省份ID"
-        }
-      },
-      "description": "Cities"
-    },
-    "Result«List«Provinces»»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
+        "categoryId3": {
           "type": "integer",
           "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+          "description": "3级分类"
         },
-        "data": {
-          "type": "array",
-          "description": "逻辑数据",
-          "items": {
-            "$ref": "#/definitions/Provinces"
-          }
+        "spuId": {
+          "type": "long",
+          "description": "SPU_ID"
         },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
+        "skuId": {
+          "type": "long",
+          "description": "SKU_ID"
         },
-        "message": {
+        "orderId": {
           "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "Result«Provinces»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
-        },
-        "data": {
-          "description": "逻辑数据",
-          "$ref": "#/definitions/Provinces"
-        },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
-        },
-        "message": {
-          "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "Provinces": {
-      "type": "object",
-      "properties": {
-        "provinceid": {
-          "type": "string",
-          "description": "省份ID"
-        },
-        "province": {
-          "type": "string",
-          "description": "省份名称"
-        }
-      },
-      "description": "Provinces"
-    },
-    "Result«List«User»»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
-        },
-        "data": {
-          "type": "array",
-          "description": "逻辑数据",
-          "items": {
-            "$ref": "#/definitions/User"
-          }
-        },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
-        },
-        "message": {
-          "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "Result«User»": {
-      "type": "object",
-      "required": [
-        "code",
-        "data",
-        "flag",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
-        },
-        "data": {
-          "description": "逻辑数据",
-          "$ref": "#/definitions/User"
-        },
-        "flag": {
-          "type": "boolean",
-          "example": false,
-          "description": "执行是否成功,true:成功,false:失败"
-        },
-        "message": {
-          "type": "string",
-          "description": "提示信息"
-        }
-      },
-      "description": "Result"
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "用户名"
-        },
-        "password": {
-          "type": "string",
-          "description": "密码，加密存储"
-        },
-        "phone": {
-          "type": "string",
-          "description": "注册手机号"
-        },
-        "email": {
-          "type": "string",
-          "description": "注册邮箱"
-        },
-        "created": {
-          "type": "date",
-          "description": "创建时间"
-        },
-        "updated": {
-          "type": "date",
-          "description": "修改时间"
-        },
-        "sourceType": {
-          "type": "string",
-          "description": "会员来源：1:PC，2：H5，3：Android，4：IOS"
-        },
-        "nickName": {
-          "type": "string",
-          "description": "昵称"
+          "description": "订单ID"
         },
         "name": {
           "type": "string",
-          "description": "真实姓名"
+          "description": "商品名称"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32",
+          "description": "单价"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "数量"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总金额"
+        },
+        "payMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "实付金额"
+        },
+        "image": {
+          "type": "string",
+          "description": "图片地址"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "重量"
+        },
+        "postFee": {
+          "type": "integer",
+          "format": "int32",
+          "description": "运费"
+        },
+        "isReturn": {
+          "type": "string",
+          "description": "是否退货,0:未退货，1：已退货"
+        }
+      },
+      "description": "OrderItem"
+    },
+    "Result«List«OrderLog»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/OrderLog"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«OrderLog»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/OrderLog"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "OrderLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID"
+        },
+        "operater": {
+          "type": "string",
+          "description": "操作员"
+        },
+        "operateTime": {
+          "type": "date",
+          "description": "操作时间"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "订单ID"
+        },
+        "orderStatus": {
+          "type": "string",
+          "description": "订单状态,0未完成，1已完成，2，已退货"
+        },
+        "payStatus": {
+          "type": "string",
+          "description": "付款状态  0:未支付，1：已支付，2：支付失败"
+        },
+        "consignStatus": {
+          "type": "string",
+          "description": "发货状态"
+        },
+        "remarks": {
+          "type": "string",
+          "description": "备注"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32",
+          "description": "支付金额"
+        },
+        "username": {
+          "type": "string",
+          "description": ""
+        }
+      },
+      "description": "OrderLog"
+    },
+    "Result«List«Preferential»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Preferential"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Preferential»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Preferential"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Preferential": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID"
+        },
+        "buyMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "消费金额"
+        },
+        "preMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "优惠金额"
+        },
+        "categoryId": {
+          "type": "long",
+          "description": "品类ID"
+        },
+        "startTime": {
+          "type": "date",
+          "description": "活动开始日期"
+        },
+        "endTime": {
+          "type": "date",
+          "description": "活动截至日期"
+        },
+        "state": {
+          "type": "string",
+          "description": "状态"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型1不翻倍 2翻倍"
+        }
+      },
+      "description": "Preferential"
+    },
+    "Result«List«ReturnCause»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/ReturnCause"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«ReturnCause»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/ReturnCause"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "ReturnCause": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID"
+        },
+        "cause": {
+          "type": "string",
+          "description": "原因"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
         },
         "status": {
           "type": "string",
-          "description": "使用状态（1正常 0非正常）"
-        },
-        "headPic": {
-          "type": "string",
-          "description": "头像地址"
-        },
-        "qq": {
-          "type": "string",
-          "description": "QQ号码"
-        },
-        "isMobileCheck": {
-          "type": "string",
-          "description": "手机是否验证 （0否  1是）"
-        },
-        "isEmailCheck": {
-          "type": "string",
-          "description": "邮箱是否检测（0否  1是）"
-        },
-        "sex": {
-          "type": "string",
-          "description": "性别，1男，0女"
-        },
-        "userLevel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "会员等级"
-        },
-        "points": {
-          "type": "integer",
-          "format": "int32",
-          "description": "积分"
-        },
-        "experienceValue": {
-          "type": "integer",
-          "format": "int32",
-          "description": "经验值"
-        },
-        "birthday": {
-          "type": "date",
-          "description": "出生年月日"
-        },
-        "lastLoginTime": {
-          "type": "date",
-          "description": "最后登录时间"
+          "description": "是否启用"
         }
       },
-      "description": "User"
+      "description": "ReturnCause"
+    },
+    "Result«List«ReturnOrder»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/ReturnOrder"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«ReturnOrder»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/ReturnOrder"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "ReturnOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "long",
+          "description": "服务单号"
+        },
+        "orderId": {
+          "type": "long",
+          "description": "订单号"
+        },
+        "applyTime": {
+          "type": "date",
+          "description": "申请时间"
+        },
+        "userId": {
+          "type": "long",
+          "description": "用户ID"
+        },
+        "userAccount": {
+          "type": "string",
+          "description": "用户账号"
+        },
+        "linkman": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "linkmanMobile": {
+          "type": "string",
+          "description": "联系人手机"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型"
+        },
+        "returnMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "退款金额"
+        },
+        "isReturnFreight": {
+          "type": "string",
+          "description": "是否退运费"
+        },
+        "status": {
+          "type": "string",
+          "description": "申请状态"
+        },
+        "disposeTime": {
+          "type": "date",
+          "description": "处理时间"
+        },
+        "returnCause": {
+          "type": "integer",
+          "format": "int32",
+          "description": "退货退款原因"
+        },
+        "evidence": {
+          "type": "string",
+          "description": "凭证图片"
+        },
+        "description": {
+          "type": "string",
+          "description": "问题描述"
+        },
+        "remark": {
+          "type": "string",
+          "description": "处理备注"
+        },
+        "adminId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "管理员id"
+        }
+      },
+      "description": "ReturnOrder"
+    },
+    "Result«List«ReturnOrderItem»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/ReturnOrderItem"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«ReturnOrderItem»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/ReturnOrderItem"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "ReturnOrderItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "long",
+          "description": "ID"
+        },
+        "categoryId": {
+          "type": "long",
+          "description": "分类ID"
+        },
+        "spuId": {
+          "type": "long",
+          "description": "SPU_ID"
+        },
+        "skuId": {
+          "type": "long",
+          "description": "SKU_ID"
+        },
+        "orderId": {
+          "type": "long",
+          "description": "订单ID"
+        },
+        "orderItemId": {
+          "type": "long",
+          "description": "订单明细ID"
+        },
+        "returnOrderId": {
+          "type": "long",
+          "description": "退货订单ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "标题"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32",
+          "description": "单价"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "数量"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总金额"
+        },
+        "payMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "支付金额"
+        },
+        "image": {
+          "type": "string",
+          "description": "图片地址"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "重量"
+        }
+      },
+      "description": "ReturnOrderItem"
     },
     "Result«List«UndoLog»»": {
       "type": "object",

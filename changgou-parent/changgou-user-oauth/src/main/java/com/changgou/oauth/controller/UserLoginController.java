@@ -47,13 +47,15 @@ public class UserLoginController {
      * @return
      */
     @RequestMapping("/login")
-    public Result<Map> login(String username, String password) {
+    public Result<Map> login(String username, String password,HttpServletResponse response) {
         // 登录 之后生成令牌的数据返回
         AuthToken authToken = loginService.login(username, password, clientId, clientSecret, GRAND_TYPE);
 
 
         //设置到cookie中
         saveCookie(authToken.getAccessToken());
+
+        response.addHeader("Authorization",authToken.getAccessToken());
         return new Result<>(true, StatusCode.OK,"令牌生成成功",authToken);
     }
 
