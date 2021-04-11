@@ -6,6 +6,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -18,9 +19,9 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 @Configuration
+// 开启 资源服务器(标识他是一个oauth2中的资源服务器)
 @EnableResourceServer
-//激活方法上的 PreAuthorize 注解
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)//激活方法上的PreAuthorize注解
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     //公钥
@@ -37,17 +38,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     /***
-     * 定义JJwtAccessTokenConverter
+     * 定义JJwtAccessTokenConverter  用来校验令牌
      * @return
      */
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setVerifierKey(getPubKey());
+        converter.setVerifier(new RsaVerifier(getPubKey()));
         return converter;
     }
+
     /**
      * 获取非对称加密公钥 Key
+     *
      * @return 公钥 Key
      */
     private String getPubKey() {
@@ -62,19 +66,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     /***
-     * Http 安全配置，对每个到达系统的 http 请求链接进行校验
+     * Http安全配置，对每个到达系统的http请求链接进行校验
      * @param http
      * @throws Exception
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
+
+        //放行 用户注册的请求
+        //其他的请求  必须有登录之后才能访问 (校验token合法才可以访问)
+
         //所有请求必须认证通过
         http.authorizeRequests()
-                //下边的路径放行
-               /* .antMatchers(
-                        "/spec/**"). //配置放行地址
-                permitAll()*/
-                .anyRequest().
-                authenticated();    //其他地址需要认证授权
+                .anyRequest()
+                .authenticated();    //其他地址需要认证授权
     }
+
+
 }
