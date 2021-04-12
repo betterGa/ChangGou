@@ -136,7 +136,7 @@ public class UserController {
      * @return
      */
     @GetMapping
-    @PreAuthorize("hasRole('user')")
+    //@PreAuthorize("hasRole('user')")
     public Result<List<User>> findAll(){
         //调用UserService实现查询所有User
         List<User> list = userService.findAll();

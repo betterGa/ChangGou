@@ -19,11 +19,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.security.KeyPair;
-
 
 @Configuration
 @EnableAuthorizationServer
