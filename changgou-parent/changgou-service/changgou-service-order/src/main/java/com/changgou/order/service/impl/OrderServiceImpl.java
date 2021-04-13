@@ -53,14 +53,22 @@ public class OrderServiceImpl implements OrderService {
         // 总金额
         int totalMoney = 0;
 
-        // 获取订单明细
-        List<OrderItem> orderItem = redisTemplate.boundHashOps("Cart_" + order.getUsername()).values();
+        // 获取订单（购物车）明细
+        List<OrderItem> orderItem = redisTemplate.boundHashOps("cart_" + order.getUsername()).values();
+        redisTemplate.boundHashOps("cart_" + order.getUsername()).keys();
+        System.out.println("!!!!!!"+redisTemplate.boundHashOps("cart_" + order.getUsername()).keys());
+
         for (OrderItem item : orderItem) {
-            totolNum += item.getNum();
+
+            // 价格校验
+            /*int price = orderItemMapper.selectByPrimaryKey(item.getId()).getPrice();
+            if (price == item.getMoney()) {*/
+            // 总金额
             totalMoney += item.getMoney();
-            item.setOrderId(order.getId());
-            // 退货状态，0 表示未退货
-            item.setIsReturn("0");
+            /*  } else totalMoney += price;*/
+
+            // 总数量
+            totolNum += item.getNum();
         }
 
         // 订单商品总数目 = 每个商品数量之和
@@ -72,31 +80,49 @@ public class OrderServiceImpl implements OrderService {
         // 订单实付金额 = 每个商品实付金额之和
         order.setPayMoney(totalMoney);
 
+        // 订单优惠金额 = 总金额 - 实付金额，暂时为 0
+        order.setPreMoney(0);
+
         // 订单创建时间
         order.setCreateTime(new Date());
 
         // 订单修改时间
         order.setUpdateTime(order.getCreateTime());
 
+        // 订单评价状态，0 表示未评价,1 表示已评价
+        order.setBuyerRate("0");
+
         // 订单来源，1 表示 Web
         order.setSourceType("1");
 
-        // 订单状态，0 表示未支付
+        // 订单状态，0 表示未完成，1 表示已完成，2 表示已退货
         order.setOrderStatus("0");
 
-        // 订单支付状态，0 表示未支付
+        // 订单支付状态，0 表示未支付，1 表示已支付，2 表示支付失败
         order.setPayStatus("0");
 
         // 订单删除状态，0 表示未删除
         order.setIsDelete("0");
 
+        // 订单发货状态，0 表示未发货，1 表示已发货，2 表示已收货
+        order.setConsignStatus("0");
+
         // 先添加订单信息
-        orderMapper.insert(order);
+        orderMapper.insertSelective(order);
 
         // 再添加订单明细信息
-        for(OrderItem item:orderItem){
-            orderItemMapper.insert(item);
+        for (OrderItem item : orderItem) {
+            item.setId(String.valueOf(idWorker.nextId()));
+            // 是否退货,0 表示未退货，1 表示已退货
+            item.setIsReturn("0");
+            item.setOrderId(order.getId());
+            // 退货状态，0 表示未退货
+            item.setIsReturn("0");
+            orderItemMapper.insertSelective(item);
         }
+
+        // 下单后需要把商品从购物车中移除
+        redisTemplate.delete("cart_" + order.getUsername());
     }
 
     /**

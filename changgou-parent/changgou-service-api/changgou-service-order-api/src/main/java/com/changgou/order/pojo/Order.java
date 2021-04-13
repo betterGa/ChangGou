@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /****
  * @Author:shenkunlin
@@ -13,6 +14,11 @@ import java.util.Date;
  *****/
 @Table(name="tb_order")
 public class Order implements Serializable{
+
+	/**
+	 * 添加一个字段，用于记录当前订单勾选的商品 ID
+	 */
+	private List<Long> skuIds;
 
 	@Id
     @Column(name = "id")
