@@ -1,6 +1,7 @@
 package com.changgou.order;
 
 import entity.FeignInterceptor;
+import entity.IdWorker;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -20,10 +21,22 @@ public class OrderApplication {
 
     /**
      * 将 Feign 调用拦截器注入到容器中
+     *
      * @return
      */
     @Bean
-    public FeignInterceptor feignInterceptor(){
+    public FeignInterceptor feignInterceptor() {
         return new FeignInterceptor();
     }
+
+    /**
+     * 创建 IdWorker
+     * @return
+     */
+    @Bean
+    public IdWorker idWorker() {
+        return new IdWorker();
+    }
 }
+
+

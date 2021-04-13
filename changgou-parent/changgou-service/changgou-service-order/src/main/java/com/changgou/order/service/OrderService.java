@@ -8,6 +8,12 @@ import java.util.List;
  * @Date 2019/6/14 0:16
  *****/
 public interface OrderService {
+    /***
+     * 添加订单实现
+     * @param order
+     */
+    void addOrder(Order order);
+
 
     /***
      * Order多条件分页查询
