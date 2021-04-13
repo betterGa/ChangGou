@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +55,20 @@ public class OrderServiceImpl implements OrderService {
         int totalMoney = 0;
 
         // 获取订单（购物车）明细
-        List<OrderItem> orderItem = redisTemplate.boundHashOps("cart_" + order.getUsername()).values();
+        List<OrderItem> orderItem = new ArrayList<OrderItem>();
+
+        // 获取勾选商品 ID，
+        for(Long skuId:order.getSkuIds()){
+
+            // 将勾选商品加入集合
+            orderItem.add(redisTemplate.boundHashOps("cart_"+order.getUsername()).get(skuId));
+
+            // 将勾选商品从购物车中移除
+            redisTemplate.boundHashOps("cart_"+order.getUsername()).delete(skuId);
+        }
+
+
         redisTemplate.boundHashOps("cart_" + order.getUsername()).keys();
-        System.out.println("!!!!!!"+redisTemplate.boundHashOps("cart_" + order.getUsername()).keys());
 
         for (OrderItem item : orderItem) {
 
@@ -122,7 +134,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         // 下单后需要把商品从购物车中移除
-        redisTemplate.delete("cart_" + order.getUsername());
+        // redisTemplate.delete("cart_" + order.getUsername());
     }
 
     /**
@@ -148,7 +160,6 @@ public class OrderServiceImpl implements OrderService {
      *
      * @param page
      * @param size
-     * @return
      */
     @Override
     public PageInfo<Order> findPage(int page, int size) {

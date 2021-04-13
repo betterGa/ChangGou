@@ -349,4 +349,11 @@ public class Order implements Serializable{
 	}
 
 
+	public List<Long> getSkuIds() {
+		return skuIds;
+	}
+
+	public void setSkuIds(List<Long> skuIds) {
+		this.skuIds = skuIds;
+	}
 }
