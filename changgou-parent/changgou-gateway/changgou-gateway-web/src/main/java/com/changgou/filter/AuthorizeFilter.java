@@ -23,6 +23,9 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
     // 令牌的名字
     private static final String AUTHOR_TOKEN =  "Authorization";
 
+    // 用户登录地址
+    private static final String USER_LOGIN_URL="http://localhost:9001/oauth/login";
+
     /**
      * 全局拦截
      *
@@ -45,10 +48,8 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         // 获取令牌信息的途径
         // （1）头文件中
         String token = request.getHeaders().getFirst(AUTHOR_TOKEN);
-
         // 设置一个布尔值，如果为 true，说明令牌在头文件中；
         boolean hasToken = true;
-
         if (StringUtils.isEmpty(token)) {
             // (2) 参数中
             token = request.getQueryParams().getFirst(AUTHOR_TOKEN);
@@ -61,14 +62,17 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
                     token = cookie.getValue();
                     hasToken = false;
                 } else {
-
                     // 若没有令牌
-                    // 设置状态码为 401 没有权限
+                   /* // 设置状态码为 401 没有权限
                     response.setStatusCode(HttpStatus.UNAUTHORIZED);
-
                     // 响应空数据
-                    return response.setComplete();
+                    return response.setComplete();*/
 
+                    // 跳转至登录页面让用户重新登录
+                    /*return needAuthorization(USER_LOGIN_URL,exchange);*/
+
+                    // 登录跳转
+                    return needAuthorization(USER_LOGIN_URL+"?FROM="+request.getURI(),exchange);
                 }
 
                 // 如果有令牌，则校验令牌是否有效
@@ -101,5 +105,12 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
     @Override
     public int getOrder() {
         return 0;
+    }
+
+    public Mono<Void> needAuthorization(String url,ServerWebExchange exchange){
+        ServerHttpResponse response=exchange.getResponse();
+        response.setStatusCode(HttpStatus.SEE_OTHER);
+        response.getHeaders().set("Location",url);
+        return exchange.getResponse().setComplete();
     }
 }

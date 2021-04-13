@@ -12,6 +12,14 @@ import java.util.List;
  *****/
 public interface AddressService {
 
+    /**
+     * 根据用户名查询收件地址信息
+     * @param username
+     * @return
+     */
+    List<Address> list(String username);
+
+
     /***
      * Address多条件分页查询
      * @param address
