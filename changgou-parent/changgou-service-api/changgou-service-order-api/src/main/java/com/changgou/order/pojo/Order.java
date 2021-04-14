@@ -1,5 +1,8 @@
 package com.changgou.order.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -18,6 +21,7 @@ public class Order implements Serializable{
 	/**
 	 * 添加一个字段，用于记录当前订单勾选的商品 ID
 	 */
+	@JsonSerialize(using = ToStringSerializer.class)
 	private List<Long> skuIds;
 
 	@Id

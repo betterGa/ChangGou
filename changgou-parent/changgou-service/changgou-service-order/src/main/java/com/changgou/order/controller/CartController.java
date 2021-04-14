@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class CartController {
      * @return
      */
     @GetMapping("/add")
-    public Result add(Integer num,Long id){
+    public Result add(@RequestParam(value = "num") Integer num, @RequestParam(value = "id") Long id){
         // 解析令牌
         Map<String, String> userInfo = tokenDecode.getUserInfo();
         System.out.println(userInfo);

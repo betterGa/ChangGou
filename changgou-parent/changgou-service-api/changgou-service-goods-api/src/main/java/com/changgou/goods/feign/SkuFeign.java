@@ -2,11 +2,13 @@ package com.changgou.goods.feign;
 
 import com.changgou.goods.pojo.Sku;
 
+import com.changgou.order.pojo.OrderItem;
 import entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 描述
@@ -47,10 +49,7 @@ public interface SkuFeign {
     public Result<Sku> findById(@PathVariable(name="id") Long id);
 
 
-/*
-    @PostMapping(value = "/decr/count")
-    public Result decrCount(@RequestBody OrderItem orderItem);
-*/
-
+    @GetMapping(value = "/decr")
+    public Result decrCount(@RequestParam Map<String,String> decrMap);
 
 }

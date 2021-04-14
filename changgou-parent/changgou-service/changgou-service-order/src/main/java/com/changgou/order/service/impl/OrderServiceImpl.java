@@ -1,5 +1,6 @@
 package com.changgou.order.service.impl;
 
+import com.changgou.goods.feign.SkuFeign;
 import com.changgou.order.dao.OrderItemMapper;
 import com.changgou.order.dao.OrderMapper;
 import com.changgou.order.pojo.Order;
@@ -16,6 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /****
@@ -38,6 +40,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
+    @Autowired
+    private SkuFeign skuFeign;
+
     /**
      * 添加订单实现
      *
@@ -57,18 +62,21 @@ public class OrderServiceImpl implements OrderService {
         // 获取订单（购物车）明细
         List<OrderItem> orderItem = new ArrayList<OrderItem>();
 
+
+        System.out.println(redisTemplate.boundHashOps("cart_" + order.getUsername()).values());
+
+
         // 获取勾选商品 ID，
-        for(Long skuId:order.getSkuIds()){
+        for (Long skuId : order.getSkuIds()) {
+
+           OrderItem selectedItem= (OrderItem) redisTemplate.boundHashOps("cart_"+order.getUsername()).get(skuId);
 
             // 将勾选商品加入集合
-            orderItem.add(redisTemplate.boundHashOps("cart_"+order.getUsername()).get(skuId));
+            orderItem.add(selectedItem);
 
             // 将勾选商品从购物车中移除
-            redisTemplate.boundHashOps("cart_"+order.getUsername()).delete(skuId);
+          //  redisTemplate.boundHashOps("cart_" + order.getUsername()).delete(skuId);
         }
-
-
-        redisTemplate.boundHashOps("cart_" + order.getUsername()).keys();
 
         for (OrderItem item : orderItem) {
 
@@ -122,6 +130,9 @@ public class OrderServiceImpl implements OrderService {
         // 先添加订单信息
         orderMapper.insertSelective(order);
 
+        // 封装库存递减 Map
+        HashMap<String, String> decrMap = new HashMap<>();
+
         // 再添加订单明细信息
         for (OrderItem item : orderItem) {
             item.setId(String.valueOf(idWorker.nextId()));
@@ -130,11 +141,15 @@ public class OrderServiceImpl implements OrderService {
             item.setOrderId(order.getId());
             // 退货状态，0 表示未退货
             item.setIsReturn("0");
+
+            // 封装库存递减参数
+            decrMap.put(item.getSkuId().toString(),item.getNum().toString());
+
             orderItemMapper.insertSelective(item);
         }
 
-        // 下单后需要把商品从购物车中移除
-        // redisTemplate.delete("cart_" + order.getUsername());
+        // 库存递减
+        skuFeign.decrCount(decrMap);
     }
 
     /**
