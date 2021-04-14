@@ -1,6 +1,7 @@
 package com.changgou.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.user.config.TokenDecode;
 import com.changgou.user.pojo.User;
 import com.changgou.user.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -8,20 +9,11 @@ import entity.BCrypt;
 import entity.JwtUtil;
 import entity.Result;
 import entity.StatusCode;
-import io.swagger.annotations.Authorization;
-import org.apache.commons.codec.digest.Crypt;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.naming.ldap.HasControls;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /****
  * @Author:shenkunlin
@@ -36,6 +28,21 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenDecode tokenDecode;
+
+    /***
+     * 增加用户积分
+     * @param points
+     * @return
+     */
+    @GetMapping(value = "/points/add")
+    public Result addPoints(@RequestParam Integer points){
+        String username = tokenDecode.getUserInfo().get("username");
+        userService.addPoints(username,points);
+        return new Result(true,StatusCode.OK,"积分成功");
+    }
 
     /***
      * User分页条件搜索实现

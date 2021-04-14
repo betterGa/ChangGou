@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
+    @Override
+    public void addPoints(String username, Integer points) {
+        userMapper.addPoints(username,points);
+    }
+
     /**
      * User条件+分页查询
      * @param user 查询条件

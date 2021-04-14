@@ -12,6 +12,14 @@ import java.util.List;
  *****/
 public interface UserService {
 
+
+    /**
+     * 增加用户积分
+     * @param username
+     * @param points
+     */
+    void addPoints(String username,Integer points);
+
     /***
      * User多条件分页查询
      * @param user

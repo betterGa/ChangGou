@@ -6,6 +6,7 @@ import com.changgou.order.dao.OrderMapper;
 import com.changgou.order.pojo.Order;
 import com.changgou.order.pojo.OrderItem;
 import com.changgou.order.service.OrderService;
+import com.changgou.user.feign.UserFeign;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import entity.IdWorker;
@@ -42,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private SkuFeign skuFeign;
+
+   @Autowired
+   private UserFeign userFeign;
 
     /**
      * 添加订单实现
@@ -150,6 +154,9 @@ public class OrderServiceImpl implements OrderService {
 
         // 库存递减
         skuFeign.decrCount(decrMap);
+
+        // 用户增加积分，积分表示用户活跃度 +1
+        userFeign.addPoints(1);
     }
 
     /**
