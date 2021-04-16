@@ -1,12 +1,15 @@
 package com.changgou.pay.controller;
 
 import com.changgou.pay.service.WeixinPayService;
+import com.github.wxpay.sdk.WXPayUtil;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
 @RestController
@@ -47,12 +50,38 @@ public class WeiXinPayController {
      * @return
      */
     @RequestMapping(value = "/notify/url")
-    public String notifyUrl(HttpServletRequest request){
-        String result="<xml>\n" +
+    public String notifyUrl(HttpServletRequest request) throws Exception {
+
+        // 获取网络输入流
+        ServletInputStream inputStream = request.getInputStream();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            baos.write(buffer, 0, len);
+        }
+
+        // 微信支付结果的字节数据
+        baos.close();
+        inputStream.close();
+
+        byte[] bytes = baos.toByteArray();
+
+        String xmlResult = new String(bytes, "utf-8");
+        System.out.println("微信支付结果的 xml" + xmlResult);
+
+        Map<String, String> stringStringMap = WXPayUtil.xmlToMap(xmlResult);
+        System.out.println("微信支付结果的 Map" + stringStringMap);
+
+
+        String result = "<xml>\n" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +
                 "  <return_msg><![CDATA[OK]]></return_msg>\n" +
                 "</xml>";
+
         return result;
     }
-
+    
 }

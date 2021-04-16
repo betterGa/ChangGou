@@ -30,4 +30,4 @@ weixin:
   appid: wx8397f8696b538317
   partner: 1473426802
   partnerkey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
-  notifyurl: http://www.itcast.cn
+  notifyurl: http://38r9r88826.wicp.vip:58181/weixin/pay/notify/url
