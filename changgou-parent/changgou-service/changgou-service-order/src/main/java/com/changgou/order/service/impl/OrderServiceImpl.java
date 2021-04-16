@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
             orderItem.add(selectedItem);
 
             // 将勾选商品从购物车中移除
-          //  redisTemplate.boundHashOps("cart_" + order.getUsername()).delete(skuId);
+           redisTemplate.boundHashOps("cart_" + order.getUsername()).delete(skuId);
         }
 
         for (OrderItem item : orderItem) {
