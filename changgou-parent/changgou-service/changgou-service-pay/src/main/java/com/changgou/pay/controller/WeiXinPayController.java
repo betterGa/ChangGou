@@ -1,9 +1,11 @@
 package com.changgou.pay.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.changgou.pay.service.WeixinPayService;
 import com.github.wxpay.sdk.WXPayUtil;
 import entity.Result;
 import entity.StatusCode;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ import java.util.Map;
 @RequestMapping(value = "/weixin/pay")
 @CrossOrigin
 public class WeiXinPayController {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private WeixinPayService weixinPayService;
@@ -72,9 +77,14 @@ public class WeiXinPayController {
         String xmlResult = new String(bytes, "utf-8");
         System.out.println("微信支付结果的 xml" + xmlResult);
 
-        Map<String, String> stringStringMap = WXPayUtil.xmlToMap(xmlResult);
-        System.out.println("微信支付结果的 Map" + stringStringMap);
+        Map<String, String> resultMap = WXPayUtil.xmlToMap(xmlResult);
+        System.out.println("微信支付结果的 Map" + resultMap);
 
+
+        // 发送支付结果给 MQ
+        rabbitTemplate.convertAndSend("exchange.order",
+                "queue.order",
+                JSON.toJSONString(resultMap));
 
         String result = "<xml>\n" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +
@@ -83,5 +93,4 @@ public class WeiXinPayController {
 
         return result;
     }
-    
 }

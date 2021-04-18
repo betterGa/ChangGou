@@ -13,6 +13,11 @@ spring:
     port: 6379
   main:
     allow-bean-definition-overriding: true
+  rabbitmq:
+    host: 192.168.211.132
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
@@ -31,3 +36,13 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
           strategy: SEMAPHORE
+
+
+mq:
+  pay:
+    exchange:
+      order: exchange.order
+    queue:
+      order: queue.order
+    routing:
+      key: queue.order

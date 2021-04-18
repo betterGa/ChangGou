@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import java.util.TreeMap;
-
 /**
  * 在 RabbitMQ 中生成交换机和队列
  */
@@ -23,7 +21,7 @@ public class MQConfig {
     // 创建队列
     @Bean
     public Queue orderQueue() {
-        return new Queue(environment.getProperty("mq.pay.exchange"));
+        return new Queue(environment.getProperty("mq.pay.queue.order"));
     }
 
     // 创建交换机
@@ -35,6 +33,7 @@ public class MQConfig {
     }
 
     // 绑定
+    @Bean
     public Binding binding(Queue queue, Exchange exchange) {
         return BindingBuilder.bind(queue).to(exchange)
                 .with(environment.getProperty("mq.pay.routing.key"))
