@@ -6,9 +6,12 @@ import com.changgou.order.dao.OrderMapper;
 import com.changgou.order.pojo.Order;
 import com.changgou.order.pojo.OrderItem;
 import com.changgou.order.service.OrderService;
+import com.changgou.pay.service.WeixinPayService;
 import com.changgou.user.feign.UserFeign;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.wxpay.sdk.WXPay;
+import com.github.wxpay.sdk.WXPayConfig;
 import entity.IdWorker;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,31 +85,40 @@ public class OrderServiceImpl implements OrderService {
         order.setTransactionId(transcationid);
 
         orderMapper.updateByPrimaryKey(order);
-
-
     }
 
     /**
-     * 删除订单
+     * 删除订单，逻辑删除，只是修改订单状态
      *
      * @param outradeno
      */
     @Override
-    public void deleteOrder(String outradeno) {
+    public void deleteOrder(String outradeno) throws Exception {
         // 查询订单
         Order order = orderMapper.selectByPrimaryKey(outradeno);
 
         // 支付失败
         order.setOrderStatus("2");
-
         orderMapper.updateByPrimaryKey(order);
 
-        // 回滚库存，需要调用 goods 微服务
+        /**
+         * 回滚库存
+         */
+        // 获取订单中商品信息
+        for (Long skuId : order.getSkuIds()) {
+            OrderItem orderItem = (OrderItem) redisTemplate.boundHashOps("cart_" + order.getUsername()).get(skuId);
 
-        // 还需要让微信支付服务器关闭订单
-
-
+            // 获取当前商品数量，因为下单时递减了，现在支付失败，需要把库存加回去
+            Integer num = orderItem.getNum();
+            // 封装库存递增 Map
+            HashMap<String, String> ascMap = new HashMap<>();
+            // 封装库存递增参数
+            ascMap.put(orderItem.getSkuId().toString(), orderItem.getNum().toString());
+            skuFeign.ascCount(ascMap);
+        }
     }
+
+
 
     /**
      * 添加订单实现

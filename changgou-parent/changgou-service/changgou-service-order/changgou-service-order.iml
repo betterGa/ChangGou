@@ -28,6 +28,7 @@
     <orderEntry type="module" module-name="changgou-service-order-api" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:1.0" level="project" />
+    <orderEntry type="module" module-name="changgou-service-weixinpay-api" />
     <orderEntry type="library" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
     <orderEntry type="module" module-name="changgou-service-goods-api" />
     <orderEntry type="module" module-name="changgou-service-user-api" />
@@ -81,6 +82,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.1.6.RELEASE" level="project" />
+    <orderEntry type="module" module-name="changgou-service-pay" />
     <orderEntry type="module" module-name="changgou-common-db" />
     <orderEntry type="library" name="Maven: tk.mybatis:mapper-spring-boot-starter:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.1.4.RELEASE" level="project" />

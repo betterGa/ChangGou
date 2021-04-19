@@ -52,4 +52,7 @@ public interface SkuFeign {
     @GetMapping(value = "/decr")
     public Result decrCount(@RequestParam Map<String,String> decrMap);
 
+    @GetMapping(value = "/asc")
+    public Result ascCount(@RequestParam Map<String,String> ascMap);
+
 }

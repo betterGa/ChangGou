@@ -16,4 +16,7 @@ public interface SkuMapper extends Mapper<Sku> {
 
     @Update("update tb_sku set num=num-#{num} where id=#{id} and num>=#{num}")
     int decrCount(@Param(value = "id") Long id, @Param(value = "num") Integer num);
+
+    @Update("update tb_sku set num=num+#{num} where id=#{id}")
+    int ascCount(@Param(value = "id") Long id,  @Param(value = "num")Integer num);
 }

@@ -1,6 +1,8 @@
 package com.changgou.pay.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.changgou.order.service.OrderService;
+import com.changgou.order.service.impl.OrderServiceImpl;
 import com.changgou.pay.service.WeixinPayService;
 import com.github.wxpay.sdk.WXPayUtil;
 import entity.Result;
@@ -24,6 +26,10 @@ public class WeiXinPayController {
 
     @Autowired
     private WeixinPayService weixinPayService;
+
+    @Autowired
+    private OrderService orderService;
+
 
     /**
      * 生成付款二维码
@@ -92,5 +98,19 @@ public class WeiXinPayController {
                 "</xml>";
 
         return result;
+    }
+
+    @RequestMapping(value = "/cancel/order")
+    public Result cancelOrder(@RequestParam String outTradeNo) throws Exception {
+        Map resultMap = weixinPayService.cancelOrder(outTradeNo);
+        if(resultMap.get("result_code").equals("FAIL")){
+            // 取消订单失败
+            return new Result(true, StatusCode.ERROR, "取消订单失败", resultMap);
+        }
+        else {
+            // 回滚库存
+            orderService.deleteOrder(outTradeNo);
+            return new Result(true, StatusCode.OK, "取消订单成功", resultMap);
+        }
     }
 }

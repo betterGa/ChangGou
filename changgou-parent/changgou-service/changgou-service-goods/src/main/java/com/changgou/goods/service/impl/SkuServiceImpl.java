@@ -247,4 +247,21 @@ public class SkuServiceImpl implements SkuService {
             }
         }
     }
+
+    @Override
+    public void ascCount(Map<String, String> ascMap) {
+        for (Map.Entry<String, String> entry : ascMap.entrySet()) {
+            // 商品 ID
+            Long id = Long.parseLong(entry.getKey());
+
+            // 数量
+            Integer num = Integer.parseInt(entry.getValue());
+
+
+            /**
+             * 使用行级锁防止超卖，通过数据库的事务特性保证数据原子性
+             */
+            int row = skuMapper.ascCount(id, num);
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.changgou.pay.service;
 
+import com.github.wxpay.sdk.WXPay;
+
 import java.util.Map;
 
 public interface WeixinPayService {
@@ -15,4 +17,16 @@ public interface WeixinPayService {
      * @return
      */
      Map queryPayStatus(String out_trade_no);
+
+
+    /**
+     * 生成 WXPay 对象
+     * @return
+     */
+    WXPay wxPay();
+
+    /**
+     * 取消订单
+     */
+    Map cancelOrder(String outTradeNo) throws Exception;
 }

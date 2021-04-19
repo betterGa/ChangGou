@@ -28,7 +28,7 @@ public interface OrderService {
      *
      * @param outradeno
      */
-    void deleteOrder(String outradeno);
+    void deleteOrder(String outradeno) throws Exception;
 
     /***
      * 添加订单实现

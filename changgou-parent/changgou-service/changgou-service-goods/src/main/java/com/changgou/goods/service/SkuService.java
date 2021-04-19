@@ -73,4 +73,10 @@ public interface SkuService {
      * @param decrMap
      */
     void decrCount(Map<String, String> decrMap);
+
+
+    /**
+     * 商品递增
+     */
+    void ascCount(Map<String,String> ascMap);
 }

@@ -26,6 +26,18 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
+    /***
+     * 商品数量递增
+     * @param ascMap
+     * @return
+     */
+    @GetMapping(value = "/asc")
+    public Result ascCount(@RequestParam Map<String,String> ascMap){
+        skuService.ascCount(ascMap);
+        return new Result(true,StatusCode.OK,"库存递增成功");
+    }
+
+
     /**
      * 商品数量递减
      * Map 的 key 为商品 ID，value 为 数量

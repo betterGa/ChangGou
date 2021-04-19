@@ -1,12 +1,15 @@
 package com.changgou.pay.service.impl;
 
 import com.changgou.pay.service.WeixinPayService;
+import com.github.wxpay.sdk.WXPay;
+import com.github.wxpay.sdk.WXPayConfig;
 import com.github.wxpay.sdk.WXPayUtil;
 import com.netflix.ribbon.proxy.annotation.Http;
 import entity.HttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +31,43 @@ public class WeiXinPayServiceImpl implements WeixinPayService {
     // 支付回调地址
     @Value("${weixin.notifyurl}")
     private String notifyurl;
+
+
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
+    }
+
+    public void setPartnerkey(String partnerkey) {
+        this.partnerkey = partnerkey;
+    }
+
+    public void setNotifyurl(String notifyurl) {
+        this.notifyurl = notifyurl;
+    }
+
+
+
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
+
+    public String getPartnerkey() {
+        return partnerkey;
+    }
+
+    public String getNotifyurl() {
+        return notifyurl;
+    }
 
 
     /**
@@ -137,4 +177,51 @@ public class WeiXinPayServiceImpl implements WeixinPayService {
         }
         return null;
     }
+
+
+    /**
+     * 构建 WXPay 对象
+     */
+    public WXPay wxPay(){
+        return new WXPay(new WXPayConfig() {
+            @Override
+            public String getAppID() {
+                return getAppid();
+            }
+
+            @Override
+            public String getMchID() {
+                return getPartner();
+            }
+
+            @Override
+            public String getKey() {
+                return getPartnerkey();
+            }
+
+            @Override
+            public InputStream getCertStream() {
+                return null;
+            }
+
+            @Override
+            public int getHttpConnectTimeoutMs() {
+                return 8000;
+            }
+
+            @Override
+            public int getHttpReadTimeoutMs() {
+                return 10000;
+            }
+        });
+    }
+
+    @Override
+    public Map cancelOrder(String outTradeNo) throws Exception {
+        // 封装参数
+        Map<String,String> reqDate=new HashMap<>();
+        reqDate.put("out_trade_no", outTradeNo);
+        return wxPay().closeOrder(reqDate);
+    }
 }
+
