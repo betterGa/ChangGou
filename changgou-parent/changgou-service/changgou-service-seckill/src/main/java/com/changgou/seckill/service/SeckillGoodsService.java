@@ -3,6 +3,7 @@ package com.changgou.seckill.service;
 import com.changgou.seckill.pojo.SeckillGoods;
 import com.github.pagehelper.PageInfo;
 
+import java.util.Date;
 import java.util.List;
 
 /****
@@ -66,4 +67,8 @@ public interface SeckillGoodsService {
      * @return
      */
     List<SeckillGoods> findAll();
+
+    List<SeckillGoods> list(String time);
+
+    SeckillGoods one(String time, Long id);
 }

@@ -3,11 +3,13 @@ package com.changgou.seckill.controller;
 import com.changgou.seckill.pojo.SeckillGoods;
 import com.changgou.seckill.service.SeckillGoodsService;
 import com.github.pagehelper.PageInfo;
+import entity.DateUtil;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /****
@@ -24,6 +26,39 @@ public class SeckillGoodsController {
     @Autowired
     private SeckillGoodsService seckillGoodsService;
 
+    /**
+     * 根据时间区间查询商品频道列表数据
+     *
+     * @return
+     */
+    @GetMapping(value = "/list")
+    public Result<List<SeckillGoods>> list(String time) {
+        List<SeckillGoods> list = seckillGoodsService.list(time);
+        return new Result(true, StatusCode.OK, "秒杀商品列表查询成功", list);
+    }
+
+    /**
+     * 查询秒杀时间菜单
+     * @return
+     */
+    @GetMapping("/menus")
+    public Result<List<Date>> menus(){
+        List<Date> dates= DateUtil.getDateMenus();
+        return new Result<>(true,StatusCode.OK,"查询秒杀时间菜单成功",dates);
+    }
+
+
+    /**
+     * 根据时间和商品 id 查询秒杀商品信息
+     * @param time
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/one")
+    public Result one(String time,Long id){
+        SeckillGoods seckillGoods = seckillGoodsService.one(time, id);
+        return new Result(true,StatusCode.OK,"查询秒杀商品信息成功",seckillGoods);
+    }
     /***
      * SeckillGoods分页条件搜索实现
      * @param seckillGoods
@@ -31,11 +66,11 @@ public class SeckillGoodsController {
      * @param size
      * @return
      */
-    @PostMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@RequestBody(required = false)  SeckillGoods seckillGoods, @PathVariable  int page, @PathVariable  int size){
+    @PostMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@RequestBody(required = false) SeckillGoods seckillGoods, @PathVariable int page, @PathVariable int size) {
         //调用SeckillGoodsService实现分页条件查询SeckillGoods
         PageInfo<SeckillGoods> pageInfo = seckillGoodsService.findPage(seckillGoods, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -44,11 +79,11 @@ public class SeckillGoodsController {
      * @param size:每页显示多少条
      * @return
      */
-    @GetMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@PathVariable  int page, @PathVariable  int size){
+    @GetMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@PathVariable int page, @PathVariable int size) {
         //调用SeckillGoodsService实现分页查询SeckillGoods
         PageInfo<SeckillGoods> pageInfo = seckillGoodsService.findPage(page, size);
-        return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result<PageInfo>(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -56,11 +91,11 @@ public class SeckillGoodsController {
      * @param seckillGoods
      * @return
      */
-    @PostMapping(value = "/search" )
-    public Result<List<SeckillGoods>> findList(@RequestBody(required = false)  SeckillGoods seckillGoods){
+    @PostMapping(value = "/search")
+    public Result<List<SeckillGoods>> findList(@RequestBody(required = false) SeckillGoods seckillGoods) {
         //调用SeckillGoodsService实现条件查询SeckillGoods
         List<SeckillGoods> list = seckillGoodsService.findList(seckillGoods);
-        return new Result<List<SeckillGoods>>(true,StatusCode.OK,"查询成功",list);
+        return new Result<List<SeckillGoods>>(true, StatusCode.OK, "查询成功", list);
     }
 
     /***
@@ -68,11 +103,11 @@ public class SeckillGoodsController {
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Long id){
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable Long id) {
         //调用SeckillGoodsService实现根据主键删除
         seckillGoodsService.delete(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /***
@@ -81,13 +116,13 @@ public class SeckillGoodsController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody  SeckillGoods seckillGoods,@PathVariable Long id){
+    @PutMapping(value = "/{id}")
+    public Result update(@RequestBody SeckillGoods seckillGoods, @PathVariable Long id) {
         //设置主键值
         seckillGoods.setId(id);
         //调用SeckillGoodsService实现修改SeckillGoods
         seckillGoodsService.update(seckillGoods);
-        return new Result(true,StatusCode.OK,"修改成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
     /***
@@ -96,10 +131,10 @@ public class SeckillGoodsController {
      * @return
      */
     @PostMapping
-    public Result add(@RequestBody   SeckillGoods seckillGoods){
+    public Result add(@RequestBody SeckillGoods seckillGoods) {
         //调用SeckillGoodsService实现添加SeckillGoods
         seckillGoodsService.add(seckillGoods);
-        return new Result(true,StatusCode.OK,"添加成功");
+        return new Result(true, StatusCode.OK, "添加成功");
     }
 
     /***
@@ -108,10 +143,10 @@ public class SeckillGoodsController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<SeckillGoods> findById(@PathVariable Long id){
+    public Result<SeckillGoods> findById(@PathVariable Long id) {
         //调用SeckillGoodsService实现根据主键查询SeckillGoods
         SeckillGoods seckillGoods = seckillGoodsService.findById(id);
-        return new Result<SeckillGoods>(true,StatusCode.OK,"查询成功",seckillGoods);
+        return new Result<SeckillGoods>(true, StatusCode.OK, "查询成功", seckillGoods);
     }
 
     /***
@@ -119,9 +154,9 @@ public class SeckillGoodsController {
      * @return
      */
     @GetMapping
-    public Result<List<SeckillGoods>> findAll(){
+    public Result<List<SeckillGoods>> findAll() {
         //调用SeckillGoodsService实现查询所有SeckillGoods
         List<SeckillGoods> list = seckillGoodsService.findAll();
-        return new Result<List<SeckillGoods>>(true, StatusCode.OK,"查询成功",list) ;
+        return new Result<List<SeckillGoods>>(true, StatusCode.OK, "查询成功", list);
     }
 }

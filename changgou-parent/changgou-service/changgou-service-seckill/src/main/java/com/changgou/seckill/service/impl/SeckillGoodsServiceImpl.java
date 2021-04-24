@@ -1,15 +1,18 @@
 package com.changgou.seckill.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.changgou.seckill.dao.SeckillGoodsMapper;
 import com.changgou.seckill.pojo.SeckillGoods;
 import com.changgou.seckill.service.SeckillGoodsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /****
@@ -22,6 +25,10 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Autowired
     private SeckillGoodsMapper seckillGoodsMapper;
+
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     /**
@@ -186,5 +193,21 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
     @Override
     public List<SeckillGoods> findAll() {
         return seckillGoodsMapper.selectAll();
+    }
+
+    /**
+     * 根据时间区间查询秒杀商品列表
+     * @param time
+     * @return
+     */
+    @Override
+    public List<SeckillGoods> list(String time) {
+        return redisTemplate.boundHashOps("SeckillGoods_"+time).values();
+    }
+
+    @Override
+    public SeckillGoods one(String time, Long id) {
+        return JSON.parseObject((String) redisTemplate.boundHashOps("SeckillGoods_"+time).get(String.valueOf(id)),
+                SeckillGoods.class);
     }
 }
