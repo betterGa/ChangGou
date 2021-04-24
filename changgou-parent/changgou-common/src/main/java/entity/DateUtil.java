@@ -130,4 +130,13 @@ public class DateUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);
     }
+
+
+    public static void main(String[] args) {
+        List<Date> dateMenus = getDateMenus();
+        for (Date dateMenu : dateMenus) {
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHH");
+            System.out.println(simpleDateFormat.format(dateMenu));
+        }
+    }
 }

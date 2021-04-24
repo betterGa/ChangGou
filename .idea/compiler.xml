@@ -16,6 +16,7 @@
         <module name="channggou-service-file" />
         <module name="changgou-service-goods-api" />
         <module name="changgou-service-weixinpay-api" />
+        <module name="changgou-service-seckill-api" />
         <module name="changgou-service-user" />
         <module name="changgou-service-canal" />
         <module name="springbootthymeleaf" />
@@ -30,6 +31,7 @@
         <module name="changgou-service-goods" />
         <module name="changgou-service-user-api" />
         <module name="changgou-common-db" />
+        <module name="changgou-service-seckill" />
         <module name="changgou-web-item" />
       </profile>
     </annotationProcessing>
@@ -54,6 +56,8 @@
       <module name="changgou-service-pay" target="8" />
       <module name="changgou-service-search" target="8" />
       <module name="changgou-service-search-api" target="8" />
+      <module name="changgou-service-seckill" target="8" />
+      <module name="changgou-service-seckill-api" target="8" />
       <module name="changgou-service-user" target="8" />
       <module name="changgou-service-user-api" target="8" />
       <module name="changgou-service-weixinpay-api" target="8" />
@@ -86,6 +90,8 @@
       <module name="changgou-service-pay" options="-parameters" />
       <module name="changgou-service-search" options="-parameters" />
       <module name="changgou-service-search-api" options="-parameters" />
+      <module name="changgou-service-seckill" options="-parameters" />
+      <module name="changgou-service-seckill-api" options="-parameters" />
       <module name="changgou-service-user" options="-parameters" />
       <module name="changgou-service-user-api" options="-parameters" />
       <module name="changgou-service-weixinpay-api" options="-parameters" />

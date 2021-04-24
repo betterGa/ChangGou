@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/com.jia/pom.xml" />
         <option value="$PROJECT_DIR$/springbootthymeleaf/pom.xml" />
         <option value="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/pom.xml" />
+        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-seckill/pom.xml" />
+        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-seckill-api/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
