@@ -207,7 +207,7 @@ public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
     @Override
     public SeckillGoods one(String time, Long id) {
-        return JSON.parseObject((String) redisTemplate.boundHashOps("SeckillGoods_"+time).get(String.valueOf(id)),
+        return JSON.parseObject((String) redisTemplate.boundHashOps("SeckillGoods_"+time).get(id.toString()),
                 SeckillGoods.class);
     }
 }
