@@ -4,6 +4,7 @@ import com.changgou.seckill.pojo.SeckillOrder;
 import com.changgou.seckill.service.SeckillOrderService;
 import com.github.pagehelper.PageInfo;
 import entity.Result;
+import entity.SeckillStatus;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,16 +26,32 @@ public class SeckillOrderController {
     private SeckillOrderService seckillOrderService;
 
     /**
+     * 查询订单信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/query")
+    public Result queryStatus() {
+        String username = "jia";
+        SeckillStatus seckillStatus = seckillOrderService.queryStatus(username);
+        if (seckillStatus == null) {
+            return new Result(false, StatusCode.NOTFOUNDERROR, "查询抢单失败");
+        }
+        return new Result(true, StatusCode.OK, "查询抢单成功", seckillStatus);
+    }
+
+    /**
      * 秒杀下单
+     *
      * @param time
      * @param id
      * @return
      */
     @RequestMapping(value = "/add")
-    public Result add(String time,Long id){
-        String username="jia";
-        seckillOrderService.add(time,id,username);
-        return new Result(true,StatusCode.OK,"下单成功");
+    public Result add(String time, Long id) {
+        String username = "jia";
+        seckillOrderService.add(time, id, username);
+        return new Result(true, StatusCode.OK, "正在排队");
     }
 
     /***
@@ -44,11 +61,11 @@ public class SeckillOrderController {
      * @param size
      * @return
      */
-    @PostMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@RequestBody(required = false)  SeckillOrder seckillOrder, @PathVariable  int page, @PathVariable  int size){
+    @PostMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@RequestBody(required = false) SeckillOrder seckillOrder, @PathVariable int page, @PathVariable int size) {
         //调用SeckillOrderService实现分页条件查询SeckillOrder
         PageInfo<SeckillOrder> pageInfo = seckillOrderService.findPage(seckillOrder, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -57,11 +74,11 @@ public class SeckillOrderController {
      * @param size:每页显示多少条
      * @return
      */
-    @GetMapping(value = "/search/{page}/{size}" )
-    public Result<PageInfo> findPage(@PathVariable  int page, @PathVariable  int size){
+    @GetMapping(value = "/search/{page}/{size}")
+    public Result<PageInfo> findPage(@PathVariable int page, @PathVariable int size) {
         //调用SeckillOrderService实现分页查询SeckillOrder
         PageInfo<SeckillOrder> pageInfo = seckillOrderService.findPage(page, size);
-        return new Result<PageInfo>(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result<PageInfo>(true, StatusCode.OK, "查询成功", pageInfo);
     }
 
     /***
@@ -69,11 +86,11 @@ public class SeckillOrderController {
      * @param seckillOrder
      * @return
      */
-    @PostMapping(value = "/search" )
-    public Result<List<SeckillOrder>> findList(@RequestBody(required = false)  SeckillOrder seckillOrder){
+    @PostMapping(value = "/search")
+    public Result<List<SeckillOrder>> findList(@RequestBody(required = false) SeckillOrder seckillOrder) {
         //调用SeckillOrderService实现条件查询SeckillOrder
         List<SeckillOrder> list = seckillOrderService.findList(seckillOrder);
-        return new Result<List<SeckillOrder>>(true,StatusCode.OK,"查询成功",list);
+        return new Result<List<SeckillOrder>>(true, StatusCode.OK, "查询成功", list);
     }
 
     /***
@@ -81,11 +98,11 @@ public class SeckillOrderController {
      * @param id
      * @return
      */
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Long id){
+    @DeleteMapping(value = "/{id}")
+    public Result delete(@PathVariable Long id) {
         //调用SeckillOrderService实现根据主键删除
         seckillOrderService.delete(id);
-        return new Result(true,StatusCode.OK,"删除成功");
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
     /***
@@ -94,13 +111,13 @@ public class SeckillOrderController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody  SeckillOrder seckillOrder,@PathVariable Long id){
+    @PutMapping(value = "/{id}")
+    public Result update(@RequestBody SeckillOrder seckillOrder, @PathVariable Long id) {
         //设置主键值
         seckillOrder.setId(id);
         //调用SeckillOrderService实现修改SeckillOrder
         seckillOrderService.update(seckillOrder);
-        return new Result(true,StatusCode.OK,"修改成功");
+        return new Result(true, StatusCode.OK, "修改成功");
     }
 
 
@@ -110,10 +127,10 @@ public class SeckillOrderController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<SeckillOrder> findById(@PathVariable Long id){
+    public Result<SeckillOrder> findById(@PathVariable Long id) {
         //调用SeckillOrderService实现根据主键查询SeckillOrder
         SeckillOrder seckillOrder = seckillOrderService.findById(id);
-        return new Result<SeckillOrder>(true,StatusCode.OK,"查询成功",seckillOrder);
+        return new Result<SeckillOrder>(true, StatusCode.OK, "查询成功", seckillOrder);
     }
 
     /***
@@ -121,9 +138,9 @@ public class SeckillOrderController {
      * @return
      */
     @GetMapping
-    public Result<List<SeckillOrder>> findAll(){
+    public Result<List<SeckillOrder>> findAll() {
         //调用SeckillOrderService实现查询所有SeckillOrder
         List<SeckillOrder> list = seckillOrderService.findAll();
-        return new Result<List<SeckillOrder>>(true, StatusCode.OK,"查询成功",list) ;
+        return new Result<List<SeckillOrder>>(true, StatusCode.OK, "查询成功", list);
     }
 }

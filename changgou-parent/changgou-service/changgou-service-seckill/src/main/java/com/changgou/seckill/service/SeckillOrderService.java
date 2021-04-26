@@ -2,6 +2,7 @@ package com.changgou.seckill.service;
 
 import com.changgou.seckill.pojo.SeckillOrder;
 import com.github.pagehelper.PageInfo;
+import entity.SeckillStatus;
 
 import java.util.List;
 
@@ -11,6 +12,13 @@ import java.util.List;
  * @Date 2019/6/14 0:16
  *****/
 public interface SeckillOrderService {
+
+    /***
+     * 根据用户名查询订单
+     * @param username
+     * @return
+     */
+   SeckillStatus queryStatus(String username);
 
     /***
      * SeckillOrder多条件分页查询
