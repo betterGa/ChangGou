@@ -71,9 +71,32 @@ public class SeckillGoodsPushTask {
 
             // 存入 Redis
             for (SeckillGoods seckillgood : seckillGoods) {
+                System.out.println("商品ID" + seckillgood.getId() + "存到了" + timeSpace);
+
                 // namespace是当前时间，key是商品id，value是商品信息
                 redisTemplate.boundHashOps("SeckillGoods_" + timeSpace).put(seckillgood.getId().toString(), JSON.toJSONString(seckillgood));
+
+                /**
+                 * 解决超卖问题
+                 */
+                // 将库存个商品id 存入 Redis
+                redisTemplate.boundListOps("SeckillGoodsCountList_" + seckillgood.getId())
+                        .leftPushAll(putAllIds(seckillgood.getStockCount(), seckillgood.getId()));
             }
         }
+    }
+
+    /**
+     * 生成 num 个 id
+     *
+     * @param num
+     * @return
+     */
+    public String[] putAllIds(int num, Long id) {
+        String[] ids = new String[num];
+        for (int i = 0; i < num; i++) {
+            ids[i] = id.toString();
+        }
+        return ids;
     }
 }

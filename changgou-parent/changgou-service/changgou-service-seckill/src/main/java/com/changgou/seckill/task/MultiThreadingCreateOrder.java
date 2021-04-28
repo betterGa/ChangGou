@@ -34,33 +34,40 @@ public class MultiThreadingCreateOrder {
     @Async
     public void createOrder() {
         try {
-        System.out.println("准备执行下单......");
-        // 睡眠
-        Thread.sleep(10000);
+            System.out.println("准备执行下单......");
+            // 睡眠
+            Thread.sleep(10000);
 
-        // 从队列中获取用户排队信息,先抢先下单
-        SeckillStatus seckillStatus= JSON.parseObject((String) redisTemplate.boundListOps("SeckillOrderQueue").
-                        rightPop(),
-                SeckillStatus.class);
-
-        if(seckillStatus==null){
-            return;
-        }
-
+            // 从队列中获取用户排队信息,先抢先下单
+            SeckillStatus seckillStatus = JSON.parseObject((String) redisTemplate.boundListOps("SeckillOrderQueue").
+                            rightPop(),
+                    SeckillStatus.class);
+            if (seckillStatus == null) {
+                return;
+            }
 
             // 抢单所属时间段
             String time = seckillStatus.getTime();
-
             // 商品id
             Long id = seckillStatus.getGoodsId();
-
             // 用户名
             String username = seckillStatus.getUsername();
+            /***
+             *当没有库存时，需要清理排队信息
+             */
+            Object goods = redisTemplate.boundListOps("SeckillGoodsCountList_" + seckillStatus.getGoodsId())
+                    .rightPop();
+
+            if (goods == null) {
+                clearUserQueue(username);
+                return;
+            }
 
 
             // 查询秒杀商品
             String nameSpace = "SeckillGoods_" + time;
-            SeckillGoods seckillGoods = JSON.parseObject((String) redisTemplate.boundHashOps(nameSpace).get(id.toString()),
+            SeckillGoods seckillGoods = JSON.parseObject((String) redisTemplate.boundHashOps(nameSpace)
+                            .get(id.toString()),
                     SeckillGoods.class);
             // 判断有无库存
             if (seckillGoods == null || seckillGoods.getStockCount() <= 0) {
@@ -82,8 +89,20 @@ public class MultiThreadingCreateOrder {
             redisTemplate.boundHashOps("SeckillOrder").put(username, JSON.toJSONString(seckillOrder));
             // 库存递减
             seckillGoods.setStockCount(seckillGoods.getStockCount() - 1);
-            // 如果商品是最后一个，需要将 Redis 中将该商品删除，并将数据同步到 Mysql
-            if (seckillGoods.getStockCount() <= 0) {
+            Thread.sleep(10000);
+
+            // 解决库存不精准问题
+            Long size = redisTemplate.boundListOps("SeckillGoodsCountList_" + seckillStatus.getGoodsId())
+                    .size();
+            if (size <= 0) {
+
+                seckillGoods.setStockCount(size.intValue());
+
+               /* // 如果商品是最后一个，需要将 Redis 中将该商品删除，并将数据同步到 Mysql
+                if (seckillGoods.getStockCount() <= 0) {
+                */
+
+                // 同步到数据库
                 seckillGoodsMapper.updateByPrimaryKey(seckillGoods);
                 redisTemplate.boundHashOps(nameSpace).delete(id);
             } else {
@@ -100,11 +119,23 @@ public class MultiThreadingCreateOrder {
                 // 待付款
                 seckillStatus.setStatus(2);
 
-                redisTemplate.boundHashOps("UserQueueStatus").put(username,JSON.toJSONString(seckillStatus));
+                redisTemplate.boundHashOps("UserQueueStatus").put(username, JSON.toJSONString(seckillStatus));
             }
             System.out.println("10 秒钟后下单完成!");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * 清理用户排队抢单信息
+     */
+    public void clearUserQueue(String username) {
+        // 排队标识
+        redisTemplate.boundHashOps("UserQueueCount").delete(username);
+
+        // 排队信息清理
+        redisTemplate.boundHashOps("UserQueueStatus").delete(username);
     }
 }

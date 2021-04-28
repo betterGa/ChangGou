@@ -10,6 +10,7 @@ import com.changgou.seckill.task.MultiThreadingCreateOrder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import entity.SeckillStatus;
+import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class SeckillOrderServiceImpl implements SeckillOrderService {
 
     /**
      * 抢单状态查询
+     *
      * @param username
      * @return
      */
@@ -186,6 +188,16 @@ public class SeckillOrderServiceImpl implements SeckillOrderService {
     @Override
     public boolean add(String time, Long id, String username) {
 
+
+        // 记录用户排队次数
+        Long userQueueCount = redisTemplate.boundHashOps("UserQueueCount").increment(username, 1);
+
+        // 重复排队
+        if (userQueueCount > 1) {
+            throw new RuntimeException(String.valueOf(StatusCode.REPERROR));
+        }
+
+
         // 创建排队对象
         SeckillStatus seckillStatus = new SeckillStatus(username, new Date(), 1, id, time);
 
@@ -193,7 +205,7 @@ public class SeckillOrderServiceImpl implements SeckillOrderService {
         redisTemplate.boundListOps("SeckillOrderQueue").leftPush(JSON.toJSONString(seckillStatus));
 
         // 用于查询订单状态
-        redisTemplate.boundHashOps("UserQueueStatus").put(username,JSON.toJSONString(seckillStatus));
+        redisTemplate.boundHashOps("UserQueueStatus").put(username, JSON.toJSONString(seckillStatus));
 
         // 异步（多线程）执行
         multiThreadingCreateOrder.createOrder();
