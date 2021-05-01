@@ -34,7 +34,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/data/**",
                 "/fonts/**",
                 "/img/**",
-                "/js/**"
+                "/js/**",
+                "/weixin/pay/**"
         );
     }
 

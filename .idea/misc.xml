@@ -12,11 +12,13 @@
         <option value="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/pom.xml" />
         <option value="$PROJECT_DIR$/changgou-parent/changgou-service-seckill/pom.xml" />
         <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-seckill-api/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_rabbitmq_delay/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-item-api/pom.xml" />
+        <option value="$PROJECT_DIR$/changgou-parent/springboot_rabbitmq_delay/pom.xml" />
       </set>
     </option>
   </component>

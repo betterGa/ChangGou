@@ -13,12 +13,27 @@ import java.util.List;
  *****/
 public interface SeckillOrderService {
 
+    /**
+     * 修改订单状态
+     *
+     * @param transactionId
+     * @param username
+     * @param endtime
+     */
+    void updatePayStatu(String transactionId, String username, String endtime);
+
+    /**
+     * 删除订单
+     * @param username
+     */
+    void deleteOrder(String username);
+
     /***
      * 根据用户名查询订单
      * @param username
      * @return
      */
-   SeckillStatus queryStatus(String username);
+    SeckillStatus queryStatus(String username);
 
     /***
      * SeckillOrder多条件分页查询
@@ -58,17 +73,19 @@ public interface SeckillOrderService {
 
     /**
      * 秒杀下单
+     *
      * @param time
      * @param id
      */
-    boolean add(String time,Long id,String username);
+    boolean add(String time, Long id, String username);
 
     /**
      * 根据ID查询SeckillOrder
+     *
      * @param id
      * @return
      */
-     SeckillOrder findById(Long id);
+    SeckillOrder findById(Long id);
 
     /***
      * 查询所有SeckillOrder

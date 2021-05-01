@@ -2,7 +2,7 @@ package com.changgou.order.mq.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.changgou.order.service.OrderService;
-import com.changgou.weixinpay.WeiXinPayFeign;
+import com.changgou.weixinpay.feign.WeiXinPayFeign;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

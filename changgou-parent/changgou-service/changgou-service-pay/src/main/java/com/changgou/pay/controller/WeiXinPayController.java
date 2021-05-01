@@ -1,8 +1,6 @@
 package com.changgou.pay.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.changgou.order.service.OrderService;
-import com.changgou.order.service.impl.OrderServiceImpl;
 import com.changgou.pay.service.WeixinPayService;
 import com.github.wxpay.sdk.WXPayUtil;
 import entity.Result;
@@ -27,8 +25,15 @@ public class WeiXinPayController {
     @Autowired
     private WeixinPayService weixinPayService;
 
-    @Autowired
-    private OrderService orderService;
+
+  /*  普通订单：
+    exchange:"exchange.order",
+    routingkey:"queue.order",
+      秒杀订单：
+    exchange:"exchange.seckillorder"
+    routingkey:"queue.seckillorder"
+    将 exchange 和 routingkey 放在 json 中，作为 attach 请求参数
+    */
 
 
     /**
@@ -87,10 +92,19 @@ public class WeiXinPayController {
         System.out.println("微信支付结果的 Map" + resultMap);
 
 
-        // 发送支付结果给 MQ
-        rabbitTemplate.convertAndSend("exchange.order",
-                "queue.order",
+        String attach = resultMap.get("attach");
+        Map<String, String> attachMap = JSON.parseObject(attach, Map.class);
+
+        System.out.println("支付结果回调获取到 attach 数据"+attach);
+
+        rabbitTemplate.convertAndSend(attachMap.get("exchange"),
+                attachMap.get("routingkey"),
                 JSON.toJSONString(resultMap));
+
+        // 发送支付结果给 MQ
+      /*  rabbitTemplate.convertAndSend("exchange.order",
+                "queue.order",
+                JSON.toJSONString(resultMap));*/
 
         String result = "<xml>\n" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +
@@ -103,14 +117,15 @@ public class WeiXinPayController {
     @RequestMapping(value = "/cancel/order")
     public Result cancelOrder(@RequestParam String outTradeNo) throws Exception {
         Map resultMap = weixinPayService.cancelOrder(outTradeNo);
-        if(resultMap.get("result_code").equals("FAIL")){
+      /*  if (resultMap.get("result_code").equals("FAIL")) {
             // 取消订单失败
             return new Result(true, StatusCode.ERROR, "取消订单失败", resultMap);
-        }
-        else {
+        } else {
             // 回滚库存
             orderService.deleteOrder(outTradeNo);
             return new Result(true, StatusCode.OK, "取消订单成功", resultMap);
-        }
+        }*/
+
+        return new Result(true, StatusCode.OK, "订单取消成功", resultMap);
     }
 }

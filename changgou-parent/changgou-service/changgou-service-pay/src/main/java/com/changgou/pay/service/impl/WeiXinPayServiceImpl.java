@@ -1,13 +1,16 @@
 package com.changgou.pay.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.changgou.pay.service.WeixinPayService;
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayConfig;
 import com.github.wxpay.sdk.WXPayUtil;
+import com.netflix.ribbon.proxy.Utils;
 import com.netflix.ribbon.proxy.annotation.Http;
 import entity.HttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -110,6 +113,27 @@ public class WeiXinPayServiceImpl implements WeixinPayService {
 
         // 交易类型
         paramMap.put("trade_type", "NATIVE");
+
+        // 获取自定义数据
+        String exchange = parameterMap.get("exchange");
+        String routingkey = parameterMap.get("routingkey");
+
+        
+        Map<String,String> attachMap=new HashMap<>();
+
+        // 如果是秒杀订单，需要传 username，后续作为秒杀订单表查询依据。
+        String username=parameterMap.get("username");
+        if(!StringUtils.isEmpty(username)){
+            attachMap.put("username",username);
+        }
+
+
+        attachMap.put("exchange",exchange);
+        attachMap.put("routingkey",routingkey);
+
+        String attach = JSON.toJSONString(attachMap);
+        paramMap.put("attach",attach);
+
 
         // 传入密钥，生成的 xml 中就会带有签名 sign 信息
         String xmlParameters = WXPayUtil.generateSignedXml(paramMap, partnerkey);

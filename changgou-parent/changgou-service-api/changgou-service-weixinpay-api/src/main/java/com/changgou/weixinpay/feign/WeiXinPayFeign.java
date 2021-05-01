@@ -1,4 +1,4 @@
-package com.changgou.weixinpay;
+package com.changgou.weixinpay.feign;
 
 import entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;

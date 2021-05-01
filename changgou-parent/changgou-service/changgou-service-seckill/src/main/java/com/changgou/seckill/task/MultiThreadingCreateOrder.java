@@ -8,11 +8,17 @@ import com.changgou.seckill.pojo.SeckillGoods;
 import com.changgou.seckill.pojo.SeckillOrder;
 import entity.IdWorker;
 import entity.SeckillStatus;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -27,6 +33,9 @@ public class MultiThreadingCreateOrder {
 
     @Autowired
     private IdWorker idWorker;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * 多线程下单操作
@@ -115,11 +124,23 @@ public class MultiThreadingCreateOrder {
                 seckillStatus.setOrderId(seckillOrder.getId());
                 // 支付金额
                 seckillStatus.setMoney(Float.valueOf(seckillGoods.getCostPrice()));
-
                 // 待付款
                 seckillStatus.setStatus(2);
-
                 redisTemplate.boundHashOps("UserQueueStatus").put(username, JSON.toJSONString(seckillStatus));
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+                System.out.println("下单信息发送时间：" + simpleDateFormat.format(new Date()));
+
+                // 发送消息给 queue1
+                rabbitTemplate.convertAndSend("delaySeckillQueue",
+                        (Object) JSON.toJSONString(seckillStatus),
+                        new MessagePostProcessor() {
+                            @Override
+                            public Message postProcessMessage(Message message) throws AmqpException {
+                                message.getMessageProperties().setExpiration("10000");
+                                return message;
+                            }
+                        });
             }
             System.out.println("10 秒钟后下单完成!");
         } catch (InterruptedException e) {

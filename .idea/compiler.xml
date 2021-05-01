@@ -29,6 +29,7 @@
         <module name="changgou-web-search" />
         <module name="changgou-service-order" />
         <module name="changgou-service-goods" />
+        <module name="springboot_rabbitmq_delay" />
         <module name="changgou-service-user-api" />
         <module name="changgou-common-db" />
         <module name="changgou-service-seckill" />
@@ -69,6 +70,7 @@
       <module name="channggou-service-file" target="8" />
       <module name="code-template" target="1.5" />
       <module name="com.jia" target="8" />
+      <module name="springboot_rabbitmq_delay" target="8" />
       <module name="springbootthymeleaf" target="8" />
     </bytecodeTargetLevel>
   </component>
@@ -100,6 +102,7 @@
       <module name="changgou-web-item-api" options="-parameters" />
       <module name="changgou-web-search" options="-parameters" />
       <module name="channggou-service-file" options="-parameters" />
+      <module name="springboot_rabbitmq_delay" options="-parameters" />
       <module name="springbootthymeleaf" options="-parameters" />
     </option>
   </component>

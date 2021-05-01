@@ -34,6 +34,7 @@
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-search/changgou-web-search.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-search/changgou-web-search.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/channggou-service-file/channggou-service-file.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/channggou-service-file/channggou-service-file.iml" />
       <module fileurl="file://$PROJECT_DIR$/code-template/code-template.iml" filepath="$PROJECT_DIR$/code-template/code-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot_rabbitmq_delay/springboot_rabbitmq_delay.iml" filepath="$PROJECT_DIR$/springboot_rabbitmq_delay/springboot_rabbitmq_delay.iml" />
       <module fileurl="file://$PROJECT_DIR$/springbootthymeleaf/springbootthymeleaf.iml" filepath="$PROJECT_DIR$/springbootthymeleaf/springbootthymeleaf.iml" />
     </modules>
   </component>
