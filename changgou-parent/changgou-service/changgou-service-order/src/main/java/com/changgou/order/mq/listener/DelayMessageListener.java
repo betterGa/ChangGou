@@ -17,7 +17,7 @@ import java.util.Map;
  * 延时队列监听
  */
 @Component
-@RabbitListener(queues = "orderListenerQueue")
+//@RabbitListener(queues = "orderListenerQueue")
 public class DelayMessageListener {
 
     @Autowired
@@ -30,7 +30,7 @@ public class DelayMessageListener {
      * 监听队列消息
      * @param message 订单id
      */
-    @RabbitHandler
+    //@RabbitHandler
     public void delayMessage(String message) throws Exception {
 
         System.out.println("监听到的消息" + message);

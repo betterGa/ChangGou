@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -24,9 +25,13 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void addPoints(String username, Integer points) {
-        userMapper.addPoints(username,points);
+        System.out.println("===========");
+        int rows= userMapper.addPoints(username,points);
+        System.out.println("受影响行数"+rows);
+       int error=1/0;
     }
 
     /**

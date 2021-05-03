@@ -17,5 +17,5 @@ public interface UserMapper extends Mapper<User> {
      * @param points
      */
     @Update("update tb_user set points=points+#{points} where username=#{username}")
-    void addPoints(@Param(value = "username") String username, @Param(value = "points") Integer points);
+    int addPoints(@Param(value = "username") String username, @Param(value = "points") Integer points);
 }

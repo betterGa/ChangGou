@@ -10,6 +10,7 @@ import com.changgou.user.feign.UserFeign;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import entity.IdWorker;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
@@ -123,6 +124,7 @@ public class OrderServiceImpl implements OrderService {
      * @param order
      */
     @Override
+    @GlobalTransactional(name = "add")
     public void addOrder(Order order) {
         // 订单主键
         order.setId(String.valueOf(idWorker.nextId()));
@@ -222,11 +224,17 @@ public class OrderServiceImpl implements OrderService {
             orderItemMapper.insertSelective(item);
         }
 
+        System.out.println("添加订单完毕");
+
         // 库存递减
         skuFeign.decrCount(decrMap);
 
+        System.out.println("回滚库存完毕");
+
         // 用户增加积分，积分表示用户活跃度 +1
         userFeign.addPoints(1);
+
+        System.out.println("添加积分完毕");
 
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
