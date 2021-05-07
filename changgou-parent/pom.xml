@@ -20,7 +20,7 @@
         <module>changgou-common</module>
         <module>changgou-common-db</module>
         <module>changgou-user-oauth</module>
-        <module>springboot_rabbitmq_delay</module>
+        <module>../springboot_rabbitmq_delay</module>
         <module>changgou-transaction-Seata</module>
     </modules>
     <parent>

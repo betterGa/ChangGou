@@ -1,5 +1,6 @@
-package com.changgou.seckill.mq;
+/*
 
+package com.changgou.seckill.mq;
 import com.alibaba.fastjson.JSON;
 import com.changgou.seckill.service.SeckillOrderService;
 import com.changgou.weixinpay.feign.WeiXinPayFeign;
@@ -17,10 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+*/
 /**
  * 延时订单监听
  * 监听 queue2
- */
+ *//*
+
+
 @Component
 @RabbitListener(queues = "seckillQueue")
 public class DelaySeckillMessageListener {
@@ -59,3 +63,5 @@ public class DelaySeckillMessageListener {
         }
     }
 }
+
+*/

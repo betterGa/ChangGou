@@ -269,7 +269,6 @@ public class SeckillOrderServiceImpl implements SeckillOrderService {
     @Override
     public boolean add(String time, Long id, String username) {
 
-
         // 记录用户排队次数
         Long userQueueCount = redisTemplate.boundHashOps("UserQueueCount").increment(username, 1);
 

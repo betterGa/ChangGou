@@ -16,3 +16,5 @@ spring:
     name: search-web
   main:
     allow-bean-definition-overriding: true
+  resources:
+    static-locations: classpath:/static/

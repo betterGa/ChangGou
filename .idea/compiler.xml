@@ -12,8 +12,11 @@
         <module name="changgou-service-content" />
         <module name="changgou-web-item-api" />
         <module name="changgou-service-search" />
+        <module name="eureka-server2" />
+        <module name="eureka-server1" />
         <module name="changgou-common" />
         <module name="channggou-service-file" />
+        <module name="eureka-server3" />
         <module name="changgou-service-goods-api" />
         <module name="changgou-service-weixinpay-api" />
         <module name="changgou-service-seckill-api" />
@@ -72,6 +75,10 @@
       <module name="channggou-service-file" target="8" />
       <module name="code-template" target="1.5" />
       <module name="com.jia" target="8" />
+      <module name="eureka-cluster" target="1.8" />
+      <module name="eureka-server1" target="8" />
+      <module name="eureka-server2" target="8" />
+      <module name="eureka-server3" target="8" />
       <module name="fescar1-account" target="1.8" />
       <module name="fescar1-api" target="1.8" />
       <module name="fescar1-business" target="1.8" />
@@ -112,6 +119,10 @@
       <module name="changgou-web-item-api" options="-parameters" />
       <module name="changgou-web-search" options="-parameters" />
       <module name="channggou-service-file" options="-parameters" />
+      <module name="eureka-cluster" options="-parameters" />
+      <module name="eureka-server1" options="-parameters" />
+      <module name="eureka-server2" options="-parameters" />
+      <module name="eureka-server3" options="-parameters" />
       <module name="fescar1-account" options="-parameters" />
       <module name="fescar1-api" options="-parameters" />
       <module name="fescar1-business" options="-parameters" />
