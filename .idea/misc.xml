@@ -3,29 +3,13 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/changgou-parent/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/pom.xml" />
         <option value="$PROJECT_DIR$/code-template/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-content-api/pom.xml" />
-        <option value="$PROJECT_DIR$/com.jia/pom.xml" />
-        <option value="$PROJECT_DIR$/springbootthymeleaf/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-seckill/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-seckill-api/pom.xml" />
-        <option value="$PROJECT_DIR$/springboot_rabbitmq_delay/pom.xml" />
-        <option value="$PROJECT_DIR$/fescar1-parent/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-cluster/pom.xml" />
+        <option value="$PROJECT_DIR$/changgou-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/springbootthymeleaf/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_rabbitmq_delay/pom.xml" />
       </list>
     </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-item-api/pom.xml" />
-        <option value="$PROJECT_DIR$/changgou-parent/springboot_rabbitmq_delay/pom.xml" />
-      </set>
-    </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-item/src/main/resources/static/1148477873158365184.html" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

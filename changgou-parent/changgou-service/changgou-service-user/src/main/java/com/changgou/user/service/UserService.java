@@ -2,6 +2,7 @@ package com.changgou.user.service;
 
 import com.changgou.user.pojo.User;
 import com.github.pagehelper.PageInfo;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public interface UserService {
      * 新增User
      * @param user
      */
-    void add(User user);
+    boolean add(User user);
 
     /**
      * 根据ID查询User

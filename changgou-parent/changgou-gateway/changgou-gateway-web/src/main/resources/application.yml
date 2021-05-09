@@ -15,6 +15,7 @@ spring:
               - POST
               - PUT
               - DELETE
+              - OPTIONS
       routes:
             - id: changgou_goods_route
               uri: lb://goods

@@ -15,13 +15,12 @@
         <module name="eureka-server2" />
         <module name="eureka-server1" />
         <module name="changgou-common" />
-        <module name="channggou-service-file" />
         <module name="eureka-server3" />
-        <module name="changgou-service-goods-api" />
+        <module name="channggou-service-file" />
         <module name="changgou-service-weixinpay-api" />
         <module name="changgou-service-seckill-api" />
+        <module name="changgou-service-goods-api" />
         <module name="changgou-service-user" />
-        <module name="changgou-service-canal" />
         <module name="springbootthymeleaf" />
         <module name="changgou-service-pay" />
         <module name="changgou-service-content-api" />
@@ -31,11 +30,12 @@
         <module name="changgou-service-search-api" />
         <module name="changgou-web-search" />
         <module name="changgou-service-order" />
-        <module name="changgou-service-goods" />
         <module name="springboot_rabbitmq_delay" />
+        <module name="service-goods" />
         <module name="changgou-service-user-api" />
         <module name="changgou-common-db" />
         <module name="changgou-service-seckill" />
+        <module name="changgou-web-user" />
         <module name="changgou-web-item" />
         <module name="changgou-transaction-Seata" />
       </profile>
@@ -50,12 +50,9 @@
       <module name="changgou-servcie-canal" target="8" />
       <module name="changgou-service" target="8" />
       <module name="changgou-service-api" target="8" />
-      <module name="changgou-service-canal" target="8" />
       <module name="changgou-service-content" target="8" />
       <module name="changgou-service-content-api" target="8" />
-      <module name="changgou-service-goods" target="8" />
       <module name="changgou-service-goods-api" target="8" />
-      <module name="changgou-service-item-api" target="8" />
       <module name="changgou-service-order" target="8" />
       <module name="changgou-service-order-api" target="8" />
       <module name="changgou-service-pay" target="8" />
@@ -71,21 +68,16 @@
       <module name="changgou-web" target="1.8" />
       <module name="changgou-web-item" target="8" />
       <module name="changgou-web-item-api" target="8" />
+      <module name="changgou-web-register" target="8" />
       <module name="changgou-web-search" target="8" />
+      <module name="changgou-web-user" target="8" />
       <module name="channggou-service-file" target="8" />
       <module name="code-template" target="1.5" />
-      <module name="com.jia" target="8" />
       <module name="eureka-cluster" target="1.8" />
       <module name="eureka-server1" target="8" />
       <module name="eureka-server2" target="8" />
       <module name="eureka-server3" target="8" />
-      <module name="fescar1-account" target="1.8" />
-      <module name="fescar1-api" target="1.8" />
-      <module name="fescar1-business" target="1.8" />
-      <module name="fescar1-eureka" target="1.8" />
-      <module name="fescar1-order" target="1.8" />
-      <module name="fescar1-parent" target="1.8" />
-      <module name="fescar1-storage" target="1.8" />
+      <module name="service-goods" target="8" />
       <module name="springboot_rabbitmq_delay" target="8" />
       <module name="springbootthymeleaf" target="8" />
     </bytecodeTargetLevel>
@@ -97,12 +89,9 @@
       <module name="changgou-eureka" options="-parameters" />
       <module name="changgou-gateway-web" options="-parameters" />
       <module name="changgou-servcie-canal" options="-parameters" />
-      <module name="changgou-service-canal" options="-parameters" />
       <module name="changgou-service-content" options="-parameters" />
       <module name="changgou-service-content-api" options="-parameters" />
-      <module name="changgou-service-goods" options="-parameters" />
       <module name="changgou-service-goods-api" options="-parameters" />
-      <module name="changgou-service-item-api" options="-parameters" />
       <module name="changgou-service-order" options="-parameters" />
       <module name="changgou-service-order-api" options="-parameters" />
       <module name="changgou-service-pay" options="-parameters" />
@@ -117,18 +106,14 @@
       <module name="changgou-user-oauth" options="-parameters" />
       <module name="changgou-web-item" options="-parameters" />
       <module name="changgou-web-item-api" options="-parameters" />
+      <module name="changgou-web-register" options="-parameters" />
       <module name="changgou-web-search" options="-parameters" />
+      <module name="changgou-web-user" options="-parameters" />
       <module name="channggou-service-file" options="-parameters" />
-      <module name="eureka-cluster" options="-parameters" />
       <module name="eureka-server1" options="-parameters" />
       <module name="eureka-server2" options="-parameters" />
       <module name="eureka-server3" options="-parameters" />
-      <module name="fescar1-account" options="-parameters" />
-      <module name="fescar1-api" options="-parameters" />
-      <module name="fescar1-business" options="-parameters" />
-      <module name="fescar1-eureka" options="-parameters" />
-      <module name="fescar1-order" options="-parameters" />
-      <module name="fescar1-storage" options="-parameters" />
+      <module name="service-goods" options="-parameters" />
       <module name="springboot_rabbitmq_delay" options="-parameters" />
       <module name="springbootthymeleaf" options="-parameters" />
     </option>

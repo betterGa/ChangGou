@@ -12,10 +12,8 @@
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-canal/changgou-servcie-canal.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-canal/changgou-servcie-canal.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-api.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-canal/changgou-service-canal.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-canal/changgou-service-canal.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-content/changgou-service-content.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-content/changgou-service-content.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-content-api/changgou-service-content-api.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-content-api/changgou-service-content-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-goods/changgou-service-goods.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-goods/changgou-service-goods.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/changgou-service-goods-api.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/changgou-service-goods-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-order/changgou-service-order.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-order/changgou-service-order.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-order-api/changgou-service-order-api.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-order-api/changgou-service-order-api.iml" />
@@ -33,12 +31,14 @@
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-item/changgou-web-item.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-item/changgou-web-item.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-web-item-api/changgou-web-item-api.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-web-item-api/changgou-web-item-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-search/changgou-web-search.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-search/changgou-web-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/changgou-web-user.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/changgou-web-user.iml" />
       <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/channggou-service-file/channggou-service-file.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/channggou-service-file/channggou-service-file.iml" />
       <module fileurl="file://$PROJECT_DIR$/code-template/code-template.iml" filepath="$PROJECT_DIR$/code-template/code-template.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-cluster/eureka-cluster.iml" filepath="$PROJECT_DIR$/eureka-cluster/eureka-cluster.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-cluster/eureka-server1/eureka-server1.iml" filepath="$PROJECT_DIR$/eureka-cluster/eureka-server1/eureka-server1.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-cluster/eureka-server2/eureka-server2.iml" filepath="$PROJECT_DIR$/eureka-cluster/eureka-server2/eureka-server2.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-cluster/eureka-server3/eureka-server3.iml" filepath="$PROJECT_DIR$/eureka-cluster/eureka-server3/eureka-server3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-goods/service-goods.iml" filepath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-goods/service-goods.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot_rabbitmq_delay/springboot_rabbitmq_delay.iml" filepath="$PROJECT_DIR$/springboot_rabbitmq_delay/springboot_rabbitmq_delay.iml" />
       <module fileurl="file://$PROJECT_DIR$/springbootthymeleaf/springbootthymeleaf.iml" filepath="$PROJECT_DIR$/springbootthymeleaf/springbootthymeleaf.iml" />
     </modules>

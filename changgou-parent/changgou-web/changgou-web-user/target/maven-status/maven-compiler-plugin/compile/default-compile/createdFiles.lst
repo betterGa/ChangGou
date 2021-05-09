@@ -1,0 +1,4 @@
+com\changgou\register\controller\RegisterController.class
+com\changgou\register\UserWebApplication.class
+com\changgou\register\controller\IndexController.class
+com\changgou\register\controller\LoginController.class
