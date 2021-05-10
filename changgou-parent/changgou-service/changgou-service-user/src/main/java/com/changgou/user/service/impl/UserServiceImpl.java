@@ -23,6 +23,20 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Override
+    public boolean add(User user) {
+        if (userMapper.selectByPrimaryKey(user) == null) {
+            Date created = new Date();
+            Date updated = new Date();
+            user.setStatus("1");
+            user.setCreated(created);
+            user.setUpdated(updated);
+            userMapper.insert(user);
+            return true;
+        }
+        return false;
+    }
+
     @Autowired
     private UserMapper userMapper;
 
@@ -198,25 +212,6 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKey(user);
     }
 
-    /**
-     * 增加User
-     *
-     * @param user
-     */
-    @Override
-    public boolean add(User user) {
-        if (userMapper.selectByPrimaryKey(user) == null) {
-            // 设置创建时间和更新时间为当前时间
-            Date created = new Date();
-            Date updated = new Date();
-            user.setCreated(created);
-            user.setUpdated(updated);
-            userMapper.insert(user);
-            return true;
-        }
-        // 如果数据库中已经存在用户名，返回 false
-        return false;
-    }
 
     /**
      * 根据ID查询User
@@ -238,4 +233,12 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userMapper.selectAll();
     }
+
+    @Override
+    public User registerCheck(String param1, String password) {
+        List<User> users = userMapper.registerCheck(param1, password);
+        if (users == null || users.size() == 0) return null;
+        else return users.get(0);
+    }
 }
+

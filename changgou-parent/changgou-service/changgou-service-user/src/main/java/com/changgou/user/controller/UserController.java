@@ -71,7 +71,24 @@ public class UserController {
         PageInfo<User> pageInfo = userService.findPage(page, size);
         return new Result<PageInfo>(true, StatusCode.OK, "查询成功", pageInfo);
     }
-    
+
+    /***
+     *  根据邮箱/用户名/手机号校验登录
+     * @param param1
+     * @param password
+     * @return
+     */
+    @GetMapping("/login")
+    public Result registerCheck(@RequestParam(value = "param") String param1,
+                                @RequestParam("password") String password) {
+        User user = userService.registerCheck(param1,password);
+        if (user == null) {
+            return new Result(false, StatusCode.ERROR, "用户不存在");
+        } else {
+            return new Result(true, StatusCode.OK, "用户登录校验成功", user);
+        }
+    }
+
     /***
      * 多条件搜索用户数据
      * @param user

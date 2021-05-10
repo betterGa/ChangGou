@@ -5,38 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5537426e-7b96-4984-8f70-a87d42f7dc49" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-goods/service-goods.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/changgou-web-user.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-store/changgou-service-store.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-admin/changgou-web-admin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changou-web-store/changou-web-store.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-gateway/changgou-gateway-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-gateway/changgou-gateway-web/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-gateway/changgou-gateway-web/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-gateway/changgou-gateway-web/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/changgou-service-goods-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service-api/changgou-service-goods-api/changgou-service-goods-api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/config/ResourceServerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/dao/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/config/ResourceServerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/config/ResourceServerConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/dao/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/dao/UserMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/target/classes/com/changgou/user/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-transaction-Seata/changgou-transaction-Seata.iml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-transaction-Seata/changgou-transaction-Seata.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/src/main/java/com/changgou/oauth/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/src/main/java/com/changgou/oauth/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/target/classes/com/changgou/oauth/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-user-oauth/target/classes/com/changgou/oauth/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/changgou-web-user-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/classes/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/classes/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/changgou-parent/changgou-web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/changgou-parent/changgou-web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-template/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/code-template/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-template/src/main/resources/使用说明" beforeDir="false" afterPath="$PROJECT_DIR$/code-template/src/main/resources/使用说明" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-template/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/code-template/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-template/target/classes/使用说明" beforeDir="false" afterPath="$PROJECT_DIR$/code-template/target/classes/使用说明" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-cluster/eureka-cluster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-cluster/eureka-cluster.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +61,9 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/impl/UserServiceImpl.java" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/service/impl/UserServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/changgou-parent/changgou-service/changgou-service-user/src/main/java/com/changgou/user/controller/UserController.java" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/templates/login.html" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -79,6 +79,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -89,14 +90,27 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="idea.background.editor" value="D:\pictures\src=http___img.pconline.com.cn_images_upload_upc_tx_wallpaper_1206_04_c1_11869550_1338788802747_800x600.jpg&amp;refer=http___img.pconline.com.jpg,10,scale,center" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/changgou-parent/changgou-web/changgou-web-user/src/main/resources/static/img" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/changgou-parent/changgou-web/changou-web-store/src/main/resources/static/img" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.31589144" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changgou-web-user\src\main\resources\static\img" />
-      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changgou-web-user\src\main\resources\templates" />
-      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changgou-web-user\src\main\resources\static\css" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources\static\img" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources\templates" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources\static" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changgou-web-admin\src\main\resources\static\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources" />
+      <recent name="D:\codes\ChangGou\changgou-parent\changgou-web\changou-web-store\src\main\resources\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -107,16 +121,27 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.UserWebApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.StoreApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="changgou-web-admin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.changgou.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.changgou.admin.AdminWebApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,28 +159,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GatewayWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="changgou-gateway-web" />
+    <configuration name="StoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="changgou-service-store" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.changgou.*" />
+          <option name="PATTERN" value="com.changgou.store.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.changgou.GatewayWebApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="changgou-service-user" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.changgou.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.changgou.UserApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.changgou.store.StoreApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,10 +187,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.UserWebApplication" />
-        <item itemvalue="Spring Boot.UserApplication" />
-        <item itemvalue="Spring Boot.GatewayWebApplication" />
+        <item itemvalue="Spring Boot.StoreApplication" />
         <item itemvalue="Spring Boot.EurekaApplication" />
+        <item itemvalue="Spring Boot.AdminWebApplication" />
+        <item itemvalue="Spring Boot.UserWebApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +205,8 @@
       <workItem from="1620464519244" duration="15220000" />
       <workItem from="1620530473049" duration="2249000" />
       <workItem from="1620535651433" duration="773000" />
-      <workItem from="1620536453872" duration="2871000" />
+      <workItem from="1620536453872" duration="38691000" />
+      <workItem from="1620616284168" duration="7843000" />
     </task>
     <servers />
   </component>
@@ -211,5 +224,17 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/changgou-parent/changgou-web/changou-web-store/src/main/resources/templates/login.html</url>
+          <line>29</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

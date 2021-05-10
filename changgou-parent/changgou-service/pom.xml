@@ -20,6 +20,7 @@
         <module>changgou-service-order</module>
         <module>changgou-service-pay</module>
         <module>changgou-service-seckill</module>
+        <module>changgou-service-store</module>
     </modules>
 
     <artifactId>changgou-service</artifactId>

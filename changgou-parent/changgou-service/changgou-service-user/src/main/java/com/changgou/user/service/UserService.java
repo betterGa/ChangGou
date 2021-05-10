@@ -75,4 +75,6 @@ public interface UserService {
      * @return
      */
     List<User> findAll();
+
+    User registerCheck(String param1,String password);
 }
