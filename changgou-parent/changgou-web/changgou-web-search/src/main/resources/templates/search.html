@@ -22,7 +22,7 @@
             <div class="py-container">
                 <div class="shortcut">
                     <ul class="fl">
-                        <li class="f-item">青橙欢迎您！</li>
+                        <li class="f-item">畅购欢迎您！</li>
                         <li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html"
                                                                                                  target="_blank">免费注册</a></span>
                         </li>
@@ -32,13 +32,10 @@
                             <li class="f-item"><span>我的订单</span></li>
 
                             <li class="f-item"><span><a href="cart.html" target="_blank">我的购物车</a></span></li>
-                            <li class="f-item"><span><a href="home.html" target="_blank">我的青橙</a></span></li>
-                            <li class="f-item"><span>青橙会员</span></li>
-                            <li class="f-item"><span>企业采购</span></li>
-                            <li class="f-item"><span>关注青橙</span></li>
+                            <li class="f-item"><span>关注畅购</span></li>
                             <li class="f-item"><span><a href="cooperation.html" target="_blank">合作招商</a></span></li>
                             <li class="f-item"><span><a href="shoplogin.html" target="_blank">商家后台</a></span></li>
-                            <li class="f-item"><span>网站导航</li>
+                            <li class="f-item"><span>网站导航</span></li>
                         </ul>
                     </div>
 
@@ -51,7 +48,7 @@
             <div class="py-container">
                 <div class="yui3-g Logo">
                     <div class="yui3-u Left logoArea">
-                        <a class="logo-bd" title="青橙" href="index.html" target="_blank"></a>
+                        <a class="logo-bd" title="畅购" href="index.html" target="_blank"></a>
                     </div>
                     <div class="yui3-u Rit searchArea">
                         <div class="search">
@@ -567,18 +564,6 @@
                     </div>
                 </div>
             </div>
-            <div class="yui3-u Center navArea">
-                <ul class="nav">
-                    <li class="f-item">服装城</li>
-                    <li class="f-item">美妆馆</li>
-                    <li class="f-item">青橙超市</li>
-                    <li class="f-item">全球购</li>
-                    <li class="f-item">闪购</li>
-                    <li class="f-item">团购</li>
-                    <li class="f-item">有趣</li>
-                    <li class="f-item"><a href="seckill-index.html" target="_blank">秒杀</a></li>
-                </ul>
-            </div>
             <div class="yui3-u Right"></div>
         </div>
     </div>
@@ -637,10 +622,6 @@
                        <a th:href="@{${url}(brand=${brand})}" th:text="${brand}"></a>
                         </li>
                     </ul>
-                </div>
-                <div class="ext">
-                    <a href="javascript:void(0);" class="sui-btn">多选</a>
-                    <a href="javascript:void(0);">更多</a>
                 </div>
             </div>
             <!--当用户没有输入规格时，显示规格列表-->
@@ -741,7 +722,7 @@
                     <li th:each="item:${result.rows}" class="yui3-u-1-5">
                         <div class="list-wrap">
                             <div class="p-img">
-                                <a th:href="'../static/'+${item.spuId}+'.html'" target="_blank">
+                                <a th:href="'http://localhost:18088/static/'+${item.spuId}+'.html'" target="_blank">
                                     <img th:src="${item.image}"/></a>
                             </div>
                             <div class="price">

@@ -39,7 +39,8 @@ public class PageServiceImpl implements PageService{
     @Value("${pagepath}")
     private String pagepath;
 
-    private Map<String, Object> buildDataModel(Long spuId) {
+
+    public Map<String, Object> buildDataModel(Long spuId) {
         //构建数据模型
         Map<String, Object> dataMap = new HashMap<>(16);
         //获取spu 和SKU列表

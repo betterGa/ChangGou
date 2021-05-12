@@ -1,5 +1,5 @@
 a {
-    color: #77b72c
+    color: #666
 }
 
 .btn-danger {
@@ -9,12 +9,12 @@ a {
 .btn-danger:hover,
 .btn-danger:focus .btn-danger:active,
 .btn-danger.active {
-    border: 1px solid #77b72c;
-    background-color: #77b72c
+    border: 1px solid #ff713f;
+    background-color: #ff713f
 }
 
 .typeNav {
-    border-bottom: 2px solid #6aa227
+    border-bottom: 2px solid #ff713f
 }
 
 #item {
@@ -248,13 +248,13 @@ ul.btn-choose li .btn-xlarge {
 
 .sui-btn:active,
 .sui-btn.active {
-    background-color: #77b72c;
+    background-color: #ff713f;
     color: #fff
 }
 
 .btn-danger {
-    background-color: #77b72c;
-    border: 1px solid #77b72c
+    background-color: #ff713f;
+    border: 1px solid #ff713f
 }
 
 ul.part-list {
@@ -280,14 +280,14 @@ ul.part-list li {
 
 .sui-nav.nav-tabs.tab-wraped>li.active>a {
     padding-top: 9px;
-    border-top: 3px solid #77b72c
+    border-top: 3px solid #ff713f
 }
 
 .intro .sui-nav.nav-tabs.tab-wraped>li.active>a {
     font-weight: 400;
     border: 0;
     padding-top: 12px;
-    background: #77b72c;
+    background: #ff713f;
     color: #fff
 }
 

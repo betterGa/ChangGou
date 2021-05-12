@@ -12,10 +12,40 @@
     <link rel="stylesheet" type="text/css" href="../static/css/pages-item.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/pages-zoom.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="../static/js/vue.js"></script>
 
 </head>
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript">
+    function pageName()
+    {
+        var a = location.href;
+        var b = a.split("/");
+        var c = b.slice(b.length-1, b.length).toString(String).split(".");
+        return c.slice(0, 1);
+    }
+    $(function () {
+        $('#cart').on('click', function () {
+            var skuid=$('#cart').val();
+            alert(skuid);
+            $.ajax(
+                {
+                    url: "http://localhost:18088/page/createHtml/",
+                    type: "GET",
+                    dataType: "JSON",
+                    contentType: "application/json;charset=UTF-8",
+                    //data: {num: $('#cartnum').val(), id: pageName()},
+                    success: function (result) {
 
+                    },
+                    error: function (result) {
+                    },
+                    cache: false
+                }
+            )
+        })
+    })
+</script>
 <body>
 
 
@@ -41,7 +71,7 @@
                             <li class="f-item"><span>关注畅购</span></li>
                             <li class="f-item"><span><a href="cooperation.html" target="_blank">合作招商</a></span></li>
                             <li class="f-item"><span><a href="shoplogin.html" target="_blank">商家后台</a></span></li>
-                            <li class="f-item"><span>网站导航</li>
+                            <li class="f-item"><span>网站导航</span></li>
                         </ul>
                     </div>
 
@@ -508,6 +538,9 @@
                 <div class="sku-name">
                     <h4 >{{sku.name}}</h4>
                 </div>
+                <div class="sku-name">
+                    <h4 >{{sku.id}}</h4>
+                </div>
                 <div class="news"><span th:text="${spu.caption}"></span></div>
                 <div class="summary">
                     <div class="summary-wrap" >
@@ -577,7 +610,7 @@
                         <div class="fl title">
                             <div class="control-group">
                                 <div class="controls">
-                                    <input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
+                                    <input autocomplete="off" type="text" value="1" minnum="1" id="cartnum" class="itxt" />
                                     <a href="javascript:void(0)" class="increment plus">+</a>
                                     <a href="javascript:void(0)" class="increment mins">-</a>
                                 </div>
@@ -586,7 +619,8 @@
                         <div class="fl">
                             <ul class="btn-choose unstyled">
                                 <li>
-                                    <a href="cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+                                    <button target="_blank" class="sui-btn  btn-danger addshopcar"
+                                            id="cart" type="button" v-bind:value="sku.id">{{sku.id}}</button>
                                 </li>
                             </ul>
                         </div>

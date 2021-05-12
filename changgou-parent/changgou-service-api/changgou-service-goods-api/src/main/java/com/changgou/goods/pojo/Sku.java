@@ -1,5 +1,7 @@
 package com.changgou.goods.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,6 +20,7 @@ import java.util.Date;
 @Table(name="tb_sku")
 public class Sku implements Serializable{
 
+	@JsonSerialize(using = ToStringSerializer.class)
 	@ApiModelProperty(value = "商品id",required = false)
 	@Id
     @Column(name = "id")
