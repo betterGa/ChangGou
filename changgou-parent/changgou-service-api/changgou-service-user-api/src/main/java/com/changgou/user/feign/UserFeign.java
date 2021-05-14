@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pojo.User;
 
+import java.util.List;
+
 @FeignClient(value = "user")
 @RequestMapping(value = "/user")
 public interface UserFeign {
+
+    // 查找所有用户信息
+    @GetMapping
+    public Result<List<User>> findAll();
+
 
     /**
      * 查询用户信息
@@ -24,6 +31,7 @@ public interface UserFeign {
 
     /**
      * 增加用户积分
+     *
      * @param points
      * @return
      */

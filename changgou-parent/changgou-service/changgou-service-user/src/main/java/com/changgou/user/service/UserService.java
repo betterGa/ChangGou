@@ -77,4 +77,6 @@ public interface UserService {
     List<User> findAll();
 
     User registerCheck(String param1,String password);
+
+    void changeStatus(String username);
 }

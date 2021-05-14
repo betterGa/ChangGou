@@ -169,6 +169,13 @@ public class UserController {
         return new Result<List<User>>(true, StatusCode.OK, "查询成功", list);
     }
 
+    // 修改用户使用状态
+    @GetMapping("/limit")
+    public Result changeStatus(@RequestParam(value = "username")String username){
+        userService.changeStatus(username);
+        return new Result(true,StatusCode.OK,"修改用户状态成功");
+    }
+
     @RequestMapping(value = "/login")
     public Result login(String username, String password, HttpServletResponse response) {
         User user = userService.findById(username);

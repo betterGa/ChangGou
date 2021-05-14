@@ -37,6 +37,17 @@ public class Brand implements Serializable{
     @Column(name = "seq")
 	private Integer seq;//排序
 
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
+	@Column(name = "storename")
+	private String storeName;
+
 
 
 	//get方法

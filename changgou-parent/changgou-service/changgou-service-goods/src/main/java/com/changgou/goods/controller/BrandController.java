@@ -25,6 +25,14 @@ public class BrandController {
     private BrandService brandService;
 
 
+    // 根据商家名称查询所属品牌信息
+    @CrossOrigin
+    @GetMapping(value = "/findByStore/{storename}")
+    public Result<List<Brand>> findByStore(@PathVariable(value = "storename")String storename){
+        List<Brand> brandList=brandService.findByStore(storename);
+        return new Result(true,StatusCode.OK,"根据商家名称查询品牌列表成功",brandList);
+    }
+
 
     /***
      * Brand分页条件搜索实现
@@ -83,7 +91,7 @@ public class BrandController {
      */
     @ApiOperation(value = "Brand根据ID删除", notes = "根据ID删除Brand方法详情", tags = {"BrandController"})
     @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "Integer")
-    @DeleteMapping(value = "/{id}")
+    @GetMapping(value = "/delete/{id}")
     public Result delete(@PathVariable Integer id) {
         //调用BrandService实现根据主键删除
         brandService.delete(id);
@@ -96,9 +104,10 @@ public class BrandController {
      * @param id
      * @return
      */
+    @CrossOrigin
     @ApiOperation(value = "Brand根据ID修改", notes = "根据ID修改Brand方法详情", tags = {"BrandController"})
     @ApiImplicitParam(paramType = "path", name = "id", value = "主键ID", required = true, dataType = "Integer")
-    @PutMapping(value = "/{id}")
+    @PostMapping(value = "/update/{id}")
     public Result update(@RequestBody @ApiParam(name = "Brand对象", value = "传入JSON数据", required = false) Brand brand, @PathVariable Integer id) {
         //设置主键值
         brand.setId(id);

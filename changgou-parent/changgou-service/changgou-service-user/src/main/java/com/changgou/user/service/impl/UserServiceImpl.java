@@ -240,5 +240,16 @@ public class UserServiceImpl implements UserService {
         if (users == null || users.size() == 0) return null;
         else return users.get(0);
     }
+
+    // 修改用户使用状态
+    @Override
+    public void changeStatus(String username) {
+        User user=userMapper.selectByPrimaryKey(username);
+        String status = user.getStatus();
+        if("1".equals(status)){
+            user.setStatus("0");
+        }else user.setStatus("1");
+        userMapper.updateByPrimaryKey(user);
+    }
 }
 

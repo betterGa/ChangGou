@@ -5,6 +5,7 @@ import com.changgou.goods.pojo.Brand;
 import com.changgou.goods.service.BrandService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -151,5 +152,17 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<Brand> findAll() {
         return brandMapper.selectAll();
+    }
+
+    /**
+     * 根据商家名称查询品牌列表
+     * @param storeName
+     * @return
+     */
+    @Override
+    public List<Brand> findByStore(String storeName) {
+        Brand brand=new Brand();
+        brand.setStoreName(storeName);
+        return brandMapper.select(brand);
     }
 }

@@ -18,3 +18,13 @@ spring:
     allow-bean-definition-overriding: true
   resources:
     static-locations: classpath:/static/
+#超时配置
+ribbon:
+  ReadTimeout: 300000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

@@ -1,5 +1,8 @@
 package com.changgou.store.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,6 +25,39 @@ public class Store implements Serializable {
     @Column(name = "centerstatus")
     private String centerStatus;
 
+
+    @Column(name = "status")
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    // @Column(name = "created")
+    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone ="GTM+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date created;
+
+    // @Column(name = "updated")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone ="GTM+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updated;
+
+    @Column(name = "score")
+    private Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public Date getCreated() {
         return created;
     }
@@ -37,12 +73,6 @@ public class Store implements Serializable {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
-
-    @Column(name = "created")
-    private Date created;
-
-    @Column(name = "updated")
-    private Date updated;
 
     public String getStoreName() {
         return storeName;

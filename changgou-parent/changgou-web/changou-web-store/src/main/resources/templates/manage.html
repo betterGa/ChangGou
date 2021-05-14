@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html style="height: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理页面</title>
+</head>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+    function delectOper(btn,brandId){
+        $.ajax(
+            {
+                url: "http://localhost:18081/brand/delete/"+brandId,
+                type: "GET",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                success: function (result) {
+                    var flag=result.flag;
+                    if(flag===true){
+                        alert("删除品牌成功！");}
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("删除品牌失败！");
+                },
+                cache: false,
+                async: false
+            }
+        )
+
+        //获取table对象，我们用其进行其对子元素的操作
+        var ta=document.getElementById("ta")
+        //获取其父类对象
+        var tr=btn.parentNode.parentNode;  //我们进行删除操作是删除其所在的行，所以我们用两次parent操作，第一层得到其所在的列(单元格)，再进一层得到其所在的行对象
+        //执行删除操作
+        ta.deleteRow(tr.rowIndex);  //进行删除操作时，我们用父类对象删除子类对象，
+        //注：对于div等对象我们可以使用remove方法，但是对于表格的属性我们利用delete进行操作，而且我们利用他的rowIndex(行号)而不是其id亦或是对象
+        //我们没法对每一个行设置一个id所以用这种方法(通过调入对象找到其父类对象)更加的方便
+    }
+
+    function changeOper(n){
+
+        //获取修改的位置对象
+        var cell=document.getElementById("cell"+n);
+        //进行一定的限制(只有是数字的情况下才能进行拼接)
+            //isNAN如果是true则表示数值不是数字，如果不添加就会产生连续点击修改时出现把源码拼接上的情况
+            //修改对象的类型
+            cell.innerHTML="<input type='text' style='width: 100%' value='"+cell.innerHTML+"' onblur='changeOper2(this,this.parentNode)'/>" //利用value='"+cell.innerHTML+"'可以实现内容的拼接注意：其内部的值是"+cell.innerHTML+"一个拼接量
+    }
+    function changeOper2(inp,cell){
+        //获取修改位置对象
+//                var cell=document.getElementById("cell"+n);
+        //修改对象的类型
+        cell.innerHTML=inp.value;  //通过对象获得用户修改获得value值
+    }
+    //明白了：document可以调用任何的id,(好比其他都是全局变量一样)，但是他的局限是获取的方法有限，必须有特定的属性才能获取
+    //document。innerHTML是对其内部的内容进行重写。
+
+
+
+
+    function entityBrand(name,image) {
+        this.name=name;
+        this.image=image;
+    }
+
+
+
+
+    function update(name,id,imageid){
+        var image=document.getElementById(imageid).innerText;
+        alert("imageid:"+imageid+"image.text"+image);
+        returnData = new entityBrand(name,image);
+        $.ajax(
+            {
+                url: "http://localhost:18081/brand/update/"+id,
+                type: "POST",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(returnData),
+                success: function (result) {
+                    var flag=result.flag;
+                    if(flag===true){
+                        alert("修改品牌图片成功！");}
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("修改品牌图片失败！");
+                },
+                cache: false,
+                async: false
+            }
+        )
+    }
+
+
+
+    function del(obj){
+        if(document.getElementById('tbodyid').children.length>1){
+            var trid=obj.parentNode.parentNode.id;
+            var objtr=document.getElementById(trid);
+            document.getElementById('tbodyid').removeChild(objtr);
+            var tbody=document.getElementById('tbodyid');
+            var countchildren=tbody.childElementCount;
+            for (var i=0;i<countchildren;i++){
+                tbody.children[i].children[0].innerHTML=i+1;
+            }
+        }
+        else{
+            alert("请不要全部删除");
+        }
+    }
+    function add(){
+        var trid = new Date().getTime();
+        var packageid=trid+'packageid';
+        var countid=trid+'countid';
+        var priceid=trid+'priceid';
+        var objtr=document.createElement('tr');
+        objtr.id=trid;
+        objtr.innerHTML="<td></td> " +
+            "      <td><input id='"+trid+"packageid'></td> " +
+            "      <td><textarea id='"+trid+"countid'></textarea></td> " +
+            "      <td><input id='"+trid+"priceid'></td> " +
+            "      <td><button type='button' onclick='del(this)'>删除</button></td>";
+        document.getElementById("tbodyid").appendChild(objtr);
+        var tbodyobj=document.getElementById('tbodyid');
+        var countchildren=tbodyobj.childElementCount;
+        for (var i=0;i<countchildren;i++){
+            tbodyobj.children[i].children[0].innerHTML=i+1;
+        }
+    }
+    function save(){
+        var tbodyobj=document.getElementById('tbodyid');
+        var countchildren=tbodyobj.childElementCount;
+        var trid="";
+        var packageid="";
+        var countid="";
+        var priceid="";
+        var list=new Array();
+        for (var i=0;i<countchildren;i++){
+            trid=tbodyobj.children[i].id;
+            packageid=trid+"packageid";
+            countid=trid+"countid";
+            priceid=trid+"priceid";
+            var map={
+                "套餐":document.getElementById(packageid).value,
+                "内容":document.getElementById(countid).value,
+                "价格":document.getElementById(priceid).value
+            }
+            list.push(map);
+        }
+        console.log("list:",list);
+        alert(JSON.stringify(list));
+    }
+</script>
+
+
+<!--图标样式-->
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/index.css"/>
+
+<body style="height: 100%;">
+
+<div class="s-side">
+    <ul>
+        <!--这部分是导航栏信息。-->
+        <li class="s-firstItem first">
+            <a href="#">
+                <i class="fa fa-home"></i>
+                <span>商家管理</span>
+            </a>
+        </li>
+
+        <li class="first">
+            <div class="d-firstNav s-firstNav clearfix">
+                <i class="fa fa-bars"></i>
+                <span>商品品牌管理</span>
+                <i class="fa fa-caret-right fr "></i>
+            </div>
+            <ul class="d-firstDrop s-firstDrop">
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="0" onclick="tab(this)">查看品牌列表</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="1" onclick="tab(this)">添加品牌</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="first">
+            <div class="d-firstNav s-firstNav">
+                <i class="fa fa-bars"></i>
+                <span>商品详情管理</span>
+                <i class="fa fa-caret-right fr"></i>
+            </div>
+            <ul class="d-firstDrop s-firstDrop">
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="2" onclick="tab(this)">查看商品详情列表</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="first">
+            <div class="d-firstNav s-firstNav">
+                <i class="fa fa-bars"></i>
+                <span>订单管理</span>
+                <i class="fa fa-caret-right fr"></i>
+            </div>
+            <ul class="d-firstDrop s-firstDrop">
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="3" onclick="tab(this)">查看订单</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content" style="width: 83.5%;float:right;height:100%;">
+    <div style="background-color:black;display: none;min-height: 100%;" onclick="cont(this)">
+
+       <table align="center" border="5px" width="100%" id="ta">
+            <caption style="font-size: 20px">品牌列表</caption>
+            <tr>
+                <th align="center" valign="middle" width="6%" height="100px">品牌id</th>
+                <th align="center" valign="middle" width="10%">品牌名称</th>
+                <th align="center" valign="middle">品牌的首字母</th>
+                <th align="center" valign="middle">品牌图片地址</th>
+                <th align="center" valign="middle">操作</th>
+            </tr>
+
+            <tr th:each="brands,brandState:${brandList}" align="center">
+                <td th:text="${brands.id}"></td>
+                <td th:text="${brands.name}"></td>
+                <td th:text="${brands.letter}"></td>
+                <td th:text="${brands.image}" th:id="'cell'+${brandState.index}"></td>
+                <td>
+                    <input type="button" name="" id="" value="修改" th:onclick="changeOper([[${brandState.index}]]);"/>
+                    <!--<input type="button" name="" id="" value="删除" onclick="delectOper(this)"/>-->
+                    <input type="button" name="" id="" value="删除" th:onclick="delectOper(this,[[${brands.id}]])"/>
+                    <input type="button" name="" id="" value="提交" th:onclick="update([[${brands.name}]],[[${brands.id}]],'cell'+[[${brandState.index}]])"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div style="background-color: black;display: none;height: 100%;" onclick="cont(this)">
+
+        <table border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;" align="center" width="100%">
+            <caption>动态增加表格</caption>
+            <thead>
+            <tr>
+                <th width="5% ">序号</th>
+                <th width="20%">套餐</th>
+                <th width="30%">内容</th>
+                <th width="10%">价格</th>
+            </tr>
+            </thead>
+            <tbody id="tbodyid">
+            <tr id="123">
+                <td>1</td>
+                <td><input id="123packageid"></td>
+                <td><textarea id="123countid"></textarea></td>
+                <td><input id="123priceid"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" onclick='add()'>添加</button>
+        <button type="button" onclick='save()'>保存</button>
+
+
+    </div>
+    <div style="background-color:black;display: none;height: 100%;" onclick="cont(this)">
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">所有商家列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">商家名称</th>
+                <th align="center" valign="middle">平台邀请码</th>
+                <th align="center" valign="middle">入驻状态</th>
+                <th align="center" valign="middle">创建时间</th>
+                <th align="center" valign="middle">修改时间</th>
+                <th align="center" valign="middle">商家评分</th>
+                <th align="center" valign="middle">使用状态</th>
+            </tr>
+            <tr th:each="stores:${storeList}">
+                <td align="center" valign="middle" height="75px" th:text="${stores.storeName}"></td>
+                <td align="center" valign="middle" th:text="${stores.inviteCode}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${stores.centerStatus=='1'}">已入驻</span>
+                    <span th:if="${stores.centerStatus=='0'}">未入驻</span>
+                </td>
+                <td align="center" valign="middle" th:text="${stores.created}"></td>
+                <td align="center" valign="middle" th:text="${stores.datetime}"></td>
+                <td align="center" valign="middle" th:text="${stores.score}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${stores.status=='1'}">正常使用</span>
+                    <span th:if="${stores.status=='0'}">限制使用中</span>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div style="background-color:black; display: none;min-heigh: 100%;" onclick="cont(this)">
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">所有用户列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">用户名</th>
+                <th align="center" valign="middle">注册手机号</th>
+                <th align="center" valign="middle">注册邮箱</th>
+                <th align="center" valign="middle">创建时间</th>
+                <th align="center" valign="middle">修改时间</th>
+                <th align="center" valign="middle">使用状态</th>
+                <th align="center" valign="middle">修改使用状态</th>
+            </tr>
+            <tr th:each="users:${userList}">
+                <td align="center" valign="middle" height="75px" th:text="${users.username}"></td>
+                <td align="center" valign="middle" th:text="${users.phone}"></td>
+                <td align="center" valign="middle" th:text="${users.email}"></td>
+                <td align="center" valign="middle" th:text="${users.created}"></td>
+                <td align="center" valign="middle" th:text="${users.updated}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${users.status=='1'}">正常使用</span>
+                    <span th:if="${users.status=='0'}">限制使用中</span>
+                </td>
+                <td align="center">
+                    <button th:onclick="limit([[${users.username}]])" style="width: 50%;">修改状态</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript">
+
+    //点击菜单执行函数
+    function tab(param) {
+        var sp_an = $(param).attr('list');//获取被点击菜单的list属性值（0,1,2,3）
+        $('.content').children('div').eq(sp_an).click();//点击菜单后，对应的内容被点击，从而实现展示
+        //使用click()方法模拟点击事件，触发下面的cont函数
+    }
+
+    //这个函数的触发是通过点击菜单的时候触发的
+    function cont(param) {
+        $(param).show();//被选中的内容显示
+        $(param).siblings().hide();//没有被选中的内容隐藏
+    }
+
+</script>
+</body>
+</html>

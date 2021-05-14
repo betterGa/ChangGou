@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html style="height: 100%" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理页面</title>
+</head>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+    function permitCenter(storeName) {
+        $.ajax(
+            {
+                url: "http://localhost:18087/admin/permitCenter",
+                type: "GET",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                data: {storeName: storeName},
+                success: function (result) {
+                    alert("商家入驻成功！");
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("商家入驻失败！");
+                },
+                cache: false
+            }
+        )
+    }
+
+    function restrict(storeName) {
+        $.ajax(
+            {
+                url: "http://localhost:18087/admin/restrict",
+                type: "GET",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                data: {storeName: storeName},
+                success: function (result) {
+                    alert("修改商家使用状态成功！");
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("修改商家使用状态失败！");
+                },
+                cache: false
+            }
+        )
+    }
+
+
+    function limit(username) {
+        $.ajax(
+            {
+                url: "http://localhost:18087/user/limit",
+                type: "GET",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                data: {username: username},
+                success: function (result) {
+                    alert("修改用户使用状态成功！");
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("修改用户使用状态失败！");
+                },
+                cache: false
+            }
+        )
+    }
+</script>
+<!--图标样式-->
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/index.css"/>
+
+<body style="height: 100%;">
+
+<div class="s-side">
+    <ul>
+        <!--这部分是导航栏信息。-->
+        <li class="s-firstItem first">
+            <a href="#">
+                <i class="fa fa-home"></i>
+                <span>后台管理</span>
+            </a>
+        </li>
+
+        <li class="first">
+            <div class="d-firstNav s-firstNav clearfix">
+                <i class="fa fa-bars"></i>
+                <span>商家管理</span>
+                <i class="fa fa-caret-right fr "></i>
+            </div>
+            <ul class="d-firstDrop s-firstDrop">
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="0" onclick="tab(this)">未入驻商家列表</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="1" onclick="tab(this)">已入驻商家列表</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="2" onclick="tab(this)">查看商家列表</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="first">
+            <div class="d-firstNav s-firstNav">
+                <i class="fa fa-bars"></i>
+                <span>用户管理</span>
+                <i class="fa fa-caret-right fr"></i>
+            </div>
+            <ul class="d-firstDrop s-firstDrop">
+                <li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="3" onclick="tab(this)">查看用户列表</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content" style="width: 83.5%;float:right;height:100%;">
+    <div style="background-color:black;display: none;height: 100%;" onclick="cont(this)">
+
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">未入驻商家列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">商家名称</th>
+                <th align="center" valign="middle">平台邀请码</th>
+                <th align="center" valign="middle">创建时间</th>
+                <th align="center" valign="middle">允许入驻</th>
+            </tr>
+            <tr th:each="unCenter:${unCenterList}">
+                <td align="center" valign="middle" height="75px" th:text="${unCenter.storeName}"></td>
+                <td align="center" valign="middle" th:text="${unCenter.inviteCode}"></td>
+                <td align="center" valign="middle" th:text="${unCenter.created}"></td>
+                <td align="center">
+                    <button th:onclick="permitCenter([[${unCenter.storeName}]]);" style="width: 50%;">允许入驻</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="background-color: black;display: none;height: 100%;" onclick="cont(this)">
+
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">已入驻商家列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">商家名称</th>
+                <th align="center" valign="middle">修改状态时间</th>
+                <th align="center" valign="middle">使用状态</th>
+                <th align="center" valign="middle">商家评分</th>
+                <th align="center" valign="middle">修改使用状态</th>
+            </tr>
+            <tr th:each="center:${centerList}">
+                <td align="center" valign="middle" height="75px" th:text="${center.storeName}" id="storeName"></td>
+                <td align="center" valign="middle" th:text="${center.datetime}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${center.status=='1'}">正常</span>
+                    <span th:if="${center.status=='0'}">限制使用</span>
+                </td>
+                <td align="center" valign="middle" th:text="${center.score}"></td>
+                <td align="center">
+                    <button th:onclick="restrict([[${center.storeName}]])" style="width: 50%;">修改使用状态</button>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div style="background-color:black;display: none;height: 100%;" onclick="cont(this)">
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">所有商家列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">商家名称</th>
+                <th align="center" valign="middle">平台邀请码</th>
+                <th align="center" valign="middle">入驻状态</th>
+                <th align="center" valign="middle">创建时间</th>
+                <th align="center" valign="middle">修改时间</th>
+                <th align="center" valign="middle">商家评分</th>
+                <th align="center" valign="middle">使用状态</th>
+            </tr>
+            <tr th:each="stores:${storeList}">
+                <td align="center" valign="middle" height="75px" th:text="${stores.storeName}"></td>
+                <td align="center" valign="middle" th:text="${stores.inviteCode}"></td>
+                <td align="center" valign="middle">
+                <span th:if="${stores.centerStatus=='1'}">已入驻</span>
+                <span th:if="${stores.centerStatus=='0'}">未入驻</span>
+                </td>
+                <td align="center" valign="middle" th:text="${stores.created}"></td>
+                <td align="center" valign="middle" th:text="${stores.datetime}"></td>
+                <td align="center" valign="middle" th:text="${stores.score}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${stores.status=='1'}">正常使用</span>
+                    <span th:if="${stores.status=='0'}">限制使用中</span>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div style="background-color:black; display: none;min-heigh: 100%;" onclick="cont(this)">
+        <table align="center" border="5px" width="100%">
+            <caption style="font-size: 20px">所有用户列表</caption>
+            <tr>
+                <th align="center" valign="middle" height="100px">用户名</th>
+                <th align="center" valign="middle">注册手机号</th>
+                <th align="center" valign="middle">注册邮箱</th>
+                <th align="center" valign="middle">创建时间</th>
+                <th align="center" valign="middle">修改时间</th>
+                <th align="center" valign="middle">使用状态</th>
+                <th align="center" valign="middle">修改使用状态</th>
+            </tr>
+            <tr th:each="users:${userList}">
+                <td align="center" valign="middle" height="75px" th:text="${users.username}"></td>
+                <td align="center" valign="middle" th:text="${users.phone}"></td>
+                <td align="center" valign="middle" th:text="${users.email}"></td>
+                <td align="center" valign="middle" th:text="${users.created}"></td>
+                <td align="center" valign="middle" th:text="${users.updated}"></td>
+                <td align="center" valign="middle">
+                    <span th:if="${users.status=='1'}">正常使用</span>
+                    <span th:if="${users.status=='0'}">限制使用中</span>
+                </td>
+                <td align="center">
+                    <button th:onclick="limit([[${users.username}]])" style="width: 50%;">修改状态</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript">
+
+    //点击菜单执行函数
+    function tab(param) {
+        var sp_an = $(param).attr('list');//获取被点击菜单的list属性值（0,1,2,3）
+        $('.content').children('div').eq(sp_an).click();//点击菜单后，对应的内容被点击，从而实现展示
+        //使用click()方法模拟点击事件，触发下面的cont函数
+    }
+
+    //这个函数的触发是通过点击菜单的时候触发的
+    function cont(param) {
+        $(param).show();//被选中的内容显示
+        $(param).siblings().hide();//没有被选中的内容隐藏
+    }
+
+</script>
+</body>
+</html>

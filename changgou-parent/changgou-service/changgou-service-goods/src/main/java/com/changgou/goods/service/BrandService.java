@@ -74,4 +74,11 @@ public interface BrandService {
      * @return
      */
     List<Brand> findAll();
+
+ /**
+  * 根据商家名称查询品牌列表
+  * @param storename
+  * @return
+  */
+ List<Brand> findByStore(String storename);
 }

@@ -24,6 +24,12 @@ public class StoreServiceImpl implements StoreService {
             // 设置状态未入驻
             store.setCenterStatus("0");
 
+            // 设置使用状态为正常
+            store.setStatus("1");
+
+            // 设置商家评分为100
+            store.setScore(100);
+
             storeMapper.insert(store);
             // 插入成功
             return true;
