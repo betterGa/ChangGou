@@ -55,9 +55,6 @@
     //明白了：document可以调用任何的id,(好比其他都是全局变量一样)，但是他的局限是获取的方法有限，必须有特定的属性才能获取
     //document。innerHTML是对其内部的内容进行重写。
 
-
-
-
     function entityBrand(name,image) {
         this.name=name;
         this.image=image;
@@ -111,16 +108,18 @@
     }
     function add(){
         var trid = new Date().getTime();
-        var packageid=trid+'packageid';
-        var countid=trid+'countid';
-        var priceid=trid+'priceid';
+        var keyid=trid+'keyid';
+        var nameid=trid+'nameid';
+        var letterid=trid+'letterid';
+        var imageid=trid+'image';
         var objtr=document.createElement('tr');
         objtr.id=trid;
-        objtr.innerHTML="<td></td> " +
-            "      <td><input id='"+trid+"packageid'></td> " +
-            "      <td><textarea id='"+trid+"countid'></textarea></td> " +
-            "      <td><input id='"+trid+"priceid'></td> " +
-            "      <td><button type='button' onclick='del(this)'>删除</button></td>";
+        objtr.innerHTML="<td align='center'></td> " +
+            "      <td><input id='"+trid+"keyid'></td> " +
+            "      <td><input id='"+trid+"nameid' style='width: 100%'></input></td> " +
+            "      <td><input id='"+trid+"letterid' style='width: 100%'></td> " +
+            "      <td><input id='"+trid+"imageid' style='width: 100%'></td>"+
+            "      <td align='center'><button type='button' onclick='del(this)'>删除</button></td>";
         document.getElementById("tbodyid").appendChild(objtr);
         var tbodyobj=document.getElementById('tbodyid');
         var countchildren=tbodyobj.childElementCount;
@@ -128,28 +127,54 @@
             tbodyobj.children[i].children[0].innerHTML=i+1;
         }
     }
-    function save(){
+    function save(storename){
         var tbodyobj=document.getElementById('tbodyid');
         var countchildren=tbodyobj.childElementCount;
         var trid="";
-        var packageid="";
-        var countid="";
-        var priceid="";
+        var keyid="";
+        var nameid="";
+        var letterid="";
+        var image="";
         var list=new Array();
         for (var i=0;i<countchildren;i++){
             trid=tbodyobj.children[i].id;
-            packageid=trid+"packageid";
-            countid=trid+"countid";
-            priceid=trid+"priceid";
+            keyid=trid+"keyid";
+            nameid=trid+"nameid";
+            letterid=trid+"letterid";
+            imageid=trid+"imageid";
             var map={
-                "套餐":document.getElementById(packageid).value,
-                "内容":document.getElementById(countid).value,
-                "价格":document.getElementById(priceid).value
+                "id":document.getElementById(keyid).value,
+                "name":document.getElementById(nameid).value,
+                "letter":document.getElementById(letterid).value,
+                "image":document.getElementById(imageid).value,
+                "storeName":storename
             }
             list.push(map);
         }
         console.log("list:",list);
         alert(JSON.stringify(list));
+
+        $.ajax(
+            {
+                url: "http://localhost:18081/brand/addMany",
+                type: "POST",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(list),
+                success: function (result) {
+                    var flag=result.flag;
+                    if(flag===true){
+                        alert("批量添加品牌成功！");}
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("批量添加品牌失败！");
+                },
+                cache: false,
+                async: false
+            }
+        )
+
     }
 </script>
 
@@ -165,10 +190,10 @@
     <ul>
         <!--这部分是导航栏信息。-->
         <li class="s-firstItem first">
-            <a href="#">
+           <!-- <a href="#">-->
                 <i class="fa fa-home"></i>
                 <span>商家管理</span>
-            </a>
+            <!--</a>-->
         </li>
 
         <li class="first">
@@ -199,9 +224,14 @@
             <ul class="d-firstDrop s-firstDrop">
                 <li>
                     <div class="d-secondNav s-secondNav">
-                        <span list="2" onclick="tab(this)">查看商品详情列表</span>
+                        <span list="2" onclick="tab(this)">查看商品spu列表</span>
                     </div>
                 </li>
+                <!--<li>
+                    <div class="d-secondNav s-secondNav">
+                        <span list="2" onclick="tab(this)">添加商品spu</span>
+                    </div>
+                </li>-->
             </ul>
         </li>
         <li class="first">
@@ -241,7 +271,6 @@
                 <td th:text="${brands.image}" th:id="'cell'+${brandState.index}"></td>
                 <td>
                     <input type="button" name="" id="" value="修改" th:onclick="changeOper([[${brandState.index}]]);"/>
-                    <!--<input type="button" name="" id="" value="删除" onclick="delectOper(this)"/>-->
                     <input type="button" name="" id="" value="删除" th:onclick="delectOper(this,[[${brands.id}]])"/>
                     <input type="button" name="" id="" value="提交" th:onclick="update([[${brands.name}]],[[${brands.id}]],'cell'+[[${brandState.index}]])"/>
                 </td>
@@ -253,26 +282,30 @@
     <div style="background-color: black;display: none;height: 100%;" onclick="cont(this)">
 
         <table border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;" align="center" width="100%">
-            <caption>动态增加表格</caption>
+            <caption style="font-size: 20px">添加品牌</caption>
             <thead>
             <tr>
-                <th width="5% ">序号</th>
-                <th width="20%">套餐</th>
-                <th width="30%">内容</th>
-                <th width="10%">价格</th>
+                <th width="8%" valign="middle" height="100px">序号</th>
+                <th align="center" valign="middle" width="10%" height="100px">品牌id</th>
+                <th align="center" valign="middle" width="20%">品牌名称</th>
+                <th align="center" valign="middle" width="8%">品牌首字母</th>
+                <th align="center" valign="middle" width="44%">品牌图片地址</th>
+                <th align="center" valign="middle" width="10%">操作</th>
             </tr>
             </thead>
             <tbody id="tbodyid">
-            <tr id="123">
-                <td>1</td>
-                <td><input id="123packageid"></td>
-                <td><textarea id="123countid"></textarea></td>
-                <td><input id="123priceid"></td>
+            <tr id="brandtr">
+                <td align="center">1</td>
+                <td><input id="brandtrkeyid"></td>
+                <td><input id="brandtrnameid" style="width:100%"></input></td>
+                <td><input id="brandtrletterid" style="width:100%"></td>
+                <td><input id="brandtrimageid" style="width:100%"></td>
+                <td align="center"><button type="button" onclick='del(this)'>删除</button></td>
             </tr>
             </tbody>
         </table>
         <button type="button" onclick='add()'>添加</button>
-        <button type="button" onclick='save()'>保存</button>
+        <button type="button" th:onclick='save([[${storename}]])'>提交</button>
 
 
     </div>

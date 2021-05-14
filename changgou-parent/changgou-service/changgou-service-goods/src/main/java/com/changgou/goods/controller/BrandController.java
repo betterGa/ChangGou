@@ -6,6 +6,7 @@ import com.changgou.goods.service.BrandService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +29,9 @@ public class BrandController {
     // 根据商家名称查询所属品牌信息
     @CrossOrigin
     @GetMapping(value = "/findByStore/{storename}")
-    public Result<List<Brand>> findByStore(@PathVariable(value = "storename")String storename){
-        List<Brand> brandList=brandService.findByStore(storename);
-        return new Result(true,StatusCode.OK,"根据商家名称查询品牌列表成功",brandList);
+    public Result<List<Brand>> findByStore(@PathVariable(value = "storename") String storename) {
+        List<Brand> brandList = brandService.findByStore(storename);
+        return new Result(true, StatusCode.OK, "根据商家名称查询品牌列表成功", brandList);
     }
 
 
@@ -116,6 +117,22 @@ public class BrandController {
         return new Result(true, StatusCode.OK, "修改成功");
     }
 
+    /**
+     * 批量添加品牌
+     */
+    @CrossOrigin
+    @PostMapping(value = "/addMany")
+    public Result addMany(@RequestBody List<Brand> brands) {
+        if (brands.isEmpty()) {
+            return new Result(false, StatusCode.ERROR, "未提供品牌");
+        } else {
+            for (Brand brand : brands) {
+                brandService.add(brand);
+            }
+            return new Result(true, StatusCode.OK, "批量添加品牌成功!");
+        }
+    }
+
     /***
      * 新增Brand数据
      * @param brand
@@ -160,9 +177,9 @@ public class BrandController {
      * /brand/category/{id}  分类ID
      */
     @GetMapping(value = "/category/{id}")
-    public Result<List<Brand>> findBrandByCategory(@PathVariable(value = "id")Integer categoryId){
+    public Result<List<Brand>> findBrandByCategory(@PathVariable(value = "id") Integer categoryId) {
         //调用Service查询品牌数据
         List<Brand> categoryList = brandService.findByCategory(categoryId);
-        return new Result<List<Brand>>(true,StatusCode.OK,"查询成功！",categoryList);
+        return new Result<List<Brand>>(true, StatusCode.OK, "查询成功！", categoryList);
     }
 }

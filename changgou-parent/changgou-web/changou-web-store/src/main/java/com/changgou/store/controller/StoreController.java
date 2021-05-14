@@ -32,7 +32,7 @@ public class StoreController {
         // 商品品牌列表
         List<Brand> brandList=brandFeign.findByStore(storeName).getData();
         model.addAttribute("brandList",brandList);
-        model.addAttribute("storeName",storeName);
+        model.addAttribute("storename",storeName);
         return "manage";
     }
 }
