@@ -96,6 +96,9 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.allowFormAuthenticationForClients()
+                // 注释掉对
+                // http://localhost:9001/user/login?username=sunwukong&password=123123
+                // 没什么影响，还是需要密码是  bcrypt 加密过的。
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");

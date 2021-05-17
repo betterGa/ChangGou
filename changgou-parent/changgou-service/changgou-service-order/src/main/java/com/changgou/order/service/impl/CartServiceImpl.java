@@ -1,5 +1,6 @@
 package com.changgou.order.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.changgou.goods.feign.SkuFeign;
 import com.changgou.goods.feign.SpuFeign;
 import com.changgou.goods.pojo.Sku;
@@ -65,7 +66,8 @@ public class CartServiceImpl implements CartService {
         orderItem.setImage(spu.getImage());
 
         // 存入 Redis
-        redisTemplate.boundHashOps("cart_" + username).put(id, orderItem);
+        // 解决 Reids 乱码问题
+        redisTemplate.boundHashOps("cart_" + username).put(id.toString(), JSON.toJSONString(orderItem));
     }
 
     /**

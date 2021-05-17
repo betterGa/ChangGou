@@ -71,7 +71,7 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
                     // 跳转至登录页面让用户重新登录
                     /*return needAuthorization(USER_LOGIN_URL,exchange);*/
 
-                    // 登录跳转
+                    // 登录跳转，但是 postman 里面是不受影响的，不会跳转，该咋执行咋执行。
                     return needAuthorization(USER_LOGIN_URL+"?FROM="+request.getURI(),exchange);
                 }
 

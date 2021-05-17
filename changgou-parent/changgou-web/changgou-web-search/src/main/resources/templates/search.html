@@ -11,7 +11,32 @@
     <link rel="stylesheet" type="text/css" href="/css/all.css"/>
     <link rel="stylesheet" type="text/css" href="/css/pages-list.css"/>
 </head>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+    function createHtml(spuId){
+        window.location.href="http://localhost:18088/static/"+spuId+".html";
 
+
+       /* alert(spuId);
+        $.ajax(
+            {
+                url: "http://localhost:18088/page/createHtml/"+spuId,
+                type: "GET",
+                dataType: "JSON",
+                contentType: "application/json;charset=UTF-8",
+                success: function (result) {
+                    alert("生成html页面成功！");
+                    window.location.href="http://localhost:18088/static/"+spuId+".html";
+                },
+                error: function (result) {
+                    console.log(result);
+                    alert("生成html页面失败！");
+                },
+                cache: false
+            }
+        )*/
+    }
+</script>
 <body>
 <!-- 头部栏位 -->
 <!--页面顶部-->
@@ -722,7 +747,8 @@
                     <li th:each="item:${result.rows}" class="yui3-u-1-5">
                         <div class="list-wrap">
                             <div class="p-img">
-                               <a th:href="'http://localhost:18088/static/'+${item.spuId}+'.html'" target="_blank">
+                               <!--<a th:href="'http://localhost:18088/static/'+${item.spuId}+'.html'" target="_blank">-->
+                                <a th:onclick="createHtml([[${item.spuId}]])" target="_blank">
                                     <img th:src="${item.image}"/></a>
                             </div>
                             <div class="price">
