@@ -20,4 +20,6 @@ public interface CartService {
      * @return
      */
     List<OrderItem> list(String username);
+
+    void delete(String username, Long skuid);
 }

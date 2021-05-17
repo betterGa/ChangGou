@@ -21,4 +21,11 @@ public class PageController {
         pageService.createPageHtml(id);
         return new Result(true, StatusCode.OK,"ok");
     }
+
+@RequestMapping("/cart/add")
+    public String addCart(){
+
+}
+
+
 }

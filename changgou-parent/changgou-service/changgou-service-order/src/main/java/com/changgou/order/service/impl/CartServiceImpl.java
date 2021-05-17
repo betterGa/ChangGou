@@ -67,7 +67,8 @@ public class CartServiceImpl implements CartService {
 
         // 存入 Redis
         // 解决 Reids 乱码问题
-        redisTemplate.boundHashOps("cart_" + username).put(id.toString(), JSON.toJSONString(orderItem));
+        /* redisTemplate.boundHashOps("cart_" + username).put(id.toString(), JSON.toJSONString(orderItem));*/
+        redisTemplate.boundHashOps("cart_" + username).put(id, orderItem);
     }
 
     /**
@@ -78,7 +79,12 @@ public class CartServiceImpl implements CartService {
      */
     @Override
     public List<OrderItem> list(String username) {
-        // 获取指定命名空间下所有数据
         return redisTemplate.boundHashOps("cart_" + username).values();
+
+    }
+
+    @Override
+    public void delete(String username, Long skuid) {
+        redisTemplate.boundHashOps("cart_"+username).delete(skuid);
     }
 }

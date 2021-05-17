@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-    <title>欢迎登录</title>
+    <title>畅购商城，欢迎登录</title>
     <link rel="icon" href="/img/favicon.ico">
 
     <link rel="stylesheet" type="text/css" href="/css/all.css"/>
@@ -79,11 +79,6 @@
         <div class="py-container login">
             <div class="loginform">
                 <ul class="sui-nav nav-tabs tab-wraped">
-                    <li id="tabOtherLogin" onclick="switchOtherLogin()">
-                        <a href="javascript:void(0)" data-toggle="tab">
-                            <h3>扫描登录</h3>
-                        </a>
-                    </li>
                     <li id="tabSuiForm" class="active" onclick="switchSuiForm()">
                         <a href="javascript:void(0)" data-toggle="tab">
                             <h3>账户登录</h3>
@@ -91,15 +86,10 @@
                     </li>
                 </ul>
                 <div class="tab-content tab-wraped">
-                    <div id="index" class="tab-pane ">
-                        <p>二维码登录，暂为官网二维码</p>
-                        <img src="/img/wx_cz.jpg"/>
-                        <img src="/img/wx_cz.jpg"/>
-                    </div>
                     <div id="profile" class="tab-pane active">
-                        <form class="sui-form" action="/user/login" method="post">
+                          <div class="sui-form">
                             <div class="input-prepend"><span class="add-on loginname"></span>
-                                <input id="inputName" v-model="username" name="username" type="text"
+                                <input id="inputName"  v-model="username" name="username" type="text"
                                        placeholder="邮箱/用户名/手机号"
                                        class="span2 input-xfat">
                             </div>
@@ -121,7 +111,7 @@
                                     登&nbsp;&nbsp;录
                                 </button>
                             </div>
-                        </form>
+                          </div>
 
                         <div class="otherlogin">
                             <div class="types">
@@ -158,13 +148,6 @@
 </div>
 
 <script type="text/javascript">
-    function switchSuiForm() {
-        document.getElementById('index').className = "tab-pane";
-        document.getElementById('profile').className = "tab-pane active";
-        document.getElementById('tabSuiForm').className = "active";
-        document.getElementById('tabOtherLogin').className = "";
-    }
-
     function switchOtherLogin() {
         document.getElementById('index').className = "tab-pane active";
         document.getElementById('profile').className = "tab-pane";
@@ -183,7 +166,7 @@
             msg: '', // 提示信息
             username: '', // 登录名字
             password: '', // 登录密码
-            fromx: [[${from}]]
+            from: [[${from}]]
         },
         methods: {
             login: function () {
@@ -191,10 +174,18 @@
                 axios.post('/user/login?username=' + app.username + '&password=' + this.password).then(
                     function (response) {
                         if (response.data.flag) {
+
+                            // 这里获取到的是 localhost:8001/api/cart/list 啊。
+                            alert(app.from);
                            //登录成功
                             app.msg = '登录成功，3s后跳转';
-                           window.location.href=app.fromx;
-                           // setTimeout(function (){window.location.href=app.fromx;},3000);
+                            if(app.from===''){
+                                // 登录成功则跳转至商城首页
+                                app.from='http://localhost:18086/search/list';
+                                alert(app.from);
+                            }
+                           setTimeout(function (){
+                            location.href=app.from;},3000);
                     }
                         else {
                             app.msg = response.data.message;

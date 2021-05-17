@@ -63,4 +63,18 @@ public class CartController {
         List<OrderItem> orderItems=cartService.list(username);
         return new Result<>(true,StatusCode.OK,"购物车列表查询成功",orderItems);
     }
+
+    // 删除购物车中商品
+    @GetMapping("/delete/{skuId}")
+    public Result delete(@PathVariable("skuId")Long skuid){
+        // 解析令牌
+        Map<String, String> userInfo = tokenDecode.getUserInfo();
+        System.out.println(userInfo);
+
+        // 获取用户登录名
+        //String username="jia";
+        String username=userInfo.get("username");
+        cartService.delete(username,skuid);
+        return new Result(true,StatusCode.OK,"删除商品成功");
+    }
 }
