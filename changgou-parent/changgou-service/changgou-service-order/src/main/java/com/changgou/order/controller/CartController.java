@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/cart")
 public class CartController {
@@ -33,21 +34,26 @@ public class CartController {
      * @param id 商品 ID
      * @return
      */
+
+    @CrossOrigin
     @GetMapping("/add")
     public Result add(@RequestParam(value = "num") Integer num, @RequestParam(value = "id") Long id){
-        // 解析令牌
+
+        // 令牌根本没传过来，怎么解析。
+       // 解析令牌
         Map<String, String> userInfo = tokenDecode.getUserInfo();
         System.out.println(userInfo);
 
         // 获取用户登录名
         //String username="jia";
         String username=userInfo.get("username");
-
+     // String username="JIA";
         cartService.add(num,id,username);
         return new Result(true, StatusCode.OK,"加入购物车成功");
 
     }
 
+    @CrossOrigin
     @GetMapping("/list")
     public Result<List<OrderItem>> list(){
 
@@ -64,6 +70,7 @@ public class CartController {
         return new Result<>(true,StatusCode.OK,"购物车列表查询成功",orderItems);
     }
 
+    @CrossOrigin
     // 删除购物车中商品
     @GetMapping("/delete/{skuId}")
     public Result delete(@PathVariable("skuId")Long skuid){

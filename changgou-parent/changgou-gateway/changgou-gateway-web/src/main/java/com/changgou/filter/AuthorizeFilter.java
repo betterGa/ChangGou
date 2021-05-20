@@ -51,8 +51,11 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
         // 设置一个布尔值，如果为 true，说明令牌在头文件中；
         boolean hasToken = true;
         if (StringUtils.isEmpty(token)) {
+
+
+            /***  不从参数中拿了。  **/
             // (2) 参数中
-            token = request.getQueryParams().getFirst(AUTHOR_TOKEN);
+           // token = request.getQueryParams().getFirst(AUTHOR_TOKEN);
             if (token != null) {
                 hasToken = false;
             } else {
@@ -71,7 +74,8 @@ public class AuthorizeFilter implements GlobalFilter, Ordered {
                     // 跳转至登录页面让用户重新登录
                     /*return needAuthorization(USER_LOGIN_URL,exchange);*/
 
-                    // 登录跳转，但是 postman 里面是不受影响的，不会跳转，该咋执行咋执行。
+                    // 经过网关的请求如果未携带令牌，需要跳转至登录页面。
+                    /*** if(request.getQueryParams().isEmpty())  **/
                     return needAuthorization(USER_LOGIN_URL+"?FROM="+request.getURI(),exchange);
                 }
 

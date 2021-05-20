@@ -26,23 +26,27 @@
     }
     $(function () {
         $('#cart').on('click', function () {
-            var skuid=$('#cart').val();
-            alert(skuid);
+            var id=$('#cart').val();
+            var num=$('#cartnum').val();
+
+            location.href="http://localhost:8001/api/cart/add?num="+num+"&id="+id;
+
+/*
             $.ajax(
                 {
-                    url: "http://localhost:18088/page/createHtml/",
+                    url: "http://localhost:8001/api/cart/add",
                     type: "GET",
                     dataType: "JSON",
                     contentType: "application/json;charset=UTF-8",
-                    data: {num: $('#cartnum').val(), id: skuid},
+                    data: {num: num, id: id},
                     success: function (result) {
-
+                        alert("加入购物车成功");
                     },
                     error: function (result) {
                     },
                     cache: false
                 }
-            )
+            )*/
         })
     })
 </script>

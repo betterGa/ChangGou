@@ -1,5 +1,6 @@
 package com.changgou.order.feign;
 import com.changgou.order.pojo.Order;
+import com.changgou.order.pojo.OrderItem;
 import com.github.pagehelper.PageInfo;
 import entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;

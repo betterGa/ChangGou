@@ -17,6 +17,19 @@ spring:
               - DELETE
               - OPTIONS
       routes:
+            - id: changgou_page_cart_route
+              uri: lb://item
+              predicates:
+              - Path=/api/cart/showlist
+              filters:
+              - StripPrefix=1
+            - id: changgou_delete_cart_route
+              uri: lb://order
+              predicates:
+              - Path=/api/cart/delete/*
+              filters:
+              - StripPrefix=1
+
             - id: changgou_goods_route
               uri: lb://goods
               predicates:
@@ -46,7 +59,14 @@ spring:
             - id: changgou_order_route
               uri: lb://order
               predicates:
-              - Path=/api/cart/**,/api/categoryReport/**,/api/orderConfig/**,/api/order/**,/api/orderItem/**,/api/orderLog/**,/api/preferential/**,/api/returnCause/**,/api/returnOrder/**,/api/returnOrderItem/**
+              - Path=/api/cart/add
+              - Query=num
+              filters:
+              - StripPrefix=1
+            - id: changgou_cart_route
+              uri: lb://order
+              predicates:
+              - Path=/api/cart/list
               filters:
               - StripPrefix=1
 

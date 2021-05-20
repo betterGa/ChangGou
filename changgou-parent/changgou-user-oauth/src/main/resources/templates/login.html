@@ -176,13 +176,13 @@
                         if (response.data.flag) {
 
                             // 这里获取到的是 localhost:8001/api/cart/list 啊。
-                            alert(app.from);
+                            //alert(app.from);
+                            console.log(app.from);
                            //登录成功
                             app.msg = '登录成功，3s后跳转';
                             if(app.from===''){
                                 // 登录成功则跳转至商城首页
                                 app.from='http://localhost:18086/search/list';
-                                alert(app.from);
                             }
                            setTimeout(function (){
                             location.href=app.from;},3000);

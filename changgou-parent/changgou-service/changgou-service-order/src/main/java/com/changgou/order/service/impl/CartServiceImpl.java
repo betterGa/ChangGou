@@ -49,7 +49,7 @@ public class CartServiceImpl implements CartService {
         // 查询商品详情
         Result<Sku> skuResult = skuFeign.findById(id);
         Sku sku = skuResult.getData();
-        Result<Spu> spuResult = spuFeign.findById(sku.getSpuId());
+         Result<Spu> spuResult = spuFeign.findById(sku.getSpuId());
         Spu spu = spuResult.getData();
 
         // 将加入购物车的商品信息封装成 OrderItem

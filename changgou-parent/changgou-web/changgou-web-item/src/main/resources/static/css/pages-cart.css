@@ -173,6 +173,19 @@ a.sum-btn {
   background: #ff4301;
   overflow: hidden;
 }
+a.sum-btnn {
+  display: block;
+  position: relative;
+  width: 206px;
+  height: 52px;
+  line-height: 52px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-family: "Microsoft YaHei";
+  background: #ff4301;
+  overflow: hidden;
+}
 .del {
   background: #fffdee;
 }
